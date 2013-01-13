@@ -25,7 +25,7 @@
 						<MenuItem Header="Fixed Window" Click="AddFixedWindow_Click" />
 						<MenuItem Header="Scroll Window" Click="AddScrollWindow_Click" />
 					</MenuItem>
-					<MenuItem Header="Windows" x:Name="WindowsMenu"> <!--x:FieldModifier="private"-->
+					<MenuItem Header="Windows" x:Name="WindowsMenu">
 						<MenuItem Header="Windows" x:Name="WindowsSubMenu">
 							<MenuItem Header="Filler"></MenuItem>
 						</MenuItem>

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Solvation.Controls;
 using WPF.MDI;
 
 namespace Solvation
@@ -16,22 +17,6 @@ namespace Solvation
 			Container.Children.CollectionChanged += (o, e) => RefreshOpenWindowsMenu();
 			Container.MdiChildTitleChanged += Container_MdiChildTitleChanged;
 			RefreshOpenWindowsMenu();
-			
-
-			//Container.Children.Add(new MdiChild
-			//{
-			//	Title = "Empty Window Using Code",
-			//	Icon = new BitmapImage(new Uri("OriginalLogo.png", UriKind.Relative))
-			//});
-
-			//Container.Children.Add(new MdiChild
-			//{
-			//	Title = "Window Using Code",
-			//	Content = new ExampleControl(),
-			//	Width = 714,
-			//	Height = 734,
-			//	Position = new Point(300, 80)
-			//});
 		}
 
 		#region Mdi-like title
@@ -51,7 +36,15 @@ namespace Solvation
 		#region File menu events
 		private void StartNewProblem_Click(object sender, RoutedEventArgs e)
 		{
-
+			var problemFrame = new MdiChild
+					{
+						Title = "New problem",
+						Content = new CreateNewProblem(),
+						Width = 800,
+						Height = 600,
+						Position = new Point(300, 300)
+					};
+			Container.Children.Add(problemFrame);
 		}
 
 		private void OpenProblem_Click(object sender, RoutedEventArgs e)
@@ -200,70 +193,5 @@ namespace Solvation
 		}
 
 		#endregion
-
-		//#region Content Button Events
-
-		///// <summary>
-		///// Handles the Click event of the DisableMinimize control.
-		///// </summary>
-		///// <param name="sender">The source of the event.</param>
-		///// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-		//private void DisableMinimize_Click(object sender, RoutedEventArgs e)
-		//{
-		//	Window1.MinimizeBox = false;
-		//}
-
-		///// <summary>
-		///// Handles the Click event of the EnableMinimize control.
-		///// </summary>
-		///// <param name="sender">The source of the event.</param>
-		///// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-		//private void EnableMinimize_Click(object sender, RoutedEventArgs e)
-		//{
-		//	Window1.MinimizeBox = true;
-		//}
-
-		///// <summary>
-		///// Handles the Click event of the DisableMaximize control.
-		///// </summary>
-		///// <param name="sender">The source of the event.</param>
-		///// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-		//private void DisableMaximize_Click(object sender, RoutedEventArgs e)
-		//{
-		//	Window1.MaximizeBox = false;
-		//}
-
-		///// <summary>
-		///// Handles the Click event of the EnableMaximize control.
-		///// </summary>
-		///// <param name="sender">The source of the event.</param>
-		///// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-		//private void EnableMaximize_Click(object sender, RoutedEventArgs e)
-		//{
-		//	Window1.MaximizeBox = true;
-		//}
-
-		///// <summary>
-		///// Handles the Click event of the ShowIcon control.
-		///// </summary>
-		///// <param name="sender">The source of the event.</param>
-		///// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-		//private void ShowIcon_Click(object sender, RoutedEventArgs e)
-		//{
-		//	Window1.ShowIcon = true;
-		//}
-
-		///// <summary>
-		///// Handles the Click event of the HideIcon control.
-		///// </summary>
-		///// <param name="sender">The source of the event.</param>
-		///// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-		//private void HideIcon_Click(object sender, RoutedEventArgs e)
-		//{
-		//	Window1.ShowIcon = false;
-		//}
-		//#endregion
-
-
 	}
 }

@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="Solvation.Controls.CreateNewProblem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:Solvation.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <Grid Margin="5">
+		<controls:TextBoxWithLabel x:Name="ResourceCount" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+		<DataGrid Name="ResourceTable" AutoGenerateColumns="True" Margin="10,48,0,0" 
+				  HorizontalAlignment="Left" MinHeight="120" MinWidth="190" Height="118" Width="190" VerticalAlignment="Top">
+			<!--<DataGrid.Columns>
+				<DataGridTextColumn Header="Resource sign" Width="85"></DataGridTextColumn>
+				<DataGridTextColumn Header="Resource amount" Width="105"></DataGridTextColumn>
+			</DataGrid.Columns>-->	
+		</DataGrid>
+		<controls:TextBoxWithLabel x:Name="JobCount" Margin="10,201,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"></controls:TextBoxWithLabel>
+		<DataGrid Name="JobTable" AutoGenerateColumns="True"
+				  HorizontalAlignment="Left" MinHeight="120" MinWidth="190" VerticalAlignment="Top" Margin="10,243,0,0" Width="970" Height="147">
+			<!--<DataGrid.Columns>
+				<DataGridTextColumn Header="Job number" Width="80"></DataGridTextColumn>
+				<DataGridTextColumn Header="Preceding jobs" Width="100"></DataGridTextColumn>
+				<DataGridTextColumn Header="Full job volume" Width="100"></DataGridTextColumn>
+				<DataGridTextColumn Header="Job minimum intencity" Width="130"></DataGridTextColumn>
+				<DataGridTextColumn Header="Job maximum intencity" Width="130"></DataGridTextColumn>
+			</DataGrid.Columns>-->
+		</DataGrid>
+
+	</Grid>
+</UserControl>

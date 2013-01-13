@@ -119,9 +119,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\ExampleControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Controls\CreateNewProblem.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TextBoxWithLabel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -131,8 +135,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\ExampleControl.xaml.cs">
-      <DependentUpon>ExampleControl.xaml</DependentUpon>
+    <Compile Include="Controls\CreateNewProblem.xaml.cs">
+      <DependentUpon>CreateNewProblem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TextBoxWithLabel.xaml.cs">
+      <DependentUpon>TextBoxWithLabel.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
