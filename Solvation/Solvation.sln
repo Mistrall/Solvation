@@ -18,19 +18,19 @@ Global
 		ReleaseTest|x86 = ReleaseTest|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B7A49831-D384-4C32-8B45-FCCB4A436EAB}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{B7A49831-D384-4C32-8B45-FCCB4A436EAB}.Debug|Any CPU.Build.0 = Debug|x86
+		{B7A49831-D384-4C32-8B45-FCCB4A436EAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7A49831-D384-4C32-8B45-FCCB4A436EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7A49831-D384-4C32-8B45-FCCB4A436EAB}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{B7A49831-D384-4C32-8B45-FCCB4A436EAB}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{B7A49831-D384-4C32-8B45-FCCB4A436EAB}.Debug|x86.ActiveCfg = Debug|x86
 		{B7A49831-D384-4C32-8B45-FCCB4A436EAB}.Debug|x86.Build.0 = Debug|x86
-		{B7A49831-D384-4C32-8B45-FCCB4A436EAB}.Release|Any CPU.ActiveCfg = Release|x86
+		{B7A49831-D384-4C32-8B45-FCCB4A436EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7A49831-D384-4C32-8B45-FCCB4A436EAB}.Release|Mixed Platforms.ActiveCfg = Release|x86
 		{B7A49831-D384-4C32-8B45-FCCB4A436EAB}.Release|Mixed Platforms.Build.0 = Release|x86
 		{B7A49831-D384-4C32-8B45-FCCB4A436EAB}.Release|x86.ActiveCfg = Release|x86
 		{B7A49831-D384-4C32-8B45-FCCB4A436EAB}.Release|x86.Build.0 = Release|x86
-		{B7A49831-D384-4C32-8B45-FCCB4A436EAB}.ReleaseTest|Any CPU.ActiveCfg = ReleaseTest|x86
-		{B7A49831-D384-4C32-8B45-FCCB4A436EAB}.ReleaseTest|Any CPU.Build.0 = ReleaseTest|x86
+		{B7A49831-D384-4C32-8B45-FCCB4A436EAB}.ReleaseTest|Any CPU.ActiveCfg = ReleaseTest|Any CPU
+		{B7A49831-D384-4C32-8B45-FCCB4A436EAB}.ReleaseTest|Any CPU.Build.0 = ReleaseTest|Any CPU
 		{B7A49831-D384-4C32-8B45-FCCB4A436EAB}.ReleaseTest|Mixed Platforms.ActiveCfg = ReleaseTest|x86
 		{B7A49831-D384-4C32-8B45-FCCB4A436EAB}.ReleaseTest|Mixed Platforms.Build.0 = ReleaseTest|x86
 		{B7A49831-D384-4C32-8B45-FCCB4A436EAB}.ReleaseTest|x86.ActiveCfg = ReleaseTest|x86
