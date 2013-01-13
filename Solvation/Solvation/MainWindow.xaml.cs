@@ -1,27 +1,269 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using WPF.MDI;
 
 namespace Solvation
 {
 	/// <summary>
-	/// Логика взаимодействия для MainWindow.xaml
+	/// MainWindow.xaml startup and logic
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class MainWindow
 	{
 		public MainWindow()
 		{
 			InitializeComponent();
+			originalTitle = Title;
+			Container.Children.CollectionChanged += (o, e) => RefreshOpenWindowsMenu();
+			Container.MdiChildTitleChanged += Container_MdiChildTitleChanged;
+			RefreshOpenWindowsMenu();
+			
+
+			//Container.Children.Add(new MdiChild
+			//{
+			//	Title = "Empty Window Using Code",
+			//	Icon = new BitmapImage(new Uri("OriginalLogo.png", UriKind.Relative))
+			//});
+
+			//Container.Children.Add(new MdiChild
+			//{
+			//	Title = "Window Using Code",
+			//	Content = new ExampleControl(),
+			//	Width = 714,
+			//	Height = 734,
+			//	Position = new Point(300, 80)
+			//});
 		}
+
+		#region Mdi-like title
+
+		readonly string originalTitle;
+
+		void Container_MdiChildTitleChanged(object sender, RoutedEventArgs e)
+		{
+			if (Container.ActiveMdiChild != null && Container.ActiveMdiChild.WindowState == WindowState.Maximized)
+				Title = originalTitle + " - [" + Container.ActiveMdiChild.Title + "]";
+			else
+				Title = originalTitle;
+		}
+
+		#endregion
+
+		#region File menu events
+		private void StartNewProblem_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void OpenProblem_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void SaveProblem_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void SaveAsProblem_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void ProgramExit_Click(object sender, RoutedEventArgs e)
+		{
+			Application.Current.Shutdown(0);
+		}
+		#endregion
+
+		#region Theme Menu Events
+
+		/// <summary>
+		/// Handles the Click event of the Generic control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		private void Generic_Click(object sender, RoutedEventArgs e)
+		{
+			Generic.IsChecked = true;
+			Luna.IsChecked = false;
+			Aero.IsChecked = false;
+
+			Container.Theme = ThemeType.Generic;
+		}
+
+		/// <summary>
+		/// Handles the Click event of the Luna control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		private void Luna_Click(object sender, RoutedEventArgs e)
+		{
+			Generic.IsChecked = false;
+			Luna.IsChecked = true;
+			Aero.IsChecked = false;
+
+			Container.Theme = ThemeType.Luna;
+		}
+
+		/// <summary>
+		/// Handles the Click event of the Aero control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		private void Aero_Click(object sender, RoutedEventArgs e)
+		{
+			Generic.IsChecked = false;
+			Luna.IsChecked = false;
+			Aero.IsChecked = true;
+
+			Container.Theme = ThemeType.Aero;
+		}
+
+		#endregion
+
+		#region New window menu Events
+
+		int ooo = 1;
+
+		/// <summary>
+		/// Handles the Click event of the 'Normal window' menu item.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		private void AddWindow_Click(object sender, RoutedEventArgs e)
+		{
+			Container.Children.Add(new MdiChild { Content = new Label { Content = "Normal window" }, Title = "Window " + ooo++ });
+		}
+
+		/// <summary>
+		/// Handles the Click event of the 'Fixed window' menu item.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		private void AddFixedWindow_Click(object sender, RoutedEventArgs e)
+		{
+			Container.Children.Add(new MdiChild { Content = new Label { Content = "Fixed width window" }, Title = "Window " + ooo++, Resizable = false });
+		}
+
+		/// <summary>
+		/// Handles the Click event of the 'Scroll window' menu item.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		private void AddScrollWindow_Click(object sender, RoutedEventArgs e)
+		{
+			StackPanel sp = new StackPanel { Orientation = Orientation.Vertical };
+			sp.Children.Add(new TextBlock { Text = "Window with scroll", Margin = new Thickness(5) });
+			sp.Children.Add(new ComboBox { Margin = new Thickness(20), Width = 300 });
+			ScrollViewer sv = new ScrollViewer { Content = sp, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto };
+
+			Container.Children.Add(new MdiChild { Content = sv, Title = "Window " + ooo++ });
+		}
+
+		#endregion
+
+		#region Windows menu events
+		/// <summary>
+		/// Refresh windows list
+		/// </summary>
+		void RefreshOpenWindowsMenu()
+		{
+			WindowsSubMenu.Items.Clear();
+			MenuItem mi;
+			foreach (MdiChild child in Container.Children)
+			{
+				mi = new MenuItem { Header = child.Title };
+				MdiChild child1 = child;
+				mi.Click += (o, e) => child1.Focus();
+				WindowsSubMenu.Items.Add(mi);
+			}
+		}
+
+		private void WindowsCascade_Click(object sender, RoutedEventArgs e)
+		{
+			Container.MdiLayout = MdiLayout.Cascade;
+		}
+
+		private void WindowsHorizontally_Click(object sender, RoutedEventArgs e)
+		{
+			Container.MdiLayout = MdiLayout.TileHorizontal;
+		}
+
+		private void WindowsVertically_Click(object sender, RoutedEventArgs e)
+		{
+			Container.MdiLayout = MdiLayout.TileVertical;
+		}
+
+		private void WindowsCloseAll_Click(object sender, RoutedEventArgs e)
+		{
+			Container.Children.Clear();
+		}
+
+		#endregion
+
+		//#region Content Button Events
+
+		///// <summary>
+		///// Handles the Click event of the DisableMinimize control.
+		///// </summary>
+		///// <param name="sender">The source of the event.</param>
+		///// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		//private void DisableMinimize_Click(object sender, RoutedEventArgs e)
+		//{
+		//	Window1.MinimizeBox = false;
+		//}
+
+		///// <summary>
+		///// Handles the Click event of the EnableMinimize control.
+		///// </summary>
+		///// <param name="sender">The source of the event.</param>
+		///// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		//private void EnableMinimize_Click(object sender, RoutedEventArgs e)
+		//{
+		//	Window1.MinimizeBox = true;
+		//}
+
+		///// <summary>
+		///// Handles the Click event of the DisableMaximize control.
+		///// </summary>
+		///// <param name="sender">The source of the event.</param>
+		///// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		//private void DisableMaximize_Click(object sender, RoutedEventArgs e)
+		//{
+		//	Window1.MaximizeBox = false;
+		//}
+
+		///// <summary>
+		///// Handles the Click event of the EnableMaximize control.
+		///// </summary>
+		///// <param name="sender">The source of the event.</param>
+		///// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		//private void EnableMaximize_Click(object sender, RoutedEventArgs e)
+		//{
+		//	Window1.MaximizeBox = true;
+		//}
+
+		///// <summary>
+		///// Handles the Click event of the ShowIcon control.
+		///// </summary>
+		///// <param name="sender">The source of the event.</param>
+		///// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		//private void ShowIcon_Click(object sender, RoutedEventArgs e)
+		//{
+		//	Window1.ShowIcon = true;
+		//}
+
+		///// <summary>
+		///// Handles the Click event of the HideIcon control.
+		///// </summary>
+		///// <param name="sender">The source of the event.</param>
+		///// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		//private void HideIcon_Click(object sender, RoutedEventArgs e)
+		//{
+		//	Window1.ShowIcon = false;
+		//}
+		//#endregion
+
+
 	}
 }
