@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
+using DataObjects;
 
 namespace Solvation.Controls
 {
@@ -9,58 +9,36 @@ namespace Solvation.Controls
 	/// </summary>
 	public partial class CreateNewProblem
 	{
-		protected List<Resource> ResourceArray;
-		protected List<Job> JobArray;
+		//protected List<Resource> ResourceArray;
+		//protected List<Job> JobArray;
 
 		public CreateNewProblem()
 		{
 			InitializeComponent();
-			
-			ResourceArray = new List<Resource>();
-			ResourceArray.Add(new Resource(1, 20));
-			ResourceArray.Add(new Resource(2, 50));
 
-			ResourceTable.ItemsSource = ResourceArray;
+			var data = GenerateDefaultData();
+
+			ResourceTable.ItemsSource = data.Resources;
 
 			JobCount.txLabel.Content = "Work amount";
 			JobCount.txBox.Text = 4.ToString(CultureInfo.InvariantCulture);
 
-			JobArray = new List<Job>();
-			JobArray.Add(new Job(1, null, 100, 1, 10));
-			JobArray.Add(new Job(2, new[] {1}, 50, 1, 10));
-			JobArray.Add(new Job(3, null, 50, 1, 10));
-			JobArray.Add(new Job(4, null, 80, 1, 10));
-
-			JobTable.ItemsSource = JobArray;
+			JobTable.ItemsSource = data.Jobs;
 		}
 
-		protected class Resource
+		private SchedulingDataContainer GenerateDefaultData()
 		{
-			public int Number { get; set; }
-			public double Value { get; set; }
-			public Resource(int n, double v)
-			{
-				Number = n;
-				Value = v;
-			}
-		}
+			var resourceArray = new List<Resource> {new Resource(1, 20), new Resource(2, 50)};
 
-		protected class Job
-		{
-			public int Number { get; set; }
-			public IEnumerable<Int32> PrecedingJobs { get; set; }
-			public double FullWorkVolume { get; set; }
-			public double MinimumIntencity { get; set; }
-			public double MaximumIntencity { get; set; }
+			var jobArray = new List<Job>
+				{
+					new Job(1, null, 100, 1, 10),
+					new Job(2, new[] {1}, 50, 1, 10),
+					new Job(3, null, 50, 1, 10),
+					new Job(4, null, 80, 1, 10)
+				};
 
-			public Job(int number, IEnumerable<int> precedingJobs, double fullWorkVolume, double minimumIntencity, double maximumIntencity)
-			{
-				Number = number;
-				PrecedingJobs = precedingJobs;
-				FullWorkVolume = fullWorkVolume;
-				MinimumIntencity = minimumIntencity;
-				MaximumIntencity = maximumIntencity;
-			}
+			return new SchedulingDataContainer(resourceArray, jobArray);
 		}
 	}
 }

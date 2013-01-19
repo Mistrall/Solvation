@@ -172,6 +172,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataObjects\DataObjects.csproj">
+      <Project>{4743a165-b92f-45e8-b44e-44d052ecd8fa}</Project>
+      <Name>DataObjects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WPF.MDI\WPF.MDI.csproj">
       <Project>{be1ed569-5e0b-4df0-8964-33ad2aae4c4a}</Project>
       <Name>WPF.MDI</Name>
