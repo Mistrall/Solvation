@@ -15,7 +15,7 @@
 				<DataGridTextColumn Header="Resource amount" Width="105"></DataGridTextColumn>
 			</DataGrid.Columns>-->	
 		</DataGrid>
-		<controls:TextBoxWithLabel x:Name="JobCount" Margin="10,201,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"></controls:TextBoxWithLabel>
+		<controls:TextBoxWithLabel x:Name="JobCount" Margin="10,201,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 		<DataGrid Name="JobTable" AutoGenerateColumns="True"
 				  HorizontalAlignment="Left" MinHeight="120" MinWidth="190" VerticalAlignment="Top" Margin="10,243,0,0" Width="970" Height="147">
 			<!--<DataGrid.Columns>
@@ -26,6 +26,17 @@
 				<DataGridTextColumn Header="Job maximum intencity" Width="130"></DataGridTextColumn>
 			</DataGrid.Columns>-->
 		</DataGrid>
-
+		<Label Content="Job-Resource dependency" HorizontalAlignment="Left" Margin="10,428,0,0" VerticalAlignment="Top" Width="150" Height="26"/>
+		<DataGrid x:Name="WorkResourceDependencyTable" AutoGenerateColumns="False"
+			HorizontalAlignment="Left" MinHeight="120" MinWidth="190" VerticalAlignment="Top" Margin="10,459,0,0" Width="970" Height="147">
+			<!--<DataGrid.Columns>
+				<DataGridTextColumn Header="Job number" Width="80"></DataGridTextColumn>
+				<DataGridTextColumn Header="Preceding jobs" Width="100"></DataGridTextColumn>
+				<DataGridTextColumn Header="Full job volume" Width="100"></DataGridTextColumn>
+				<DataGridTextColumn Header="Job minimum intencity" Width="130"></DataGridTextColumn>
+				<DataGridTextColumn Header="Job maximum intencity" Width="130"></DataGridTextColumn>
+			</DataGrid.Columns>-->
+		</DataGrid>
+		
 	</Grid>
 </UserControl>

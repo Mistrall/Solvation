@@ -9,9 +9,6 @@ namespace Solvation.Controls
 	/// </summary>
 	public partial class CreateNewProblem
 	{
-		//protected List<Resource> ResourceArray;
-		//protected List<Job> JobArray;
-
 		public CreateNewProblem()
 		{
 			InitializeComponent();

@@ -123,6 +123,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\FieldUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TestFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\TextBoxWithLabel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -138,6 +146,12 @@
     <Compile Include="Controls\CreateNewProblem.xaml.cs">
       <DependentUpon>CreateNewProblem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FieldUserControl.xaml.cs">
+      <DependentUpon>FieldUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TestFrame.xaml.cs">
+      <DependentUpon>TestFrame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TextBoxWithLabel.xaml.cs">
       <DependentUpon>TextBoxWithLabel.xaml</DependentUpon>
     </Compile>
@@ -147,6 +161,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ShoesizeModel.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -9,6 +9,7 @@
 				<Menu DockPanel.Dock="Top">
 					<MenuItem Header="File">
 						<MenuItem Header="New Problem" Click="StartNewProblem_Click"></MenuItem>
+						<MenuItem Header="TestFrame" Click="StartTestFrame_Click"></MenuItem>
 						<MenuItem Header="Open Problem" Click="OpenProblem_Click"></MenuItem>
 						<MenuItem Header="Save" Click="SaveProblem_Click"></MenuItem>
 						<MenuItem Header="Save As" Click="SaveAsProblem_Click"></MenuItem>

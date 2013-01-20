@@ -193,5 +193,18 @@ namespace Solvation
 		}
 
 		#endregion
+
+		private void StartTestFrame_Click(object sender, RoutedEventArgs e)
+		{
+			var frame = new MdiChild
+			{
+				Title = "Test Frame",
+				Content = new TestFrame(),
+				Width = 800,
+				Height = 600,
+				Position = new Point(300, 300)
+			};
+			Container.Children.Add(frame);
+		}
 	}
 }

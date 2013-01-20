@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="41" d:DesignWidth="223">
-    <Grid>
-            <Label HorizontalAlignment="Left" Name="txLabel" VerticalAlignment="Top" Margin="0,8,0,0">Resource count</Label>
-			<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Name="txBox" Margin="97,10,0,0" Width="31" Height="22">1</TextBox>
-			<Button HorizontalAlignment="Left" VerticalAlignment="Top" Name="txBtn" Margin="133,10,0,0" Width="44" Height="22">Set</Button>
+    <Grid Margin="0,0,38,0">
+		<Label HorizontalAlignment="Left" x:Name="txLabel" VerticalAlignment="Top" Margin="31,8,0,0" Content="Label text"/>
+			<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="txBox" Margin="97,10,0,0" Width="31" Height="22">1</TextBox>
+			<Button HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="txBtn" Margin="133,10,0,0" Width="44" Height="22">Set</Button>
     </Grid>
 </UserControl>
