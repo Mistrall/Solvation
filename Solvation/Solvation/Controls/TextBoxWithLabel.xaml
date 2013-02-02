@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Height="33" Width="207">
+             mc:Ignorable="d" Height="32" MinWidth="150">
     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" x:Name ="LayoutRoot">
-		<Label HorizontalAlignment="Left" x:Name="txLabel" VerticalAlignment="Top" MinWidth="50" Content="{Binding Path=Label}" Height="25" Margin="0, 5, 0, 5"/>
-		<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="txBox" Width="31" Height="22" Text="{Binding Path=Value}" Margin="5, 5, 5, 5"/>
-		<Button HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="txBtn" Width="44" Height="22" Content="Set" Margin="5, 5, 5, 5"/>
+		<Label HorizontalAlignment="Left" x:Name="txLabel" VerticalAlignment="Center" MinWidth="50" Content="{Binding Path=Label}" Height="25" Margin="0, 5, 0, 5"/>
+		<TextBox HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="txBox" Width="31" Height="22" Text="{Binding Path=Value}" Margin="5, 5, 5, 5"/>
+		<Button HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="txBtn" Width="44" Height="22" Content="Set" Margin="5, 5, 5, 5"/>
 	</StackPanel>
 </UserControl>

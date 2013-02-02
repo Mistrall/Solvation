@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using DataObjects;
+using Solvation.Models;
 
 namespace Solvation.Controls
 {
@@ -13,12 +13,13 @@ namespace Solvation.Controls
 		{
 			InitializeComponent();
 
+			var model = new NewProblemModel { ResourceCount = 2, JobCount = 4 };
+
+			DataContext = model;
+
 			var data = GenerateDefaultData();
 
 			ResourceTable.ItemsSource = data.Resources;
-
-			JobCount.txLabel.Content = "Work amount";
-			JobCount.txBox.Text = 4.ToString(CultureInfo.InvariantCulture);
 
 			JobTable.ItemsSource = data.Jobs;
 		}
