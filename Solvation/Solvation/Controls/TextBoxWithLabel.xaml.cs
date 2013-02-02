@@ -10,12 +10,31 @@ namespace Solvation.Controls
 		public TextBoxWithLabel()
 		{
 			InitializeComponent();
+			LayoutRoot.DataContext = this;
 		}
 
-		public string LabelText
+		#region Label DP
+		public static DependencyProperty LabelProperty =
+			DependencyProperty.Register("Label", typeof(string), typeof(TextBoxWithLabel));
+
+		public string Label
 		{
-			get { return txLabel.Content.ToString(); }
-			set { txLabel.Content = value; }
+			get { return (string) GetValue(LabelProperty); }
+			set { SetValue(LabelProperty, value);}
 		}
+		#endregion
+
+		#region Value DP
+
+		public static DependencyProperty ValueProperty =
+			DependencyProperty.Register("Value", typeof(object), typeof(TextBoxWithLabel), new PropertyMetadata(null));
+
+		public object Value
+		{
+			get { return GetValue(ValueProperty); }
+			set { SetValue(ValueProperty, value); }
+		}
+
+		#endregion
 	}
 }

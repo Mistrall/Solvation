@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1000">
     <Grid Margin="5">
-		<controls:TextBoxWithLabel x:Name="ResourceCount" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+		<controls:TextBoxWithLabel x:Name="ResourceCount" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Label="Resource Count:" Value="1"/>
 		<DataGrid Name="ResourceTable" AutoGenerateColumns="True" Margin="10,48,0,0" 
 				  HorizontalAlignment="Left" MinHeight="120" MinWidth="190" Height="118" Width="190" VerticalAlignment="Top">
 			<!--<DataGrid.Columns>
@@ -15,7 +15,7 @@
 				<DataGridTextColumn Header="Resource amount" Width="105"></DataGridTextColumn>
 			</DataGrid.Columns>-->	
 		</DataGrid>
-		<controls:TextBoxWithLabel x:Name="JobCount" Margin="10,201,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+		<controls:TextBoxWithLabel x:Name="JobCount" Margin="10,201,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Label="Work Count:" Value="4"/>
 		<DataGrid Name="JobTable" AutoGenerateColumns="True"
 				  HorizontalAlignment="Left" MinHeight="120" MinWidth="190" VerticalAlignment="Top" Margin="10,243,0,0" Width="970" Height="147">
 			<!--<DataGrid.Columns>
