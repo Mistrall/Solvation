@@ -43,7 +43,6 @@ namespace Solvation.Models
 					values.Add(vals.ToArray());
 				}
 			}
-			
 		}
 
 		public int ResourceCount { get; private set; }
