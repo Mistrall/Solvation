@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Globalization;
+using System.Windows;
 using System.Windows.Controls;
 using Solvation.Controls;
 using WPF.MDI;
@@ -36,9 +37,10 @@ namespace Solvation
 		#region File menu events
 		private void StartNewProblem_Click(object sender, RoutedEventArgs e)
 		{
+			var problemNum = (1 + Container.Children.Count).ToString(CultureInfo.InvariantCulture);
 			var problemFrame = new MdiChild
 					{
-						Title = "New problem",
+						Title = "New problem " + problemNum,
 						Content = new CreateNewProblem(),
 						Width = 800,
 						Height = 600,
@@ -193,18 +195,5 @@ namespace Solvation
 		}
 
 		#endregion
-
-		private void StartTestFrame_Click(object sender, RoutedEventArgs e)
-		{
-			var frame = new MdiChild
-			{
-				Title = "Test Frame",
-				Content = new TestFrame(),
-				Width = 800,
-				Height = 600,
-				Position = new Point(300, 300)
-			};
-			Container.Children.Add(frame);
-		}
 	}
 }

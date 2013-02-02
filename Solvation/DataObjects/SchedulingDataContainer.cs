@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DataObjects.BasicStructures;
 
 namespace DataObjects
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DataObjects
+namespace DataObjects.BasicStructures
 {
 	public class Job
 	{
@@ -9,6 +9,9 @@ namespace DataObjects
 		public double FullWorkVolume { get; set; }
 		public double MinimumIntencity { get; set; }
 		public double MaximumIntencity { get; set; }
+
+		public Job(int number):this(number, new List<int>(), 0, 0, 0)
+		{}
 
 		public Job(int number, IEnumerable<int> precedingJobs, double fullWorkVolume, double minimumIntencity, double maximumIntencity)
 		{

@@ -36,5 +36,12 @@ namespace Solvation.Controls
 		}
 
 		#endregion
+
+		public event RoutedEventHandler CustomClick;
+
+		private void OnButtonClick(object sender, RoutedEventArgs e)
+		{
+			if (CustomClick!=null) CustomClick(this, new RoutedEventArgs());
+		}
 	}
 }

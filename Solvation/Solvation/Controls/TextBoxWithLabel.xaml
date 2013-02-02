@@ -7,6 +7,7 @@
     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" x:Name ="LayoutRoot">
 		<Label HorizontalAlignment="Left" x:Name="txLabel" VerticalAlignment="Center" MinWidth="50" Content="{Binding Path=Label}" Height="25" Margin="0, 5, 0, 5"/>
 		<TextBox HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="txBox" Width="31" Height="22" Text="{Binding Path=Value}" Margin="5, 5, 5, 5"/>
-		<Button HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="txBtn" Width="44" Height="22" Content="Set" Margin="5, 5, 5, 5"/>
+		<Button HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="txBtn" Width="44" Height="22" Content="Set" Margin="5, 5, 5, 5"
+				Click="OnButtonClick"/>
 	</StackPanel>
 </UserControl>

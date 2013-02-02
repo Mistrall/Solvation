@@ -40,8 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Job.cs" />
-    <Compile Include="Resource.cs" />
+    <Compile Include="BasicStructures\Job.cs" />
+    <Compile Include="BasicStructures\Resource.cs" />
+    <Compile Include="BasicStructures\JobResourceDependency.cs" />
     <Compile Include="SchedulingDataContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
