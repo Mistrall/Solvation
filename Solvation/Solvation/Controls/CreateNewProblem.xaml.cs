@@ -39,7 +39,16 @@ namespace Solvation.Controls
 					new Job(4, null, 80, 1, 10)
 				};
 
-			return new SchedulingDataContainer(resourceArray, jobArray);
+			var dependencies = new List<double[]>
+				{
+					new double[] {1, 2},
+					new double[] {2, 2},
+					new double[] {0.7, 3.5},
+					new double[] {2, 4}
+				};
+
+
+			return new SchedulingDataContainer(resourceArray, jobArray, dependencies);
 		}
 
 		private void OnResourceCountClick(object sender, RoutedEventArgs e)

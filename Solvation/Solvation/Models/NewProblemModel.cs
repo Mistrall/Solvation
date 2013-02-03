@@ -32,24 +32,42 @@ namespace Solvation.Models
 			JobCount = jobCount;
 			Resources= new BindingList<Resource>(resources.ToList());
 			Jobs = new BindingList<Job>(jobs.ToList());
-			var newDependencies = new JobResourceDependency[JobCount, ResourceCount];
+			//var newDependencies = new JobResourceDependency[JobCount, ResourceCount];
+			var values = GenerateDependencyValues(dependencies);
+
+			DependencyValues = values;
+		}
+
+		private BindingList<double[]> GenerateDependencyValues(IEnumerable<JobResourceDependency[]> dependencies)
+		{
 			var values = new BindingList<double[]>();
 			if (dependencies != null)
 			{
 				foreach (var jobResourceDependencyArr in dependencies)
 				{
 					var vals = new List<double>();
-					vals.AddRange(jobResourceDependencyArr.Select(d=>d.Value));
+					vals.AddRange(jobResourceDependencyArr.Select(d => d.Value));
 					values.Add(vals.ToArray());
 				}
 			}
+			else
+			{
+				for (int j = 0; j < JobCount; j++)
+				{
+					var vals = new List<double>();
+					for (int r = 0; r < ResourceCount; r++)
+						vals.Add(0);
+					values.Add(vals.ToArray());
+				}
+			}
+			return values;
 		}
 
 		public int ResourceCount { get; private set; }
 		public int JobCount { get; private set; }
 		public BindingList<Resource> Resources { get; private set; }
 		public BindingList<Job> Jobs { get; private set; }
-		public IEnumerable<JobResourceDependency[]> Dependencies { get; private set; }
-		public BindingList<double> DependencyValues { get; private set; }
+		//public IEnumerable<JobResourceDependency[]> Dependencies { get; private set; }
+		public BindingList<double[]> DependencyValues { get; private set; }
 	}
 }
