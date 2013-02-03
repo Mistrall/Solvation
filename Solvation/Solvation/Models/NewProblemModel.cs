@@ -26,7 +26,7 @@ namespace Solvation.Models
 			: this(resourceCount, jobCount, resources, jobs, null)
 		{}
 
-		public NewProblemModel(int resourceCount, int jobCount, IEnumerable<Resource> resources, IEnumerable<Job> jobs, IEnumerable<JobResourceDependency[]> dependencies)
+		public NewProblemModel(int resourceCount, int jobCount, IEnumerable<Resource> resources, IEnumerable<Job> jobs, IEnumerable<double[]> dependencies)
 		{
 			ResourceCount = resourceCount;
 			JobCount = jobCount;
@@ -38,7 +38,7 @@ namespace Solvation.Models
 			DependencyValues = values;
 		}
 
-		private BindingList<double[]> GenerateDependencyValues(IEnumerable<JobResourceDependency[]> dependencies)
+		private BindingList<double[]> GenerateDependencyValues(IEnumerable<double[]> dependencies)
 		{
 			var values = new BindingList<double[]>();
 			if (dependencies != null)
@@ -46,7 +46,7 @@ namespace Solvation.Models
 				foreach (var jobResourceDependencyArr in dependencies)
 				{
 					var vals = new List<double>();
-					vals.AddRange(jobResourceDependencyArr.Select(d => d.Value));
+					vals.AddRange(jobResourceDependencyArr);
 					values.Add(vals.ToArray());
 				}
 			}

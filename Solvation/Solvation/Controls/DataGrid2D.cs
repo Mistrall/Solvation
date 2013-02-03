@@ -21,8 +21,8 @@ namespace Solvation.Controls
 
         static DataGrid2D()
         {
-            var resourceLocater = new Uri("/Solvation;component/Themes/DataGridStyleDictionary.xaml", UriKind.Relative);
-            var resourceDictionary = (ResourceDictionary)Application.LoadComponent(resourceLocater);
+            var resourceLocator = new Uri("/Solvation;component/Themes/DataGridStyleDictionary.xaml", UriKind.Relative);
+            var resourceDictionary = (ResourceDictionary)Application.LoadComponent(resourceLocator);
             SDataGridColumnHeaderStyle = resourceDictionary["DataGridColumnHeaderStyle"] as Style;
             SDataGridCellStyle = resourceDictionary["DataGridCellStyle"] as Style;
             SDataGridRowHeaderStyle = resourceDictionary["DataGridRowHeaderStyle"] as Style;

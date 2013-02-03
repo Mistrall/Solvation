@@ -22,7 +22,7 @@ namespace Solvation.Controls
 
 			var data = GenerateDefaultData();
 
-			model = new NewProblemModel(2, 4, data.Resources, data.Jobs);
+			model = new NewProblemModel(2, 4, data.Resources, data.Jobs, data.Dependencies);
 
 			DataContext = model;
 		}
