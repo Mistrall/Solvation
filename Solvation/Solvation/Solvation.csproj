@@ -124,6 +124,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\SchedulingProblem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\TextBoxWithLabel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -142,6 +146,9 @@
     <Compile Include="Controls\DataGrid2D.cs" />
     <Compile Include="Controls\Helpers\BindingHelper.cs" />
     <Compile Include="Controls\Helpers\Ref.cs" />
+    <Compile Include="Controls\SchedulingProblem.xaml.cs">
+      <DependentUpon>SchedulingProblem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TextBoxWithLabel.xaml.cs">
       <DependentUpon>TextBoxWithLabel.xaml</DependentUpon>
     </Compile>

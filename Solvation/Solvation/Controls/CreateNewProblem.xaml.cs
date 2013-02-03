@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Windows;
 using DataObjects;
 using DataObjects.BasicStructures;
 using Solvation.Models;
+using WPF.MDI;
 
 namespace Solvation.Controls
 {
@@ -14,6 +13,7 @@ namespace Solvation.Controls
 	/// </summary>
 	public partial class CreateNewProblem
 	{
+		private readonly MdiContainer parent;
 		private NewProblemModel model;
 
 		public CreateNewProblem()
@@ -25,6 +25,11 @@ namespace Solvation.Controls
 			model = new NewProblemModel(2, 4, data.Resources, data.Jobs, data.Dependencies);
 
 			DataContext = model;
+		}
+
+		public CreateNewProblem(MdiContainer parent):this()
+		{
+			this.parent = parent;
 		}
 
 		private SchedulingDataContainer GenerateDefaultData()
@@ -99,6 +104,22 @@ namespace Solvation.Controls
 			model = new NewProblemModel(model.ResourceCount, newJobsCount, model.Resources, newJobsList);
 
 			DataContext = model;
+		}
+
+
+		//Hack, we need to raise some event for parent here
+		private void StartThisProblemClick(object sender, RoutedEventArgs e)
+		{
+			var problemFrame = new MdiChild
+			{
+				Title = "Scheduling problem",
+				Content = new SchedulingProblem(),
+				Width = 800,
+				Height = 600,
+				Position = new Point(300, 300)
+			};
+
+			parent.Children.Add(problemFrame);
 		}
 	}
 }

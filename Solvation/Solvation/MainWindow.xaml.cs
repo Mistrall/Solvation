@@ -41,7 +41,7 @@ namespace Solvation
 			var problemFrame = new MdiChild
 					{
 						Title = "New problem " + problemNum,
-						Content = new CreateNewProblem(),
+						Content = new CreateNewProblem(Container),
 						Width = 800,
 						Height = 600,
 						Position = new Point(300, 300)
