@@ -35,11 +35,12 @@ namespace Solvation.Controls
 
         private static void ItemsSource2DPropertyChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
-            var dataGrid2D = source as DataGrid2D;
-            dataGrid2D.OnItemsSource2DChanged(e.OldValue as IEnumerable, e.NewValue as IEnumerable);
+	        var dataGrid2D = source as DataGrid2D;
+	        if (dataGrid2D != null)
+		        dataGrid2D.OnItemsSource2DChanged(e.OldValue as IEnumerable, e.NewValue as IEnumerable);
         }
 
-        #endregion //Statics
+	    #endregion //Statics
 
         #region Constructor
 
@@ -63,8 +64,8 @@ namespace Solvation.Controls
             // crash on iList[0].
             if (newValue != null && newValue is IList && newValue.GetType().Name.IndexOf("[,,", StringComparison.Ordinal) == -1)
             {
-                Type type = newValue.GetType();
-                Type elementType = newValue.GetType().GetElementType();
+                var type = newValue.GetType();
+                var elementType = newValue.GetType().GetElementType();
 
                 var iList = newValue as IList;
                 bool multiDimensionalArray = type.IsArray && type.GetArrayRank() == 2;
@@ -90,7 +91,7 @@ namespace Solvation.Controls
                             ItemsSource = null;
                             return;
                         }
-                        Type listType = iListRow1[0].GetType();
+                        var listType = iListRow1[0].GetType();
                         var bindingHelper = new BindingHelper();
                         var method = typeof(BindingHelper).GetMethod("GetBindable2DViewFromIList");
                         var generic = method.MakeGenericMethod(listType);
@@ -98,7 +99,7 @@ namespace Solvation.Controls
                     }
                     else // 1D List
                     {
-                        Type listType = iList[0].GetType();
+                        var listType = iList[0].GetType();
                         var bindingHelper = new BindingHelper();
                         var method = typeof(BindingHelper).GetMethod("GetBindable1DViewFromIList");
                         var generic = method.MakeGenericMethod(listType);
@@ -124,7 +125,8 @@ namespace Solvation.Controls
         void DataGrid2D_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             var column = e.Column as DataGridTextColumn;
-            var binding = column.Binding as Binding;
+	        if (column == null) return;
+	        var binding = column.Binding as Binding;
 	        if (binding != null) binding.Path = new PropertyPath(binding.Path.Path + ".Value");
         }
 
@@ -138,17 +140,17 @@ namespace Solvation.Controls
             set { SetValue(ItemsSource2DProperty, value); }
         }
 
-        private bool m_useModifiedDataGridStyle;
+        private bool useModifiedDataGridStyle;
         public bool UseModifiedDataGridStyle
         {
             get
             {
-                return m_useModifiedDataGridStyle;
+                return useModifiedDataGridStyle;
             }
             set
             {
-                m_useModifiedDataGridStyle = value;
-                if (m_useModifiedDataGridStyle)
+                useModifiedDataGridStyle = value;
+                if (useModifiedDataGridStyle)
                 {
                     RowHeaderStyle = SDataGridRowHeaderStyle;
                     CellStyle = SDataGridCellStyle;

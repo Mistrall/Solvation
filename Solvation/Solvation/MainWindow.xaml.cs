@@ -42,9 +42,9 @@ namespace Solvation
 					{
 						Title = "New problem " + problemNum,
 						Content = new CreateNewProblem(Container),
-						Width = 800,
-						Height = 600,
-						Position = new Point(300, 300)
+						Width = 1100,
+						Height = 800,
+						Position = new Point(100, 100)
 					};
 			Container.Children.Add(problemFrame);
 		}

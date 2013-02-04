@@ -57,7 +57,7 @@ namespace Solvation.Controls.Helpers
             var dataTable = new DataTable();
             for (int i = 0; i < ((IList)list2D[0]).Count; i++)
             {
-                dataTable.Columns.Add(i.ToString(CultureInfo.InvariantCulture), typeof(Ref<T>));
+                dataTable.Columns.Add((i+1).ToString(CultureInfo.InvariantCulture), typeof(Ref<T>));
             }
             for (int i = 0; i < list2D.Count; i++)
             {
