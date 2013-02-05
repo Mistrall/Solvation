@@ -9,15 +9,26 @@
     <Grid Margin="5">
 		<controls:TextBoxWithLabel x:Name="ResourceCount" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Label="Resource Count:" 
 								   Value="{Binding ResourceCount}" CustomClick="OnResourceCountClick"/>
-		<DataGrid Name="ResourceTable" AutoGenerateColumns="True" Margin="10,40,0,0" 
+		<DataGrid Name="ResourceTable" AutoGenerateColumns="False" Margin="10,40,0,0" 
 				  HorizontalAlignment="Left" MinHeight="120" MinWidth="190" Height="118" Width="190" VerticalAlignment="Top"
 				  ItemsSource="{Binding Resources}">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Number" Width="*" Binding="{Binding Path=Number}" />
+				<DataGridTextColumn Header="Value" Width="*" Binding="{Binding Path=Value}" />
+			</DataGrid.Columns>
 		</DataGrid>
 		<controls:TextBoxWithLabel x:Name="JobCount" Margin="10,206,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Label="Job Count:" 
 								   Value="{Binding JobCount}" CustomClick="OnJobCountClick"/>
-		<DataGrid Name="JobTable" AutoGenerateColumns="True"
+		<DataGrid Name="JobTable" AutoGenerateColumns="False"
 				  HorizontalAlignment="Left" MinHeight="120" MinWidth="190" VerticalAlignment="Top" Margin="10,243,0,0" Width="970" Height="147"
 				  ItemsSource="{Binding Jobs}">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Number" Width="*" Binding="{Binding Path=Number}" />
+				<DataGridTextColumn Header="Preceding Jobs" Width="*" Binding="{Binding Path=PrecedingJobsStr}" />
+				<DataGridTextColumn Header="Full Work Volume" Width="*" Binding="{Binding Path=FullWorkVolume}" />
+				<DataGridTextColumn Header="Minimum Intencity" Width="*" Binding="{Binding Path=MinimumIntencity}" />
+				<DataGridTextColumn Header="Maximum Intencity" Width="*" Binding="{Binding Path=MaximumIntencity}" />
+			</DataGrid.Columns>
 		</DataGrid>
 		<Label Content="Job-Resource dependency" HorizontalAlignment="Left" Margin="10,428,0,0" VerticalAlignment="Top" Width="150" Height="26"/>
 		<controls:DataGrid2D x:Name="WorkResourceDependencyTable" AutoGenerateColumns="True"

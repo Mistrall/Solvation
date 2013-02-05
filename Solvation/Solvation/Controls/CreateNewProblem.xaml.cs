@@ -39,7 +39,7 @@ namespace Solvation.Controls
 			var jobArray = new List<Job>
 				{
 					new Job(1, null, 100, 1, 10),
-					new Job(2, new[] {1}, 50, 1, 10),
+					new Job(2, "1", 50, 1, 10),
 					new Job(3, null, 50, 1, 10),
 					new Job(4, null, 80, 1, 10)
 				};
