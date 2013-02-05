@@ -31,7 +31,7 @@
 			</DataGrid.Columns>
 		</DataGrid>
 		<Label Content="Job-Resource dependency" HorizontalAlignment="Left" Margin="10,428,0,0" VerticalAlignment="Top" Width="150" Height="26"/>
-		<controls:DataGrid2D x:Name="WorkResourceDependencyTable" AutoGenerateColumns="True"
+		<controls:DataGrid2D x:Name="WorkResourceDependencyTable" 
 			HorizontalAlignment="Left" MinHeight="120" MinWidth="190" VerticalAlignment="Top" Margin="10,459,0,0" Width="970" Height="147"
 				  ItemsSource2D="{Binding DependencyValues}">
 			<!--<DataGrid.RowHeaderStyle>
