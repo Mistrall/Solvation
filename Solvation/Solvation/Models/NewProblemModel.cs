@@ -41,25 +41,30 @@ namespace Solvation.Models
 		private BindingList<double[]> GenerateDependencyValues(IEnumerable<double[]> dependencies)
 		{
 			var values = new BindingList<double[]>();
-			if (dependencies != null)
+
+			for (int j = 0; j < JobCount; j++)
 			{
-				foreach (var jobResourceDependencyArr in dependencies)
+				var vals = new List<double>();
+				for (int r = 0; r < ResourceCount; r++)
+					vals.Add(0);
+				values.Add(vals.ToArray());
+			}
+
+			var deps = dependencies.ToArray();
+
+			for (int i = 0; i < deps.Length; i++)
+			{
+				if (i < JobCount)
 				{
-					var vals = new List<double>();
-					vals.AddRange(jobResourceDependencyArr);
-					values.Add(vals.ToArray());
+					for (int j = 0; j < deps[i].Length; j++)
+					{
+						if (j < ResourceCount)
+							values[i][j] = deps[i][j];
+					}
 				}
 			}
-			else
-			{
-				for (int j = 0; j < JobCount; j++)
-				{
-					var vals = new List<double>();
-					for (int r = 0; r < ResourceCount; r++)
-						vals.Add(0);
-					values.Add(vals.ToArray());
-				}
-			}
+
+
 			return values;
 		}
 

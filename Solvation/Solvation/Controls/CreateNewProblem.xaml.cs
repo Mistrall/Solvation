@@ -76,7 +76,7 @@ namespace Solvation.Controls
 					newResourceList.Add(model.Resources[i]);
 			}
 
-			model = new NewProblemModel(newResourceCount, model.JobCount, newResourceList, model.Jobs);
+			model = new NewProblemModel(newResourceCount, model.JobCount, newResourceList, model.Jobs, model.DependencyValues);
 
 			DataContext = model;
 		}
@@ -101,7 +101,7 @@ namespace Solvation.Controls
 					newJobsList.Add(model.Jobs[i]);
 			}
 
-			model = new NewProblemModel(model.ResourceCount, newJobsCount, model.Resources, newJobsList);
+			model = new NewProblemModel(model.ResourceCount, newJobsCount, model.Resources, newJobsList, model.DependencyValues);
 
 			DataContext = model;
 		}
