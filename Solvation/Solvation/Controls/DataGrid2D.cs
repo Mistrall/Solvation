@@ -6,9 +6,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
-using Solvation.Controls.Helpers;
+using Solvation.UI.Controls.Helpers;
 
-namespace Solvation.Controls
+namespace Solvation.UI.Controls
 {
     public class DataGrid2D : DataGrid
     {
@@ -21,7 +21,7 @@ namespace Solvation.Controls
 
         static DataGrid2D()
         {
-            var resourceLocator = new Uri("/Solvation;component/Themes/DataGridStyleDictionary.xaml", UriKind.Relative);
+            var resourceLocator = new Uri("/Solvation.UI;component/Themes/DataGridStyleDictionary.xaml", UriKind.Relative);
             var resourceDictionary = (ResourceDictionary)Application.LoadComponent(resourceLocator);
             SDataGridColumnHeaderStyle = resourceDictionary["DataGridColumnHeaderStyle"] as Style;
             SDataGridCellStyle = resourceDictionary["DataGridCellStyle"] as Style;

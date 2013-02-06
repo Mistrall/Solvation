@@ -1,10 +1,10 @@
 ﻿using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
-using Solvation.Controls;
+using Solvation.UI.Controls;
 using WPF.MDI;
 
-namespace Solvation
+namespace Solvation.UI
 {
 	/// <summary>
 	/// MainWindow.xaml startup and logic

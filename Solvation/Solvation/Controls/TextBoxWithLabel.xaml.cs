@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Solvation.Controls
+namespace Solvation.UI.Controls
 {
 	/// <summary>
 	/// Interaction logic for TextBoxWithLabel.xaml

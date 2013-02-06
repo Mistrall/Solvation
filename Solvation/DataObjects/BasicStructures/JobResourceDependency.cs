@@ -1,4 +1,4 @@
-﻿namespace DataObjects.BasicStructures
+﻿namespace Solvation.Domain.BasicStructures
 {
 	public class JobResourceDependency
 	{

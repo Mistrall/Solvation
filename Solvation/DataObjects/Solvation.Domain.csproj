@@ -7,8 +7,8 @@
     <ProjectGuid>{4743A165-B92F-45E8-B44E-44D052ECD8FA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DataObjects</RootNamespace>
-    <AssemblyName>DataObjects</AssemblyName>
+    <RootNamespace>Solvation.Domain</RootNamespace>
+    <AssemblyName>Solvation.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

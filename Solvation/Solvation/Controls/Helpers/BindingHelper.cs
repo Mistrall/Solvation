@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 
-namespace Solvation.Controls.Helpers
+namespace Solvation.UI.Controls.Helpers
 {
     public class BindingHelper
     {

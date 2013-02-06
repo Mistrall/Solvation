@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using DataObjects.BasicStructures;
+using Solvation.Domain.BasicStructures;
 
-namespace DataObjects
+namespace Solvation.Domain
 {
     public class SchedulingDataContainer
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Solvation.Controls.Helpers
+namespace Solvation.UI.Controls.Helpers
 {
     public class Ref<T> : INotifyPropertyChanged
     {

@@ -1,4 +1,4 @@
-﻿namespace Solvation.Controls
+﻿namespace Solvation.UI.Controls
 {
 	/// <summary>
 	/// Interaction logic for SchedulingProblem.xaml

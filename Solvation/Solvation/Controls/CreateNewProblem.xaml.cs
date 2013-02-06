@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using DataObjects;
-using DataObjects.BasicStructures;
+using Solvation.Domain;
+using Solvation.Domain.BasicStructures;
 using Solvation.Models;
 using WPF.MDI;
 
-namespace Solvation.Controls
+namespace Solvation.UI.Controls
 {
 	/// <summary>
 	/// Interaction logic for CreateNewProblem.xaml

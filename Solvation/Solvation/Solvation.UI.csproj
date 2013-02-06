@@ -8,8 +8,8 @@
     <ProjectGuid>{B7A49831-D384-4C32-8B45-FCCB4A436EAB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Solvation</RootNamespace>
-    <AssemblyName>Solvation</AssemblyName>
+    <RootNamespace>Solvation.UI</RootNamespace>
+    <AssemblyName>Solvation.UI</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -193,9 +193,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataObjects\DataObjects.csproj">
+    <ProjectReference Include="..\DataObjects\Solvation.Domain.csproj">
       <Project>{4743a165-b92f-45e8-b44e-44d052ecd8fa}</Project>
-      <Name>DataObjects</Name>
+      <Name>Solvation.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\WPF.MDI\WPF.MDI.csproj">
       <Project>{be1ed569-5e0b-4df0-8964-33ad2aae4c4a}</Project>

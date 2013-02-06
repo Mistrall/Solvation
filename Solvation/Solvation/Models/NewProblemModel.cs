@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using DataObjects.BasicStructures;
 using Solvation.Annotations;
+using Solvation.Domain.BasicStructures;
 
 namespace Solvation.Models
 {
