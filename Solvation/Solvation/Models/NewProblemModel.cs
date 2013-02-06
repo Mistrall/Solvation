@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 using Solvation.Annotations;
-using Solvation.Domain.BasicStructures;
+using Solvation.Domain.DomainObjects;
 
 namespace Solvation.Models
 {

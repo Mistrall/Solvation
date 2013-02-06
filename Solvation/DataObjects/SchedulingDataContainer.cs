@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Solvation.Domain.BasicStructures;
+using Solvation.Domain.DomainObjects;
 
 namespace Solvation.Domain
 {

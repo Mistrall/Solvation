@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace Solvation.Domain.BasicStructures
+namespace Solvation.Domain.DomainObjects
 {
 	public class Job
 	{

@@ -1,4 +1,4 @@
-﻿namespace Solvation.Domain.BasicStructures
+﻿namespace Solvation.Domain.DomainObjects
 {
 	public class Resource
 	{

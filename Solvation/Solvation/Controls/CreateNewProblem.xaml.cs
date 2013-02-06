@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using Solvation.Domain;
-using Solvation.Domain.BasicStructures;
+using Solvation.Domain.DomainObjects;
 using Solvation.Models;
 using WPF.MDI;
 
