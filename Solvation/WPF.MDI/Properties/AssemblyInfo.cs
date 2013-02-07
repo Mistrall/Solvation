@@ -7,12 +7,12 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WPF.MDI")]
-[assembly: AssemblyDescription("http://wpfmdi.codeplex.com/")]
+[assembly: AssemblyTitle("Solvation.WPF.MDI")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("xadet")]
-[assembly: AssemblyProduct("WPF.MDI")]
-[assembly: AssemblyCopyright("2009 xadet, 2010 stbear")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Solvation.WPF.MDI")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

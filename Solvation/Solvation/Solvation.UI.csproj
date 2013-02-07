@@ -120,17 +120,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\CreateNewProblem.xaml">
-      <SubType>Designer</SubType>
+    <Compile Include="UIComponents\Frames\SchedulingProblemFrame.xaml.cs">
+      <DependentUpon>SchedulingProblemFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\UserControls\DataGrid2D.cs" />
+    <Compile Include="UIComponents\UserControls\TextBoxWithLabel.xaml.cs">
+      <DependentUpon>TextBoxWithLabel.xaml</DependentUpon>
+    </Compile>
+    <Page Include="UIComponents\Frames\CreateNewProblem.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\SchedulingProblem.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="UIComponents\Frames\SchedulingProblemFrame.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\TextBoxWithLabel.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -140,18 +143,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\CreateNewProblem.xaml.cs">
+    <Compile Include="UIComponents\Frames\CreateNewProblem.xaml.cs">
       <DependentUpon>CreateNewProblem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DataGrid2D.cs" />
-    <Compile Include="Controls\Helpers\BindingHelper.cs" />
-    <Compile Include="Controls\Helpers\Ref.cs" />
-    <Compile Include="Controls\SchedulingProblem.xaml.cs">
-      <DependentUpon>SchedulingProblem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TextBoxWithLabel.xaml.cs">
-      <DependentUpon>TextBoxWithLabel.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="UIComponents\Helpers\BindingHelper.cs" />
+    <Compile Include="UIComponents\Helpers\Ref.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -164,8 +160,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UIComponents\UserControls\TextBoxWithLabel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\PlanModel.cs" />
     <Compile Include="Models\NewProblemModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -197,9 +198,9 @@
       <Project>{4743a165-b92f-45e8-b44e-44d052ecd8fa}</Project>
       <Name>Solvation.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WPF.MDI\WPF.MDI.csproj">
+    <ProjectReference Include="..\WPF.MDI\Solvation.WPF.MDI.csproj">
       <Project>{be1ed569-5e0b-4df0-8964-33ad2aae4c4a}</Project>
-      <Name>WPF.MDI</Name>
+      <Name>Solvation.WPF.MDI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

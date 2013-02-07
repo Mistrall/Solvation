@@ -7,9 +7,9 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using System.Collections.Generic;
 using System.Windows.Input;
-using System.Windows.Data;
+using Solvation.WPF.MDI.Enums;
 
-namespace WPF.MDI
+namespace Solvation.WPF.MDI
 {
 	[ContentProperty("Children")]
 	public class MdiContainer : UserControl

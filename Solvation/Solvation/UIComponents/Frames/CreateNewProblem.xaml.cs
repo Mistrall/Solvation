@@ -1,12 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Windows;
-using Solvation.Domain;
 using Solvation.Domain.DomainObjects;
+using Solvation.Domain.Services;
 using Solvation.Models;
-using WPF.MDI;
+using Solvation.UI.Models;
+using Solvation.WPF.MDI;
 
-namespace Solvation.UI.Controls
+namespace Solvation.UI.UIComponents.Frames
 {
 	/// <summary>
 	/// Interaction logic for CreateNewProblem.xaml
@@ -16,14 +17,16 @@ namespace Solvation.UI.Controls
 		private readonly MdiContainer parent;
 		private NewProblemModel model;
 
+		public JobPlanBuilder PlanBuilder { get; set; } 
+
 		public CreateNewProblem()
 		{
+			//TODO: replace with DI property injection
+			PlanBuilder=new JobPlanBuilder();
+
 			InitializeComponent();
 
-			var data = GenerateDefaultData();
-
-			model = new NewProblemModel(2, 4, data.Resources, data.Jobs, data.Dependencies);
-
+			model = GenerateDefaultDataModel(); 
 			DataContext = model;
 		}
 
@@ -32,7 +35,7 @@ namespace Solvation.UI.Controls
 			this.parent = parent;
 		}
 
-		private SchedulingDataContainer GenerateDefaultData()
+		private NewProblemModel GenerateDefaultDataModel()
 		{
 			var resourceArray = new List<Resource> {new Resource(1, 20), new Resource(2, 50)};
 
@@ -52,8 +55,7 @@ namespace Solvation.UI.Controls
 					new double[] {2, 4}
 				};
 
-
-			return new SchedulingDataContainer(resourceArray, jobArray, dependencies);
+			return new NewProblemModel(2, 4, resourceArray, jobArray, dependencies);
 		}
 
 		private void OnResourceCountClick(object sender, RoutedEventArgs e)
@@ -106,14 +108,15 @@ namespace Solvation.UI.Controls
 			DataContext = model;
 		}
 
-
 		//Hack, we need to raise some event for parent here
 		private void StartThisProblemClick(object sender, RoutedEventArgs e)
 		{
+			var baseStepList = PlanBuilder.GetBasePlan(model.Resources, model.Jobs, model.DependencyValues);
+
 			var problemFrame = new MdiChild
 			{
 				Title = "Scheduling problem",
-				Content = new SchedulingProblem(),
+				Content = new SchedulingProblemFrame(new PlanModel(baseStepList)),
 				Width = 800,
 				Height = 600,
 				Position = new Point(300, 300)

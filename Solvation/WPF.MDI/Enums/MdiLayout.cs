@@ -1,4 +1,4 @@
-﻿namespace WPF.MDI
+﻿namespace Solvation.WPF.MDI.Enums
 {
 	/// <summary>
 	/// Specifies the layout of MdiChild windows in an MdiContainer control.

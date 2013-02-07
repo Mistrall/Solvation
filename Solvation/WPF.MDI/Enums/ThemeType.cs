@@ -1,4 +1,4 @@
-﻿namespace WPF.MDI
+﻿namespace Solvation.WPF.MDI.Enums
 {
 	/// <summary>
 	/// Type of theme to use.

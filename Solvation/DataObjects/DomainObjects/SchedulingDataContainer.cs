@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using Solvation.Domain.DomainObjects;
+using System.Collections.Generic;
 
-namespace Solvation.Domain
+namespace Solvation.Domain.DomainObjects
 {
     public class SchedulingDataContainer
     {

@@ -1,13 +1,14 @@
-﻿<UserControl x:Class="Solvation.UI.Controls.CreateNewProblem"
+<UserControl x:Class="Solvation.UI.UIComponents.Frames.CreateNewProblem"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:Solvation.UI.Controls"
+             xmlns:userControls="clr-namespace:Solvation.UI.UIComponents.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1000">
     <Grid Margin="5">
-		<controls:TextBoxWithLabel x:Name="ResourceCount" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Label="Resource Count:" 
+		<userControls:TextBoxWithLabel x:Name="ResourceCount" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Label="Resource Count:" 
 								   Value="{Binding ResourceCount}" CustomClick="OnResourceCountClick"/>
 		<DataGrid Name="ResourceTable" AutoGenerateColumns="False" Margin="10,40,0,0" 
 				  HorizontalAlignment="Left" MinHeight="120" MinWidth="190" Height="118" Width="190" VerticalAlignment="Top"
@@ -17,7 +18,7 @@
 				<DataGridTextColumn Header="Value" Width="*" Binding="{Binding Path=Value}" />
 			</DataGrid.Columns>
 		</DataGrid>
-		<controls:TextBoxWithLabel x:Name="JobCount" Margin="10,206,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Label="Job Count:" 
+		<userControls:TextBoxWithLabel x:Name="JobCount" Margin="10,206,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Label="Job Count:" 
 								   Value="{Binding JobCount}" CustomClick="OnJobCountClick"/>
 		<DataGrid Name="JobTable" AutoGenerateColumns="False"
 				  HorizontalAlignment="Left" MinHeight="120" MinWidth="190" VerticalAlignment="Top" Margin="10,243,0,0" Width="970" Height="147"
@@ -31,7 +32,7 @@
 			</DataGrid.Columns>
 		</DataGrid>
 		<Label Content="Job-Resource dependency" HorizontalAlignment="Left" Margin="10,428,0,0" VerticalAlignment="Top" Width="150" Height="26"/>
-		<controls:DataGrid2D x:Name="WorkResourceDependencyTable" 
+		<userControls:DataGrid2D x:Name="WorkResourceDependencyTable" 
 			HorizontalAlignment="Left" MinHeight="120" MinWidth="190" VerticalAlignment="Top" Margin="10,459,0,0" Width="970" Height="147"
 				  ItemsSource2D="{Binding DependencyValues}">
 			<!--<DataGrid.RowHeaderStyle>
@@ -39,7 +40,7 @@
 					<Setter Property="Content" Value="Blablabla" />
 				</Style>
 			</DataGrid.RowHeaderStyle>-->
-		</controls:DataGrid2D>
+		</userControls:DataGrid2D>
 		<Button Content="Start" HorizontalAlignment="Left" Margin="10,626,0,0" VerticalAlignment="Top" Width="75" 
 				Click="StartThisProblemClick"/>
 	</Grid>

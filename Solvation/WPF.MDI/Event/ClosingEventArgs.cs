@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WPF.MDI
+namespace Solvation.WPF.MDI.Event
 {
     public class ClosingEventArgs : RoutedEventArgs
     {
