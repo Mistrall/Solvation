@@ -72,7 +72,6 @@ namespace Solvation.Domain.Services
 				unfinishedJobCount--;
 			}
 			
-
 			return plan;
 		}
 
