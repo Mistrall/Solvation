@@ -120,6 +120,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\JobModel.cs" />
+    <Compile Include="Models\ResourceModel.cs" />
     <Compile Include="UIComponents\Frames\SchedulingProblemFrame.xaml.cs">
       <DependentUpon>SchedulingProblemFrame.xaml</DependentUpon>
     </Compile>

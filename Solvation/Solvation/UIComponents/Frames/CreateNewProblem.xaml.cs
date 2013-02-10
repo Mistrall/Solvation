@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using Solvation.Domain.DomainObjects;
 using Solvation.Domain.Services;
@@ -37,14 +38,14 @@ namespace Solvation.UI.UIComponents.Frames
 
 		private NewProblemModel GenerateDefaultDataModel()
 		{
-			var resourceArray = new List<Resource> {new Resource(1, 20), new Resource(2, 50)};
+			var resourceArray = new List<ResourceModel> {new ResourceModel(1, 20), new ResourceModel(2, 50)};
 
-			var jobArray = new List<Job>
+			var jobArray = new List<JobModel>
 				{
-					new Job(1, null, 100, 1, 10),
-					new Job(2, "1", 50, 1, 10),
-					new Job(3, null, 50, 1, 10),
-					new Job(4, null, 80, 1, 10)
+					new JobModel(1, null, 100, 1, 10),
+					new JobModel(2, "1", 50, 1, 10),
+					new JobModel(3, null, 50, 1, 10),
+					new JobModel(4, null, 80, 1, 10)
 				};
 
 			var dependencies = new List<double[]>
@@ -63,14 +64,14 @@ namespace Solvation.UI.UIComponents.Frames
 			var newResourceCount = Int32.Parse(ResourceCount.Value.ToString());
 			if (newResourceCount == model.ResourceCount) return;
 
-			var newResourceList = new List<Resource>();
+			var newResourceList = new List<ResourceModel>();
 
 
 			if (newResourceCount > model.ResourceCount)
 			{
 				newResourceList.AddRange(model.Resources);
 
-				for (int i = model.ResourceCount; i < newResourceCount; i++) newResourceList.Add(new Resource(i + 1));
+				for (int i = model.ResourceCount; i < newResourceCount; i++) newResourceList.Add(new ResourceModel(i + 1));
 			}
 			else
 			{
@@ -89,13 +90,13 @@ namespace Solvation.UI.UIComponents.Frames
 			var newJobsCount = Int32.Parse(JobCount.Value.ToString());
 			if (newJobsCount == model.JobCount) return;
 
-			var newJobsList = new List<Job>();
+			var newJobsList = new List<JobModel>();
 
 			if (newJobsCount > model.JobCount)
 			{
 				newJobsList.AddRange(model.Jobs);
 
-				for (int i = model.JobCount; i < newJobsCount; i++) newJobsList.Add(new Job(i + 1));
+				for (int i = model.JobCount; i < newJobsCount; i++) newJobsList.Add(new JobModel(i + 1));
 			}
 			else
 			{
@@ -111,7 +112,11 @@ namespace Solvation.UI.UIComponents.Frames
 		//Hack, we need to raise some event for parent here
 		private void StartThisProblemClick(object sender, RoutedEventArgs e)
 		{
-			var baseStepList = PlanBuilder.GetBasePlan(model.Resources, model.Jobs, model.DependencyValues);
+			var jobs = model.Jobs.Select(jobModel => 
+				new Job(jobModel.Number, jobModel.FullWorkVolume, jobModel.PrecedingJobs, jobModel.MinimumIntencity, jobModel.MaximumIntencity)).ToList();
+
+			var resources = model.Resources.Select(resourceModel => new Resource(resourceModel.Number, resourceModel.Value)).ToList();
+			var baseStepList = PlanBuilder.GetBasePlan(resources, jobs, model.DependencyValues);
 
 			var problemFrame = new MdiChild
 			{

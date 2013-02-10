@@ -6,7 +6,7 @@ namespace Solvation.Domain.Services
 {
 	public class JobPlanBuilder
 	{
-		public IEnumerable<PlanStep> GetBasePlan(BindingList<Resource> resources, BindingList<Job> jobs, BindingList<double[]> dependencyValues)
+		public IEnumerable<PlanStep> GetBasePlan(IEnumerable<Resource> resources, IEnumerable<Job> jobs, IEnumerable<double[]> dependencyValues)
 		{
 			var dataContainer = new SchedulingDataContainer(resources, jobs, dependencyValues);
 

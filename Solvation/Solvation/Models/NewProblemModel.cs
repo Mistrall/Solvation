@@ -18,20 +18,20 @@ namespace Solvation.Models
 		}
 		public NewProblemModel()
 		{
-			Resources = new BindingList<Resource>();
-			Jobs = new BindingList<Job>();
+			Resources = new BindingList<ResourceModel>();
+			Jobs = new BindingList<JobModel>();
 		}
 
-		public NewProblemModel(int resourceCount, int jobCount, IEnumerable<Resource> resources, IEnumerable<Job> jobs)
+		public NewProblemModel(int resourceCount, int jobCount, IEnumerable<ResourceModel> resources, IEnumerable<JobModel> jobs)
 			: this(resourceCount, jobCount, resources, jobs, null)
 		{}
 
-		public NewProblemModel(int resourceCount, int jobCount, IEnumerable<Resource> resources, IEnumerable<Job> jobs, IEnumerable<double[]> dependencies)
+		public NewProblemModel(int resourceCount, int jobCount, IEnumerable<ResourceModel> resources, IEnumerable<JobModel> jobs, IEnumerable<double[]> dependencies)
 		{
 			ResourceCount = resourceCount;
 			JobCount = jobCount;
-			Resources= new BindingList<Resource>(resources.ToList());
-			Jobs = new BindingList<Job>(jobs.ToList());
+			Resources= new BindingList<ResourceModel>(resources.ToList());
+			Jobs = new BindingList<JobModel>(jobs.ToList());
 			//var newDependencies = new JobResourceDependency[JobCount, ResourceCount];
 			var values = GenerateDependencyValues(dependencies);
 
@@ -70,8 +70,8 @@ namespace Solvation.Models
 
 		public int ResourceCount { get; private set; }
 		public int JobCount { get; private set; }
-		public BindingList<Resource> Resources { get; private set; }
-		public BindingList<Job> Jobs { get; private set; }
+		public BindingList<ResourceModel> Resources { get; private set; }
+		public BindingList<JobModel> Jobs { get; private set; }
 		//public IEnumerable<JobResourceDependency[]> Dependencies { get; private set; }
 		public BindingList<double[]> DependencyValues { get; private set; }
 	}
