@@ -36,7 +36,7 @@ namespace Solvation.Domain.DomainObjects
 				for (int r=0;r<resArr.Length;r++)
 				{
 					var dep = new JobResourceDependency(jobsArr[j], resArr[r], depArr[j][r]);
-					jobsDict[jobsArr[j].Number.ToString(CultureInfo.InvariantCulture)].Dependencies.Add(dep);
+					jobsDict[jobsArr[j].Number.ToString(CultureInfo.InvariantCulture)].ResourceDependencies.Add(dep);
 				}
 				if (jobsArr[j].PrecedingJobNums.Count > 0)
 				{
@@ -44,6 +44,9 @@ namespace Solvation.Domain.DomainObjects
 					{
 						jobsDict[jobsArr[j].Number.ToString(CultureInfo.InvariantCulture)]
 							.PrecedingJobs.Add(jobsDict[pjob.ToString(CultureInfo.InvariantCulture)]);
+
+						jobsDict[pjob.ToString(CultureInfo.InvariantCulture)].
+							DependantJobs.Add(jobsDict[jobsArr[j].Number.ToString(CultureInfo.InvariantCulture)]);
 					}
 				}
 			}

@@ -29,37 +29,39 @@ namespace Solvation.Tests.Domain.DomainObjects
 			AreEqual(container.Jobs[0].FullWorkVolume, 100);
 			AreEqual(container.Jobs[0].MinimumIntencity, 1);
 			AreEqual(container.Jobs[0].MaximumIntencity, 10);
-			AreEqual(container.Jobs[0].Dependencies.Count, 2);
+			AreEqual(container.Jobs[0].ResourceDependencies.Count, 2);
 			AreEqual(container.Jobs[0].PrecedingJobs.Count, 0);
-			AreEqual(container.Jobs[0].Dependencies[0].Job, firstJob);
-			AreEqual(container.Jobs[0].Dependencies[0].Resource, resource1);
-			AreEqual(container.Jobs[0].Dependencies[0].Value, 0.7);
-			AreEqual(container.Jobs[0].Dependencies[1].Job, firstJob);
-			AreEqual(container.Jobs[0].Dependencies[1].Resource, resource2);
-			AreEqual(container.Jobs[0].Dependencies[1].Value, 1.2);
+			AreEqual(container.Jobs[0].NumberOfDependants, 2);
+			AreEqual(container.Jobs[0].ResourceDependencies[0].Job, firstJob);
+			AreEqual(container.Jobs[0].ResourceDependencies[0].Resource, resource1);
+			AreEqual(container.Jobs[0].ResourceDependencies[0].Value, 0.7);
+			AreEqual(container.Jobs[0].ResourceDependencies[1].Job, firstJob);
+			AreEqual(container.Jobs[0].ResourceDependencies[1].Resource, resource2);
+			AreEqual(container.Jobs[0].ResourceDependencies[1].Value, 1.2);
 
 			AreEqual(container.Jobs[1].Number, 2);
 			AreEqual(container.Jobs[1].PrecedingJobs.Count, 1);
 			AreEqual(container.Jobs[1].PrecedingJobs[0], firstJob);
-			AreEqual(container.Jobs[1].Dependencies.Count, 2);
-			AreEqual(container.Jobs[1].Dependencies[0].Job, secondJob);
-			AreEqual(container.Jobs[1].Dependencies[0].Resource, resource1);
-			AreEqual(container.Jobs[1].Dependencies[0].Value, 1.4);
-			AreEqual(container.Jobs[1].Dependencies[1].Job, secondJob);
-			AreEqual(container.Jobs[1].Dependencies[1].Resource, resource2);
-			AreEqual(container.Jobs[1].Dependencies[1].Value, 0.8);
+			AreEqual(container.Jobs[1].NumberOfDependants, 1);
+			AreEqual(container.Jobs[1].ResourceDependencies.Count, 2);
+			AreEqual(container.Jobs[1].ResourceDependencies[0].Job, secondJob);
+			AreEqual(container.Jobs[1].ResourceDependencies[0].Resource, resource1);
+			AreEqual(container.Jobs[1].ResourceDependencies[0].Value, 1.4);
+			AreEqual(container.Jobs[1].ResourceDependencies[1].Job, secondJob);
+			AreEqual(container.Jobs[1].ResourceDependencies[1].Resource, resource2);
+			AreEqual(container.Jobs[1].ResourceDependencies[1].Value, 0.8);
 
 			AreEqual(container.Jobs[2].Number, 3);
 			AreEqual(container.Jobs[2].PrecedingJobs.Count, 2);
 			AreEqual(container.Jobs[2].PrecedingJobs[0], firstJob);
 			AreEqual(container.Jobs[2].PrecedingJobs[1], secondJob);
-			AreEqual(container.Jobs[2].Dependencies.Count, 2);
-			AreEqual(container.Jobs[2].Dependencies[0].Job, thirdJob);
-			AreEqual(container.Jobs[2].Dependencies[0].Resource, resource1);
-			AreEqual(container.Jobs[2].Dependencies[0].Value, 1.0);
-			AreEqual(container.Jobs[2].Dependencies[1].Job, thirdJob);
-			AreEqual(container.Jobs[2].Dependencies[1].Resource, resource2);
-			AreEqual(container.Jobs[2].Dependencies[1].Value, 2.0);
+			AreEqual(container.Jobs[2].ResourceDependencies.Count, 2);
+			AreEqual(container.Jobs[2].ResourceDependencies[0].Job, thirdJob);
+			AreEqual(container.Jobs[2].ResourceDependencies[0].Resource, resource1);
+			AreEqual(container.Jobs[2].ResourceDependencies[0].Value, 1.0);
+			AreEqual(container.Jobs[2].ResourceDependencies[1].Job, thirdJob);
+			AreEqual(container.Jobs[2].ResourceDependencies[1].Resource, resource2);
+			AreEqual(container.Jobs[2].ResourceDependencies[1].Value, 2.0);
 		}
 	}
 }

@@ -8,16 +8,18 @@ namespace Solvation.Domain.DomainObjects
 		private readonly List<int> precedingJobNums;
 
 		public int Number { get; set; }
+		//TODO: Add validation for duplicates and cycles
 		public List<Job> PrecedingJobs { get; set; }
-		public List<JobResourceDependency> Dependencies { get; set; }
+		//TODO: Add validation for duplicates and cycles
+		public List<Job> DependantJobs { get; set; }
+		public List<JobResourceDependency> ResourceDependencies { get; set; }
 		public double FullWorkVolume { get; set; }
 		public double MinimumIntencity { get; set; }
 		public double MaximumIntencity { get; set; }
+		public int NumberOfDependants { get { return DependantJobs.Count; } }
+		public JobState State { get; set; }
 
-		public List<int> PrecedingJobNums
-		{
-			get { return precedingJobNums; }
-		}
+		public List<int> PrecedingJobNums { get { return precedingJobNums; } }
 
 		public Job(int number, double fullWorkVolume, IEnumerable<int> precedingJobNums, double minimumIntencity, double maximumIntencity)
 		{
@@ -27,9 +29,16 @@ namespace Solvation.Domain.DomainObjects
 			FullWorkVolume = fullWorkVolume;
 			MinimumIntencity = minimumIntencity;
 			MaximumIntencity = maximumIntencity;
+			State = JobState.NotStarted;
 
-			Dependencies = new List<JobResourceDependency>();
+			ResourceDependencies = new List<JobResourceDependency>();
 			PrecedingJobs = new List<Job>();
+			DependantJobs = new List<Job>();
+		}
+
+		public bool CanStart()
+		{
+			return PrecedingJobs.All(j => j.State == JobState.Finished);
 		}
 
 		#region Equality members
@@ -61,5 +70,24 @@ namespace Solvation.Domain.DomainObjects
 			return !Equals(left, right);
 		}
 		#endregion
+
+		//TODO: This recursion can cause stack overflow if we will have incorrect configuration, check it. 
+		//TODO: Also make it lazy field of job instance, not static, assign after we compute it one time. Will reduce number of recursive calls significantly
+		public static double GetFullVolumeWithDependantJobs(Job job)
+		{
+			var dependantVolume = 0.0;
+			if (job.NumberOfDependants != 0) 
+			{
+				dependantVolume += job.DependantJobs.Sum(depJob => GetFullVolumeWithDependantJobs(depJob));
+			}
+			return job.FullWorkVolume+dependantVolume;
+		}
+	}
+
+	public enum JobState
+	{
+		NotStarted = 0,
+		Started = 1,
+		Finished = 2
 	}
 }

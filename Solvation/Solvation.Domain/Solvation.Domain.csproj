@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlgorithmHelpers\JobGreedyComparer.cs" />
     <Compile Include="DomainObjects\Job.cs" />
     <Compile Include="DomainObjects\PlanStep.cs" />
     <Compile Include="DomainObjects\JobResourceDependency.cs" />
