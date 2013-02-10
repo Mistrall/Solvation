@@ -46,5 +46,9 @@
 
 		#endregion
 
+		public Resource DeepCopy()
+		{
+			return new Resource(Number, Value);
+		}
 	}
 }

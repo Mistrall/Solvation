@@ -121,6 +121,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\JobModel.cs" />
+    <Compile Include="Models\PlanStepModel.cs" />
     <Compile Include="Models\ResourceModel.cs" />
     <Compile Include="UIComponents\Frames\SchedulingProblemFrame.xaml.cs">
       <DependentUpon>SchedulingProblemFrame.xaml</DependentUpon>

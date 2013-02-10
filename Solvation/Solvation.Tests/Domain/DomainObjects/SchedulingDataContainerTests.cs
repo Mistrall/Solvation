@@ -27,8 +27,8 @@ namespace Solvation.Tests.Domain.DomainObjects
 
 			AreEqual(container.Jobs[0].Number, 1);
 			AreEqual(container.Jobs[0].FullWorkVolume, 100);
-			AreEqual(container.Jobs[0].MinimumIntencity, 1);
-			AreEqual(container.Jobs[0].MaximumIntencity, 10);
+			AreEqual(container.Jobs[0].MinimumIntensity, 1);
+			AreEqual(container.Jobs[0].MaximumIntensity, 10);
 			AreEqual(container.Jobs[0].ResourceDependencies.Count, 2);
 			AreEqual(container.Jobs[0].PrecedingJobs.Count, 0);
 			AreEqual(container.Jobs[0].NumberOfDependants, 2);

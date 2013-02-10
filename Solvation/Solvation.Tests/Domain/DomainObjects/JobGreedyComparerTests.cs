@@ -67,7 +67,9 @@ namespace Solvation.Tests.Domain.DomainObjects
 			job3.PrecedingJobs.Add(job4);
 			var comparer = new JobGreedyComparer();
 			//Act and Assert
+// ReSharper disable ReturnValueOfPureMethodIsNotUsed
 			Throws<InvalidOperationException>(()=>comparer.Compare(job2, job3));
+// ReSharper restore ReturnValueOfPureMethodIsNotUsed
 		}
 	}
 }

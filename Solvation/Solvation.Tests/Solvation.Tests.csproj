@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\DomainObjects\JobGreedyComparerTests.cs" />
+    <Compile Include="Domain\DomainObjects\JobPlanBuilderTests.cs" />
     <Compile Include="Domain\DomainObjects\JobTests.cs" />
     <Compile Include="Domain\DomainObjects\SchedulingDataContainerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

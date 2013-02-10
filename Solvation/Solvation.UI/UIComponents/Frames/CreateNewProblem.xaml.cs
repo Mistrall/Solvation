@@ -112,7 +112,7 @@ namespace Solvation.UI.UIComponents.Frames
 		private void StartThisProblemClick(object sender, RoutedEventArgs e)
 		{
 			var jobs = model.Jobs.Select(jobModel => 
-				new Job(jobModel.Number, jobModel.FullWorkVolume, jobModel.PrecedingJobs, jobModel.MinimumIntencity, jobModel.MaximumIntencity)).ToList();
+				new Job(jobModel.Number, jobModel.FullWorkVolume, jobModel.PrecedingJobs, jobModel.MinimumIntensity, jobModel.MaximumIntensity)).ToList();
 
 			var resources = model.Resources.Select(resourceModel => new Resource(resourceModel.Number, resourceModel.Value)).ToList();
 			var baseStepList = PlanBuilder.GetBasePlan(resources, jobs, model.DependencyValues);

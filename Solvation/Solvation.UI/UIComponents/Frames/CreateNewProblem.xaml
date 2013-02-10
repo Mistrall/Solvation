@@ -26,8 +26,8 @@
 				<DataGridTextColumn Header="Number" Width="*" Binding="{Binding Path=Number}" />
 				<DataGridTextColumn Header="Preceding Jobs" Width="*" Binding="{Binding Path=PrecedingJobsStr}" />
 				<DataGridTextColumn Header="Full Work Volume" Width="*" Binding="{Binding Path=FullWorkVolume}" />
-				<DataGridTextColumn Header="Minimum Intencity" Width="*" Binding="{Binding Path=MinimumIntencity}" />
-				<DataGridTextColumn Header="Maximum Intencity" Width="*" Binding="{Binding Path=MaximumIntencity}" />
+				<DataGridTextColumn Header="Minimum Intencity" Width="*" Binding="{Binding Path=MinimumIntensity}" />
+				<DataGridTextColumn Header="Maximum Intencity" Width="*" Binding="{Binding Path=MaximumIntensity}" />
 			</DataGrid.Columns>
 		</DataGrid>
 		<Label Content="Job-Resource dependency" HorizontalAlignment="Left" Margin="10,428,0,0" VerticalAlignment="Top" Width="150" Height="26"/>

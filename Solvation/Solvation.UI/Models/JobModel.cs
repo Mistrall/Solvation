@@ -30,20 +30,20 @@ namespace Solvation.UI.Models
 			} 
 		}
 		public double FullWorkVolume { get; set; }
-		public double MinimumIntencity { get; set; }
-		public double MaximumIntencity { get; set; }
+		public double MinimumIntensity { get; set; }
+		public double MaximumIntensity { get; set; }
 
 		public JobModel(int number):this(number, string.Empty, 0, 0, 0)
 		{}
 
-		public JobModel(int number, string precedingJobs, double fullWorkVolume, double minimumIntencity, double maximumIntencity)
+		public JobModel(int number, string precedingJobs, double fullWorkVolume, double minimumIntencity, double maximumIntensity)
 		{
 			Number = number;
 			PrecedingJobs=new List<int>();
 			PrecedingJobsStr = precedingJobs;
 			FullWorkVolume = fullWorkVolume;
-			MinimumIntencity = minimumIntencity;
-			MaximumIntencity = maximumIntencity;
+			MinimumIntensity = minimumIntencity;
+			MaximumIntensity = maximumIntensity;
 		}
 	}
 }

@@ -45,6 +45,7 @@
     <Compile Include="DomainObjects\PlanStep.cs" />
     <Compile Include="DomainObjects\JobResourceDependency.cs" />
     <Compile Include="DomainObjects\Resource.cs" />
+    <Compile Include="DomainObjects\RunningJob.cs" />
     <Compile Include="DomainObjects\SchedulingDataContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\JobPlanBuilder.cs" />
