@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.ComponentModel;
 using Solvation.Domain.DomainObjects;
 
 namespace Solvation.Domain.Services

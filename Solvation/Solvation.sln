@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solvation.WPF.MDI", "WPF.MD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solvation.Domain", "DataObjects\Solvation.Domain.csproj", "{4743A165-B92F-45E8-B44E-44D052ECD8FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solvation.Tests", "Solvation.Tests\Solvation.Tests.csproj", "{C8BDD77F-4C39-4111-B6C8-1C3280B7714E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,21 @@ Global
 		{4743A165-B92F-45E8-B44E-44D052ECD8FA}.ReleaseTest|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{4743A165-B92F-45E8-B44E-44D052ECD8FA}.ReleaseTest|Mixed Platforms.Build.0 = Release|Any CPU
 		{4743A165-B92F-45E8-B44E-44D052ECD8FA}.ReleaseTest|x86.ActiveCfg = Release|Any CPU
+		{C8BDD77F-4C39-4111-B6C8-1C3280B7714E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8BDD77F-4C39-4111-B6C8-1C3280B7714E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8BDD77F-4C39-4111-B6C8-1C3280B7714E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C8BDD77F-4C39-4111-B6C8-1C3280B7714E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C8BDD77F-4C39-4111-B6C8-1C3280B7714E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C8BDD77F-4C39-4111-B6C8-1C3280B7714E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8BDD77F-4C39-4111-B6C8-1C3280B7714E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8BDD77F-4C39-4111-B6C8-1C3280B7714E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C8BDD77F-4C39-4111-B6C8-1C3280B7714E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C8BDD77F-4C39-4111-B6C8-1C3280B7714E}.Release|x86.ActiveCfg = Release|Any CPU
+		{C8BDD77F-4C39-4111-B6C8-1C3280B7714E}.ReleaseTest|Any CPU.ActiveCfg = Release|Any CPU
+		{C8BDD77F-4C39-4111-B6C8-1C3280B7714E}.ReleaseTest|Any CPU.Build.0 = Release|Any CPU
+		{C8BDD77F-4C39-4111-B6C8-1C3280B7714E}.ReleaseTest|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C8BDD77F-4C39-4111-B6C8-1C3280B7714E}.ReleaseTest|Mixed Platforms.Build.0 = Release|Any CPU
+		{C8BDD77F-4C39-4111-B6C8-1C3280B7714E}.ReleaseTest|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
