@@ -15,9 +15,8 @@
  */
 
 using System;
-using System.ComponentModel;
 
-namespace Solvation.Annotations
+namespace Solvation.UI.Properties
 {
   /// <summary>
   /// Indicates that marked element should be localized or not.

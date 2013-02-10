@@ -444,10 +444,10 @@ namespace Solvation.WPF.MDI
 			switch (themeType)
 			{
 				case ThemeType.Luna:
-					Application.Current.Resources.MergedDictionaries.Add(currentResourceDictionary = new ResourceDictionary { Source = new Uri(@"/WPF.MDI;component/Themes/Luna.xaml", UriKind.Relative) });
+					Application.Current.Resources.MergedDictionaries.Add(currentResourceDictionary = new ResourceDictionary { Source = new Uri(@"/Solvation.WPF.MDI;component/Themes/Luna.xaml", UriKind.Relative) });
 					break;
 				case ThemeType.Aero:
-					Application.Current.Resources.MergedDictionaries.Add(currentResourceDictionary = new ResourceDictionary { Source = new Uri(@"/WPF.MDI;component/Themes/Aero.xaml", UriKind.Relative) });
+					Application.Current.Resources.MergedDictionaries.Add(currentResourceDictionary = new ResourceDictionary { Source = new Uri(@"/Solvation.WPF.MDI;component/Themes/Aero.xaml", UriKind.Relative) });
 					break;
 			}
 

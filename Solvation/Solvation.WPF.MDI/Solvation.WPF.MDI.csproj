@@ -186,6 +186,12 @@
     <Resource Include="Themes\Luna\TopRightFocused.png" />
     <Resource Include="Themes\Luna\TopRightUnfocused.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Solvation.Domain\Solvation.Domain.csproj">
+      <Project>{4743a165-b92f-45e8-b44e-44d052ecd8fa}</Project>
+      <Name>Solvation.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

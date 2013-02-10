@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Solvation.Annotations;
-using Solvation.Domain.DomainObjects;
+using Solvation.UI.Properties;
 
-namespace Solvation.Models
+namespace Solvation.UI.Models
 {
 	public class NewProblemModel: INotifyPropertyChanged
 	{
@@ -32,7 +31,6 @@ namespace Solvation.Models
 			JobCount = jobCount;
 			Resources= new BindingList<ResourceModel>(resources.ToList());
 			Jobs = new BindingList<JobModel>(jobs.ToList());
-			//var newDependencies = new JobResourceDependency[JobCount, ResourceCount];
 			var values = GenerateDependencyValues(dependencies);
 
 			DependencyValues = values;
@@ -72,7 +70,6 @@ namespace Solvation.Models
 		public int JobCount { get; private set; }
 		public BindingList<ResourceModel> Resources { get; private set; }
 		public BindingList<JobModel> Jobs { get; private set; }
-		//public IEnumerable<JobResourceDependency[]> Dependencies { get; private set; }
 		public BindingList<double[]> DependencyValues { get; private set; }
 	}
 }

@@ -1,8 +1,6 @@
-﻿using System.ComponentModel;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
-using Solvation.UI.Controls;
 using Solvation.WPF.MDI;
 using Solvation.WPF.MDI.Enums;
 using CreateNewProblem = Solvation.UI.UIComponents.Frames.CreateNewProblem;

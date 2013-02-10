@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
-using Solvation.UI.Controls.Helpers;
+using Solvation.UI.UIComponents.Helpers;
 
 namespace Solvation.UI.UIComponents.UserControls
 {

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows;
 using Solvation.Domain.DomainObjects;
 using Solvation.Domain.Services;
-using Solvation.Models;
 using Solvation.UI.Models;
 using Solvation.WPF.MDI;
 

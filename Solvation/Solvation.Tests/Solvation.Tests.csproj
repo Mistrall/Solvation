@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Solvation.Domain\Solvation.Domain.csproj">
-      <Project>{4743A165-B92F-45E8-B44E-44D052ECD8FA}</Project>
+      <Project>{4743a165-b92f-45e8-b44e-44d052ecd8fa}</Project>
       <Name>Solvation.Domain</Name>
     </ProjectReference>
   </ItemGroup>

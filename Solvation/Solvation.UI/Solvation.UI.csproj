@@ -196,11 +196,11 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataObjects\Solvation.Domain.csproj">
-      <Project>{4743a165-b92f-45e8-b44e-44d052ecd8fa}</Project>
+    <ProjectReference Include="..\Solvation.Domain\Solvation.Domain.csproj">
+      <Project>{4743A165-B92F-45E8-B44E-44D052ECD8FA}</Project>
       <Name>Solvation.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WPF.MDI\Solvation.WPF.MDI.csproj">
+    <ProjectReference Include="..\Solvation.WPF.MDI\Solvation.WPF.MDI.csproj">
       <Project>{be1ed569-5e0b-4df0-8964-33ad2aae4c4a}</Project>
       <Name>Solvation.WPF.MDI</Name>
     </ProjectReference>
