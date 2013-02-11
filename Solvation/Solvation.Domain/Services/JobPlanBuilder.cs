@@ -43,7 +43,7 @@ namespace Solvation.Domain.Services
 					if (maxIntensity > 0)
 					{
 						//Start job
-						jobToExecute.State=JobState.Started;
+						jobToExecute.State = JobState.Started;
 						//calc spended resources, remaining resources and time
 						foreach (var resource in resourcesForStep)
 						{
@@ -52,7 +52,7 @@ namespace Solvation.Domain.Services
 								resource.Value -= jobResourceDependency.Value*maxIntensity;
 						}
 
-						var time = jobToExecute.FullWorkVolume/maxIntensity;
+						var time = jobToExecute.RemainingVolume/maxIntensity;
 						jobsForStep.Add(new RunningJob(jobToExecute, maxIntensity, time));
 					}
 
@@ -64,9 +64,21 @@ namespace Solvation.Domain.Services
 				var startTime = (plan.Count > 0) ? plan.Last().TimeEnd : 0;
 				//Create PlanStep at this moment
 				var step = new PlanStep(jobsForStep, startTime, stepTime + startTime);
-				//Compute first job to finish
-				var finishedJob = jobsForStep.FirstOrDefault(j => Math.Abs(j.RunTime - stepTime) < Epsilon);
-				if (finishedJob != null) finishedJob.JobReference.State = JobState.Finished;
+				//Compute all jobs to finish
+				foreach (var runningJob in jobsForStep)
+				{
+					if (Math.Abs(runningJob.RunTime - stepTime) < Epsilon)
+					{
+						runningJob.JobReference.State = JobState.Finished;
+						runningJob.JobReference.RemainingVolume = 0;
+					}
+					else
+					{
+						var completed = runningJob.Intencity*stepTime;
+						runningJob.JobReference.RemainingVolume -= completed;
+					}
+				}
+
 				//Memorize job progress
 				plan.Add(step);
 				unfinishedJobCount--;
@@ -80,7 +92,7 @@ namespace Solvation.Domain.Services
 			var maxJobIntensity = Double.MaxValue;
 			foreach (var resource in resourcesForStep)
 			{
-				var jobResourceDependency = jobToExecute.ResourceDependencies.FirstOrDefault(d => d.Resource == resource);
+				var jobResourceDependency = jobToExecute.ResourceDependencies.FirstOrDefault(d => d.Resource.Number == resource.Number);
 				if (jobResourceDependency == null) continue;
 				var resourceDependencyValue = jobResourceDependency.Value;
 				var upperbound = resourceDependencyValue*jobToExecute.MaximumIntensity;

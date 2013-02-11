@@ -30,7 +30,7 @@ namespace Solvation.Tests.Domain.DomainObjects
 			var job1 = new Job(1, 10, null, 1, 10);
 			var job2 = new Job(2, 10, null, 1, 10);
 			var job3 = new Job(3, 10, null, 1, 10);
-			var job4 = new Job(4, 10, null, 1, 10);
+			var job4 = new Job(4, 20, null, 1, 10);
 			job1.DependantJobs.Add(job2);
 			job1.DependantJobs.Add(job3);
 			job4.DependantJobs.Add(job3);

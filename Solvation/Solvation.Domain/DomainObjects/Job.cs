@@ -14,6 +14,7 @@ namespace Solvation.Domain.DomainObjects
 		public List<Job> DependantJobs { get; set; }
 		public List<JobResourceDependency> ResourceDependencies { get; set; }
 		public double FullWorkVolume { get; set; }
+		public double RemainingVolume { get; set; }
 		public double MinimumIntensity { get; set; }
 		public double MaximumIntensity { get; set; }
 		public int NumberOfDependants { get { return DependantJobs.Count; } }
@@ -27,6 +28,7 @@ namespace Solvation.Domain.DomainObjects
 			this.precedingJobNums = precedingJobNums != null ? precedingJobNums.ToList() : new List<int>();
 			
 			FullWorkVolume = fullWorkVolume;
+			RemainingVolume = fullWorkVolume;
 			MinimumIntensity = minimumIntencity;
 			MaximumIntensity = maximumIntensity;
 			State = JobState.NotStarted;
