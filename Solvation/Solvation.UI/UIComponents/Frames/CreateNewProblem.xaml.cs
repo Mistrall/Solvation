@@ -22,7 +22,7 @@ namespace Solvation.UI.UIComponents.Frames
 		public CreateNewProblem()
 		{
 			//TODO: replace with DI property injection
-			PlanBuilder=new JobPlanBuilder();
+			PlanBuilder = new JobPlanBuilder();
 
 			InitializeComponent();
 

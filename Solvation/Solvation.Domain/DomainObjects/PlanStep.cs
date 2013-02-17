@@ -6,7 +6,7 @@ namespace Solvation.Domain.DomainObjects
 	{
 		public double TimeStart { get; set; }
 		public double TimeEnd { get; set; }
-		public double TimeDelta { get { return TimeEnd - TimeStart; } }
+		public double TimeDelta { get; private set;}
 		public List<RunningJob> ExecutingJobs { get; set; }
 
 		public PlanStep(List<RunningJob> executingJobs, double timeStart, double timeEnd)
@@ -14,6 +14,7 @@ namespace Solvation.Domain.DomainObjects
 			ExecutingJobs = executingJobs;
 			TimeStart = timeStart;
 			TimeEnd = timeEnd;
+			TimeDelta = timeEnd - timeStart;
 		}
 	}
 }
