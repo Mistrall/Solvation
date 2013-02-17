@@ -3,19 +3,90 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:converters="clr-namespace:Solvation.UI.UIComponents.Converters"
+             xmlns:converters="clr-namespace:Solvation.UI.UIComponents.Helpers.Converters"
+             xmlns:selectors="clr-namespace:Solvation.UI.UIComponents.Helpers.Selectors"
+             xmlns:models="clr-namespace:Solvation.UI.Models"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="800" d:DesignWidth="600">
 	<UserControl.Resources>
 		<converters:RowToPositionConverter x:Key="EquipmentRowAsYCoordinate"
-                                  RowHeight="24"
+                                  RowHeight="30"
                                   RowSpacing="0"/>
+		
+		<converters:TimeToPositionConverter x:Key="TimeAsXCoordinate"
+                                   StartTime="2009/08/12 12:00:00"
+                                   ScaleTime="2009/08/31 12:00:00"
+                                   ScaleTimePosition="700" />
+
+		<converters:TimeSpanToDimensionConverter x:Key="DurationAsWidth"
+                                        ScaleTimeSpan="19.00:00:00"
+                                        ScaleDimension="700" />
+
+		<converters:RowToPositionConverter x:Key="EquipmentRowCentreAsYCoordinate"
+                                  RowHeight="24"
+                                  RowSpacing="0"
+                                  Offset="12"/>
+
+		<converters:RowToColorConverter x:Key="JobChainColour">
+			<x:StaticExtension Member="Colors.Red" />
+			<x:StaticExtension Member="Colors.LimeGreen" />
+			<x:StaticExtension Member="Colors.Orange" />
+			<x:StaticExtension Member="Colors.Aqua" />
+			<x:StaticExtension Member="Colors.Goldenrod" />
+			<x:StaticExtension Member="Colors.CadetBlue" />
+		</converters:RowToColorConverter>
+
+
+		<DataTemplate x:Key="UsageBlockTemplate">
+			<Border Background="White" Margin="-1">
+				<Rectangle Margin="2"
+                   Height="20"
+                   Width="{Binding Usage.Duration, Converter={StaticResource DurationAsWidth}}"
+                   RadiusX="2"
+                   RadiusY="2"
+                   Name="UsageRectangle"
+                   >
+					<Rectangle.Stroke>
+						<SolidColorBrush Color="{Binding ExperimentIndex, Converter={StaticResource ExperimentColour}}" />
+					</Rectangle.Stroke>
+					<Rectangle.Fill>
+						<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+							<GradientStop Offset="0" Color="White" />
+							<GradientStop Offset="1" Color="{Binding ExperimentIndex, Converter={StaticResource JobChainColour}}" />
+						</LinearGradientBrush>
+					</Rectangle.Fill>
+				</Rectangle>
+			</Border>
+			<!--<DataTemplate.Triggers>
+				<DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" Value="True">
+					<Setter TargetName="UsageRectangle" Property="LayoutTransform">
+						<Setter.Value>
+							<ScaleTransform CenterY="0.5" ScaleY="-1" />
+						</Setter.Value>
+					</Setter>
+					<Setter TargetName="UsageRectangle" Property="StrokeThickness" Value="2" />
+				</DataTrigger>
+			</DataTemplate.Triggers>-->
+		</DataTemplate>
+
 	</UserControl.Resources>
 	<DockPanel x:Name="LayoutRoot">
-		<ItemsControl Width="100" DockPanel.Dock="Left" ItemsSource="{Binding Path=Jobs}">
+		<Border DockPanel.Dock="Bottom" Background="LightYellow" Padding="6">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="Job: " />
+				<TextBlock Text="" />
+				<TextBlock Text=" | Started at: " />
+				<TextBlock Text="" />
+				<TextBlock Text=" | Ended at: " />
+				<TextBlock Text="" />
+			</StackPanel>
+		</Border>
+		<ItemsControl Width="100" DockPanel.Dock="Left" ItemsSource="{Binding Path=Jobs}" BorderThickness="1" BorderBrush="Navy">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-						<TextBlock Text="{Binding Name}"></TextBlock>
+					<StackPanel Width="200">
+						<TextBlock HorizontalAlignment="Center" Text="{Binding Name}"></TextBlock>
+					</StackPanel>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
 			<ItemsControl.ItemsPanel>
@@ -30,5 +101,34 @@
 			</ItemsControl.ItemContainerStyle>
 		</ItemsControl>
 		
+		<Grid>
+			<ListBox ItemsSource="{Binding Path=Steps}" 
+					 BorderThickness="1" Name="GanttChart">
+				<ListBox.ItemTemplateSelector>
+					<selectors:ByTypeDataTemplateSelector>
+						<selectors:TypeTemplateMapping Type="models:PlanModel" Template="{StaticResource UsageBlockTemplate}"/>
+					</selectors:ByTypeDataTemplateSelector>
+				</ListBox.ItemTemplateSelector>
+				<ListBox.ItemsPanel>
+					<ItemsPanelTemplate>
+						<Canvas />
+					</ItemsPanelTemplate>
+				</ListBox.ItemsPanel>
+				<ListBox.ItemContainerStyleSelector>
+					<selectors:ByTypeStyleSelector>
+						<selectors:TypeStyleMapping Type="models:PlanModel">
+							<selectors:TypeStyleMapping.Style>
+								<Style TargetType="ListBoxItem">
+									<Setter Property="Canvas.Left" Value="{Binding TimeDelta, Converter={StaticResource TimeAsXCoordinate}}" />
+									<Setter Property="Canvas.Top" Value="{Binding EquipmentRow, Converter={StaticResource EquipmentRowAsYCoordinate}}" />
+									<Setter Property="Margin" Value="0" />
+									<Setter Property="Padding" Value="0" />
+								</Style>
+							</selectors:TypeStyleMapping.Style>
+						</selectors:TypeStyleMapping>
+					</selectors:ByTypeStyleSelector>
+				</ListBox.ItemContainerStyleSelector>
+			</ListBox>
+		</Grid>
 	</DockPanel>
 </UserControl>

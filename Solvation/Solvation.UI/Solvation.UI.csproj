@@ -125,10 +125,15 @@
     <Compile Include="Models\PlanStepModel.cs" />
     <Compile Include="Models\ResourceModel.cs" />
     <Compile Include="Models\RunningJobModel.cs" />
-    <Compile Include="UIComponents\Converters\RowToPositionConverter.cs" />
     <Compile Include="UIComponents\Frames\SchedulingProblemFrame.xaml.cs">
       <DependentUpon>SchedulingProblemFrame.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UIComponents\Helpers\Converters\RowToColorConverter.cs" />
+    <Compile Include="UIComponents\Helpers\Converters\RowToPositionConverter.cs" />
+    <Compile Include="UIComponents\Helpers\Converters\TimeSpanToDimensionConverter.cs" />
+    <Compile Include="UIComponents\Helpers\Converters\TimeToPositionConverter.cs" />
+    <Compile Include="UIComponents\Helpers\Selectors\ByTypeDataTemplateSelector.cs" />
+    <Compile Include="UIComponents\Helpers\Selectors\ByTypeStyleSelector.cs" />
     <Compile Include="UIComponents\UserControls\DataGrid2D.cs" />
     <Compile Include="UIComponents\UserControls\TextBoxWithLabel.xaml.cs">
       <DependentUpon>TextBoxWithLabel.xaml</DependentUpon>

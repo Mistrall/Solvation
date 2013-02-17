@@ -9,16 +9,15 @@ namespace Solvation.UI.Models
 	public class PlanModel:Observable
 	{
 		private readonly ReadOnlyObservableCollection<RunningJobModel> jobs;
+		private readonly ReadOnlyObservableCollection<PlanStepModel> steps;
 
-		public List<PlanStepModel> Steps { get; set; }
-		public ReadOnlyObservableCollection<RunningJobModel> Jobs
-		{
-			get { return jobs; }
-		}
+		public ReadOnlyObservableCollection<PlanStepModel> Steps { get { return steps; } }
+		public ReadOnlyObservableCollection<RunningJobModel> Jobs { get { return jobs; } }
 		
 		public PlanModel(IEnumerable<PlanStep> baseStepList)
 		{
-			Steps = baseStepList.Select(bs => new PlanStepModel(bs)).ToList();
+			steps = new ReadOnlyObservableCollection<PlanStepModel>(
+				new ObservableCollection<PlanStepModel>(baseStepList.Select(bs => new PlanStepModel(bs)).ToList()));
 
 			var jobList = Steps.SelectMany(s => s.ExecutingJobs).Distinct(new JobByNumberComparer())
 				.Select(j => new RunningJobModel 

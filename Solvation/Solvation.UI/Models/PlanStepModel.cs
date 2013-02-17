@@ -3,7 +3,7 @@ using Solvation.Domain.DomainObjects;
 
 namespace Solvation.UI.Models
 {
-	public class PlanStepModel
+	public class PlanStepModel : Observable
 	{
 		public double TimeStart { get; set; }
 		public double TimeEnd { get; set; }

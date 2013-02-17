@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Solvation.UI.UIComponents.Converters
+namespace Solvation.UI.UIComponents.Helpers.Converters
 {
 	public class RowToPositionConverter : IValueConverter
 	{
@@ -12,7 +12,7 @@ namespace Solvation.UI.UIComponents.Converters
 
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			return ((int)value * (RowHeight + RowSpacing)) - RowSpacing + Offset;
+			return (((int)value -1) * (RowHeight + RowSpacing)) - RowSpacing + Offset;
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
