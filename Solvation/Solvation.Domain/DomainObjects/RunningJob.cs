@@ -5,12 +5,14 @@
 		public Job JobReference { get; set; }
 		public double Intencity { get; set; }
 		public double RunTime { get; set; }
+		public double StartTime { get; set; }
 
-		public RunningJob(Job jobReference, double intencity, double runTime)
+		public RunningJob(Job jobReference, double intencity, double runTime, double startTime)
 		{
 			JobReference = jobReference;
 			Intencity = intencity;
 			RunTime = runTime;
+			StartTime = startTime;
 		}
 	}
 }

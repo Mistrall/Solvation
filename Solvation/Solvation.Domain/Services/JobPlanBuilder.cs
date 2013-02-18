@@ -53,7 +53,8 @@ namespace Solvation.Domain.Services
 						}
 
 						var time = jobToExecute.RemainingVolume/maxIntensity;
-						jobsForStep.Add(new RunningJob(jobToExecute, maxIntensity, time));
+						jobsForStep.Add(new RunningJob(jobToExecute, maxIntensity, time,
+							plan.LastOrDefault()!=null?plan.LastOrDefault().TimeEnd:0));
 					}
 
 					//Repeat while we have some jobs

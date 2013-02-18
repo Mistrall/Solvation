@@ -8,39 +8,53 @@ namespace Solvation.UI.Models
 {
 	public class PlanModel:Observable
 	{
-		private readonly ReadOnlyObservableCollection<RunningJobModel> jobs;
-		private readonly ReadOnlyObservableCollection<PlanStepModel> steps;
+		private double scaleDimention;
+		private readonly ObservableCollection<RunningJobModel> distinctJobs;
+		private readonly ObservableCollection<RunningJobModel> jobs;
+		private readonly ObservableCollection<PlanStepModel> steps;
 
-		public ReadOnlyObservableCollection<PlanStepModel> Steps { get { return steps; } }
-		public ReadOnlyObservableCollection<RunningJobModel> Jobs { get { return jobs; } }
-		
-		public PlanModel(IEnumerable<PlanStep> baseStepList)
+		public ObservableCollection<PlanStepModel> Steps { get { return steps; } }
+		public ObservableCollection<RunningJobModel> DistinctJobs { get { return distinctJobs; } }
+		public ObservableCollection<RunningJobModel> Jobs { get { return jobs; } }
+
+		public double ScaleDimention
 		{
-			steps = new ReadOnlyObservableCollection<PlanStepModel>(
-				new ObservableCollection<PlanStepModel>(baseStepList.Select(bs => new PlanStepModel(bs)).ToList()));
-
-			var jobList = Steps.SelectMany(s => s.ExecutingJobs).Distinct(new JobByNumberComparer())
-				.Select(j => new RunningJobModel 
-				{ Job = j, 
-					Name = "Job " + j.JobReference.Number.ToString(CultureInfo.InvariantCulture),
-					Number = j.JobReference.Number
-				})
-				.ToList();
-
-			jobs = new ReadOnlyObservableCollection<RunningJobModel>(new ObservableCollection<RunningJobModel>(jobList));
+			get { return scaleDimention; }
+			set { Set(ref scaleDimention, value, "ScaleDimention"); }
 		}
 
-		private class JobByNumberComparer : IEqualityComparer<RunningJob> 
+		public PlanModel(IEnumerable<PlanStep> baseStepList)
 		{
-			public bool Equals(RunningJob x, RunningJob y)
+			steps = new ObservableCollection<PlanStepModel>(baseStepList.Select(bs => new PlanStepModel(bs)).ToList());
+
+			jobs = new ObservableCollection<RunningJobModel>(
+				Steps.SelectMany(s => s.ExecutingJobs)
+				.Select(j => new RunningJobModel 
+				{ 
+					Job = j, 
+					Name = "Job " + j.JobReference.Number.ToString(CultureInfo.InvariantCulture),
+					StartTime = j.StartTime,
+					Duration = j.RunTime
+				})
+				.ToList());
+
+			distinctJobs = new ObservableCollection<RunningJobModel>(jobs.Distinct(new JobModelByNumberComparer()));
+
+			var lastOrDefault = Steps.LastOrDefault();
+			if (lastOrDefault != null) scaleDimention = 700 / lastOrDefault.TimeEnd;
+		}
+
+		private class JobModelByNumberComparer : IEqualityComparer<RunningJobModel> 
+		{
+			public bool Equals(RunningJobModel x, RunningJobModel y)
 			{
 				if (x == null || y == null) return false;
-				return x.JobReference.Number == y.JobReference.Number;
+				return x.Number == y.Number;
 			}
 
-			public int GetHashCode(RunningJob obj)
+			public int GetHashCode(RunningJobModel obj)
 			{
-				return obj.JobReference.Number;
+				return obj.Number;
 			}
 		}
 	}

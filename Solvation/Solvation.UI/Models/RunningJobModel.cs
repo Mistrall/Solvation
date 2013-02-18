@@ -10,7 +10,11 @@ namespace Solvation.UI.Models
 
 		public int Number
 		{
-			get { return number; }
+			get
+			{
+				if (number == 0) number = job.JobReference.Number;
+				return number;
+			}
 			set { number = value; }
 		}
 
@@ -25,5 +29,8 @@ namespace Solvation.UI.Models
 			get { return name; }
 			set { Set(ref name, value, "Name"); }
 		}
+
+		public double StartTime { get; set; }
+		public double Duration { get; set; }
 	}
 }

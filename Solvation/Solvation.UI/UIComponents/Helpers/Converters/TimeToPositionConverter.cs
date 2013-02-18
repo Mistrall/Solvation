@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 
 namespace Solvation.UI.UIComponents.Helpers.Converters
 {
 	public class TimeToPositionConverter : IValueConverter
 	{
-		//public DateTime StartTime { get; set; }
-		//public DateTime ScaleTime { get; set; }
-		public double Duration { get; set; }
-		public double ScaleTimePosition { get; set; }
+		public double ScaleDimention { get; set; }
 
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
@@ -18,8 +16,8 @@ namespace Solvation.UI.UIComponents.Helpers.Converters
 			//var time = (DateTime)value;
 			//var delta = time - StartTime;
 			//return delta.TotalSeconds * positionPerSecond;
-
-			return ScaleTimePosition/Duration;
+			var startTime = (double) value;
+			return ScaleDimention * startTime;
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

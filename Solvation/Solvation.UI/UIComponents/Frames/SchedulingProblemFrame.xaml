@@ -7,21 +7,18 @@
              xmlns:selectors="clr-namespace:Solvation.UI.UIComponents.Helpers.Selectors"
              xmlns:models="clr-namespace:Solvation.UI.Models"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="600">
+             d:DesignHeight="800" d:DesignWidth="800">
 	<UserControl.Resources>
 		<converters:RowToPositionConverter x:Key="EquipmentRowAsYCoordinate"
                                   RowHeight="30"
                                   RowSpacing="0"/>
 		
-		<converters:TimeToPositionConverter x:Key="TimeAsXCoordinate"
-                                   StartTime="2009/08/12 12:00:00"
-                                   ScaleTime="2009/08/31 12:00:00"
-                                   ScaleTimePosition="700" />
+		<!--<converters:TimeToPositionConverter x:Key="TimeAsXCoordinate" ScaleDimention="{Binding ScaleDimention}" />-->
+		<converters:TimeToPositionConverter x:Key="TimeAsXCoordinate" ScaleDimention="33" />
 
-		<converters:TimeSpanToDimensionConverter x:Key="DurationAsWidth"
-                                        ScaleTimeSpan="19.00:00:00"
-                                        ScaleDimension="700" />
-
+		<!--<converters:TimeSpanToDimensionConverter x:Key="DurationAsWidth" ScaleDimention="{Binding ScaleDimention}" />-->
+		<converters:TimeSpanToDimensionConverter x:Key="DurationAsWidth" ScaleDimention="33" />
+		
 		<converters:RowToPositionConverter x:Key="EquipmentRowCentreAsYCoordinate"
                                   RowHeight="24"
                                   RowSpacing="0"
@@ -41,18 +38,18 @@
 			<Border Background="White" Margin="-1">
 				<Rectangle Margin="2"
                    Height="20"
-                   Width="{Binding Usage.Duration, Converter={StaticResource DurationAsWidth}}"
+                   Width="{Binding Duration, Converter={StaticResource DurationAsWidth}}"
                    RadiusX="2"
                    RadiusY="2"
                    Name="UsageRectangle"
                    >
 					<Rectangle.Stroke>
-						<SolidColorBrush Color="{Binding ExperimentIndex, Converter={StaticResource ExperimentColour}}" />
+						<SolidColorBrush Color="{Binding Number, Converter={StaticResource JobChainColour}}" />
 					</Rectangle.Stroke>
 					<Rectangle.Fill>
 						<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
 							<GradientStop Offset="0" Color="White" />
-							<GradientStop Offset="1" Color="{Binding ExperimentIndex, Converter={StaticResource JobChainColour}}" />
+							<GradientStop Offset="1" Color="{Binding Number, Converter={StaticResource JobChainColour}}" />
 						</LinearGradientBrush>
 					</Rectangle.Fill>
 				</Rectangle>
@@ -81,11 +78,11 @@
 				<TextBlock Text="" />
 			</StackPanel>
 		</Border>
-		<ItemsControl Width="100" DockPanel.Dock="Left" ItemsSource="{Binding Path=Jobs}" BorderThickness="1" BorderBrush="Navy">
+		<ItemsControl Width="200" DockPanel.Dock="Left" ItemsSource="{Binding Path=DistinctJobs}" BorderThickness="1" BorderBrush="Navy">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
 					<StackPanel Width="200">
-						<TextBlock HorizontalAlignment="Center" Text="{Binding Name}"></TextBlock>
+						<Button HorizontalAlignment="Center" Width="200" Content="{Binding Name}"/>
 					</StackPanel>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
@@ -102,11 +99,11 @@
 		</ItemsControl>
 		
 		<Grid>
-			<ListBox ItemsSource="{Binding Path=Steps}" 
+			<ListBox ItemsSource="{Binding Path=Jobs}" 
 					 BorderThickness="1" Name="GanttChart">
 				<ListBox.ItemTemplateSelector>
 					<selectors:ByTypeDataTemplateSelector>
-						<selectors:TypeTemplateMapping Type="models:PlanModel" Template="{StaticResource UsageBlockTemplate}"/>
+						<selectors:TypeTemplateMapping Type="models:RunningJobModel" Template="{StaticResource UsageBlockTemplate}"/>
 					</selectors:ByTypeDataTemplateSelector>
 				</ListBox.ItemTemplateSelector>
 				<ListBox.ItemsPanel>
@@ -116,11 +113,11 @@
 				</ListBox.ItemsPanel>
 				<ListBox.ItemContainerStyleSelector>
 					<selectors:ByTypeStyleSelector>
-						<selectors:TypeStyleMapping Type="models:PlanModel">
+						<selectors:TypeStyleMapping Type="models:RunningJobModel">
 							<selectors:TypeStyleMapping.Style>
 								<Style TargetType="ListBoxItem">
-									<Setter Property="Canvas.Left" Value="{Binding TimeDelta, Converter={StaticResource TimeAsXCoordinate}}" />
-									<Setter Property="Canvas.Top" Value="{Binding EquipmentRow, Converter={StaticResource EquipmentRowAsYCoordinate}}" />
+									<Setter Property="Canvas.Left" Value="{Binding StartTime, Converter={StaticResource TimeAsXCoordinate}}" />
+									<Setter Property="Canvas.Top" Value="{Binding Number, Converter={StaticResource EquipmentRowAsYCoordinate}}" />
 									<Setter Property="Margin" Value="0" />
 									<Setter Property="Padding" Value="0" />
 								</Style>
