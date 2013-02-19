@@ -39,7 +39,7 @@ namespace Solvation.UI.Models
 		public JobModel(int number, string precedingJobs, double fullWorkVolume, double minimumIntencity, double maximumIntensity)
 		{
 			Number = number;
-			PrecedingJobs=new List<int>();
+			PrecedingJobs = new List<int>();
 			PrecedingJobsStr = precedingJobs;
 			FullWorkVolume = fullWorkVolume;
 			MinimumIntensity = minimumIntencity;

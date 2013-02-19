@@ -5,19 +5,22 @@ using System.Windows.Data;
 
 namespace Solvation.UI.UIComponents.Helpers.Converters
 {
-	public class TimeToPositionConverter : IValueConverter
+	public class TimeToPositionConverter : DependencyObject, IValueConverter
 	{
-		public double ScaleDimention { get; set; }
+		public static DependencyProperty ScaleDimensionProperty =
+			 DependencyProperty.Register("ScaleDimension", typeof(double),
+			 typeof(TimeToPositionConverter));
+
+		public double ScaleDimension
+		{
+			get { return (double)GetValue(ScaleDimensionProperty); }
+			set { SetValue(ScaleDimensionProperty, value); }
+		}
 
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			//var positionPerSecond = ScaleTimePosition / (ScaleTime - StartTime).TotalSeconds;
-
-			//var time = (DateTime)value;
-			//var delta = time - StartTime;
-			//return delta.TotalSeconds * positionPerSecond;
 			var startTime = (double) value;
-			return ScaleDimention * startTime;
+			return ScaleDimension * startTime;
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

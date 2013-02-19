@@ -6,6 +6,7 @@
              xmlns:converters="clr-namespace:Solvation.UI.UIComponents.Helpers.Converters"
              xmlns:selectors="clr-namespace:Solvation.UI.UIComponents.Helpers.Selectors"
              xmlns:models="clr-namespace:Solvation.UI.Models"
+			 xmlns:helpers="clr-namespace:Solvation.UI.UIComponents.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="800">
 	<UserControl.Resources>
@@ -13,11 +14,9 @@
                                   RowHeight="30"
                                   RowSpacing="0"/>
 		
-		<!--<converters:TimeToPositionConverter x:Key="TimeAsXCoordinate" ScaleDimention="{Binding ScaleDimention}" />-->
-		<converters:TimeToPositionConverter x:Key="TimeAsXCoordinate" ScaleDimention="33" />
+		<converters:TimeToPositionConverter x:Key="TimeAsXCoordinate"/>
 
-		<!--<converters:TimeSpanToDimensionConverter x:Key="DurationAsWidth" ScaleDimention="{Binding ScaleDimention}" />-->
-		<converters:TimeSpanToDimensionConverter x:Key="DurationAsWidth" ScaleDimention="33" />
+		<converters:TimeSpanToDimensionConverter x:Key="DurationAsWidth"/>
 		
 		<converters:RowToPositionConverter x:Key="EquipmentRowCentreAsYCoordinate"
                                   RowHeight="24"
@@ -99,6 +98,10 @@
 		</ItemsControl>
 		
 		<Grid>
+			<helpers:BindingReflector Target="{Binding  Mode=OneWayToSource, Source = {StaticResource TimeAsXCoordinate}, Path=ScaleDimension}"
+										Source="{Binding Path=ScaleDimention, Mode=OneWay}" />
+			<helpers:BindingReflector Target="{Binding  Mode=OneWayToSource, Source = {StaticResource DurationAsWidth}, Path=ScaleDimension}"
+										Source="{Binding Path=ScaleDimention, Mode=OneWay}" />
 			<ListBox ItemsSource="{Binding Path=Jobs}" 
 					 BorderThickness="1" Name="GanttChart">
 				<ListBox.ItemTemplateSelector>
