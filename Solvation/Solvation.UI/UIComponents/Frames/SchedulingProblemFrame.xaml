@@ -53,7 +53,7 @@
 					</Rectangle.Fill>
 				</Rectangle>
 			</Border>
-			<!--<DataTemplate.Triggers>
+			<DataTemplate.Triggers>
 				<DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" Value="True">
 					<Setter TargetName="UsageRectangle" Property="LayoutTransform">
 						<Setter.Value>
@@ -62,7 +62,7 @@
 					</Setter>
 					<Setter TargetName="UsageRectangle" Property="StrokeThickness" Value="2" />
 				</DataTrigger>
-			</DataTemplate.Triggers>-->
+			</DataTemplate.Triggers>
 		</DataTemplate>
 
 	</UserControl.Resources>
