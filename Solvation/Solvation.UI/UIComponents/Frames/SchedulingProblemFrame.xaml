@@ -22,6 +22,12 @@
                                   RowHeight="24"
                                   RowSpacing="0"
                                   Offset="12"/>
+		
+		<converters:DependencyInfoToPointConverter x:Key="DependencyOffset"
+                                          RowHeight="24"
+                                          RowSpacing="0"
+											MinStrokeWidth="1"
+                                          />
 
 		<converters:RowToColorConverter x:Key="JobChainColour">
 			<x:StaticExtension Member="Colors.Red" />
@@ -31,7 +37,6 @@
 			<x:StaticExtension Member="Colors.Goldenrod" />
 			<x:StaticExtension Member="Colors.CadetBlue" />
 		</converters:RowToColorConverter>
-
 
 		<DataTemplate x:Key="UsageBlockTemplate">
 			<Border Background="White" Margin="-1">
@@ -65,7 +70,25 @@
 			</DataTemplate.Triggers>
 		</DataTemplate>
 
+		<DataTemplate x:Key="DependencyTemplate">
+			<Path StrokeThickness="1.5">
+				<Path.Stroke>
+					<SolidColorBrush Color="{Binding DependantOn.JobReference.Number, Converter={StaticResource JobChainColour}}" />
+				</Path.Stroke>
+				<Path.Data>
+					<LineGeometry StartPoint="0,0">
+						<LineGeometry.EndPoint>
+							<MultiBinding Converter="{StaticResource DependencyOffset}">
+								<Binding Path="RowDifference" />
+								<Binding Path="Distance" />
+							</MultiBinding>
+						</LineGeometry.EndPoint>
+					</LineGeometry>
+				</Path.Data>
+			</Path>
+		</DataTemplate>
 	</UserControl.Resources>
+	
 	<DockPanel x:Name="LayoutRoot">
 		<Border DockPanel.Dock="Bottom" Background="LightYellow" Padding="6">
 			<StackPanel Orientation="Horizontal">
@@ -99,14 +122,17 @@
 		
 		<Grid>
 			<helpers:BindingReflector Target="{Binding  Mode=OneWayToSource, Source = {StaticResource TimeAsXCoordinate}, Path=ScaleDimension}"
-										Source="{Binding Path=ScaleDimention, Mode=OneWay}" />
+										Source="{Binding Path=ScaleDimension, Mode=OneWay}" />
 			<helpers:BindingReflector Target="{Binding  Mode=OneWayToSource, Source = {StaticResource DurationAsWidth}, Path=ScaleDimension}"
-										Source="{Binding Path=ScaleDimention, Mode=OneWay}" />
-			<ListBox ItemsSource="{Binding Path=Jobs}" 
+										Source="{Binding Path=ScaleDimension, Mode=OneWay}" />
+			<helpers:BindingReflector Target="{Binding  Mode=OneWayToSource, Source = {StaticResource DependencyOffset}, Path=ScaleDimension}"
+										Source="{Binding Path=ScaleDimension, Mode=OneWay}" />
+			<ListBox ItemsSource="{Binding JobsWithDepedencies}" 
 					 BorderThickness="1" Name="GanttChart">
 				<ListBox.ItemTemplateSelector>
 					<selectors:ByTypeDataTemplateSelector>
 						<selectors:TypeTemplateMapping Type="models:RunningJobModel" Template="{StaticResource UsageBlockTemplate}"/>
+						<selectors:TypeTemplateMapping Type="models:JobDependencyModel" Template="{StaticResource DependencyTemplate}" />
 					</selectors:ByTypeDataTemplateSelector>
 				</ListBox.ItemTemplateSelector>
 				<ListBox.ItemsPanel>
@@ -121,6 +147,16 @@
 								<Style TargetType="ListBoxItem">
 									<Setter Property="Canvas.Left" Value="{Binding StartTime, Converter={StaticResource TimeAsXCoordinate}}" />
 									<Setter Property="Canvas.Top" Value="{Binding Number, Converter={StaticResource EquipmentRowAsYCoordinate}}" />
+									<Setter Property="Margin" Value="0" />
+									<Setter Property="Padding" Value="0" />
+								</Style>
+							</selectors:TypeStyleMapping.Style>
+						</selectors:TypeStyleMapping>
+						<selectors:TypeStyleMapping Type="models:JobDependencyModel">
+							<selectors:TypeStyleMapping.Style>
+								<Style TargetType="ListBoxItem">
+									<Setter Property="Canvas.Left" Value="{Binding DependantOn.EndTime, Converter={StaticResource TimeAsXCoordinate}}" />
+									<Setter Property="Canvas.Top" Value="{Binding DependantOn.JobReference.Number, Converter={StaticResource EquipmentRowCentreAsYCoordinate}}" />
 									<Setter Property="Margin" Value="0" />
 									<Setter Property="Padding" Value="0" />
 								</Style>

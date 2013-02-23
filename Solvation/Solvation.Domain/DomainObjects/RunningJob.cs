@@ -7,6 +7,8 @@
 		public double RunTime { get; set; }
 		public double StartTime { get; set; }
 
+		public double EndTime { get { return StartTime + RunTime; } }
+
 		public RunningJob(Job jobReference, double intencity, double runTime, double startTime)
 		{
 			JobReference = jobReference;
