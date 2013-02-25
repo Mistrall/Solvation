@@ -19,12 +19,12 @@
 		<converters:TimeSpanToDimensionConverter x:Key="DurationAsWidth"/>
 		
 		<converters:RowToPositionConverter x:Key="EquipmentRowCentreAsYCoordinate"
-                                  RowHeight="24"
+                                  RowHeight="30"
                                   RowSpacing="0"
-                                  Offset="12"/>
+                                  Offset="15"/>
 		
 		<converters:DependencyInfoToPointConverter x:Key="DependencyOffset"
-                                          RowHeight="24"
+                                          RowHeight="30"
                                           RowSpacing="0"
 											MinStrokeWidth="1"
                                           />
