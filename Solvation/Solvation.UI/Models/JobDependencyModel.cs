@@ -28,5 +28,10 @@ namespace Solvation.UI.Models
 		{
 			get { return Dependant.StartTime - (DependantOn.StartTime + DependantOn.RunTime); }
 		}
+
+		public int DependencyKey
+		{
+			get { return (Dependant.JobNumber + "->" + DependantOn.JobNumber).GetHashCode(); }
+		}
 	}
 }

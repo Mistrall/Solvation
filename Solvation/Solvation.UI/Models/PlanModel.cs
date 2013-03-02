@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
@@ -9,15 +10,31 @@ namespace Solvation.UI.Models
 	public class PlanModel : Observable
 	{
 		private double scaleDimension;
+		private const double EPSILON = 0.000001;
 		private readonly ObservableCollection<RunningJobModel> distinctJobs;
 		private readonly ObservableCollection<RunningJobModel> jobs;
 		private readonly ObservableCollection<PlanStepModel> steps;
 		private readonly ObservableCollection<JobDependencyModel> dependencies;
 
-		public ObservableCollection<PlanStepModel> Steps { get { return steps; } }
-		public ObservableCollection<RunningJobModel> DistinctJobs { get { return distinctJobs; } }
-		public ObservableCollection<RunningJobModel> Jobs { get { return jobs; } }
-		public ObservableCollection<JobDependencyModel> Dependencies { get { return dependencies; } }
+		public ObservableCollection<PlanStepModel> Steps
+		{
+			get { return steps; }
+		}
+
+		public ObservableCollection<RunningJobModel> DistinctJobs
+		{
+			get { return distinctJobs; }
+		}
+
+		public ObservableCollection<RunningJobModel> Jobs
+		{
+			get { return jobs; }
+		}
+
+		public ObservableCollection<JobDependencyModel> Dependencies
+		{
+			get { return dependencies; }
+		}
 
 		public ReadOnlyObservableCollection<object> JobsWithDepedencies { get; private set; }
 
@@ -33,18 +50,19 @@ namespace Solvation.UI.Models
 
 			var jobList = new List<RunningJobModel>();
 			var distinctJobList = new List<RunningJobModel>();
-			var dependencyList = new List<JobDependencyModel>();
+			//var dependencyList = new List<JobDependencyModel>();
+			var dependencyHashTable = new Dictionary<int, JobDependencyModel>();
 
 			jobList =
 				Steps.SelectMany(s => s.ExecutingJobs)
-				.Select(j => new RunningJobModel
-				{
-					Job = j,
-					Name = "Job " + j.JobReference.Number.ToString(CultureInfo.InvariantCulture),
-					StartTime = j.StartTime,
-					Duration = j.RunTime
-				})
-				.ToList();
+				     .Select(j => new RunningJobModel
+					     {
+						     Job = j,
+						     Name = "Job " + j.JobReference.Number.ToString(CultureInfo.InvariantCulture),
+						     StartTime = j.StartTime,
+						     Duration = j.RunTime
+					     })
+				     .ToList();
 
 
 			distinctJobList = jobList.Distinct(new JobModelByNumberComparer()).ToList();
@@ -53,21 +71,29 @@ namespace Solvation.UI.Models
 			{
 				foreach (var precedingJob in runningJob.Job.JobReference.PrecedingJobs)
 				{
+					var allDependantOn = jobList.Where(j => j.Number == precedingJob.Number);
+					var maxTime = allDependantOn.Max(j1 => j1.EndTime);
+					var lastDependantOn = allDependantOn.SingleOrDefault(j => Math.Abs(j.EndTime - maxTime) < EPSILON);
+
+					if (lastDependantOn == null) continue;
+
 					var dependency = new JobDependencyModel
 						{
 							Dependant = runningJob.Job,
-							DependantOn = distinctJobList.Where(j => j.Number == precedingJob.Number).Select(j => j.Job).SingleOrDefault()
+							DependantOn = lastDependantOn.Job
 						};
 
-					if (!dependencyList.Contains(dependency, new JobDependencyComparer()))
-						dependencyList.Add(dependency);
+					if (dependencyHashTable.ContainsKey(dependency.DependencyKey))
+					{
+						dependencyHashTable[dependency.DependencyKey] = dependency;
+					}
+					else dependencyHashTable.Add(dependency.DependencyKey, dependency);
 				}
 			}
 
-
 			distinctJobs = new ObservableCollection<RunningJobModel>(distinctJobList);
 			jobs = new ObservableCollection<RunningJobModel>(jobList);
-			dependencies = new ObservableCollection<JobDependencyModel>(dependencyList);
+			dependencies = new ObservableCollection<JobDependencyModel>(dependencyHashTable.Values.ToList());
 
 			var obs = new List<object>();
 			obs.AddRange(jobs);
@@ -76,7 +102,7 @@ namespace Solvation.UI.Models
 			JobsWithDepedencies = new ReadOnlyObservableCollection<object>(new ObservableCollection<object>(obs));
 
 			var lastOrDefault = Steps.LastOrDefault();
-			if (lastOrDefault != null) scaleDimension = 700 / lastOrDefault.TimeEnd;
+			if (lastOrDefault != null) scaleDimension = 700/lastOrDefault.TimeEnd;
 		}
 
 		private class JobModelByNumberComparer : IEqualityComparer<RunningJobModel>
@@ -99,7 +125,7 @@ namespace Solvation.UI.Models
 			{
 				if (x == null || y == null) return false;
 				return (x.Dependant.JobReference.Number == y.Dependant.JobReference.Number)
-					   && (x.DependantOn.JobReference.Number == y.DependantOn.JobReference.Number);
+				       && (x.DependantOn.JobReference.Number == y.DependantOn.JobReference.Number);
 			}
 
 			public int GetHashCode(JobDependencyModel obj)
@@ -108,6 +134,4 @@ namespace Solvation.UI.Models
 			}
 		}
 	}
-
-
 }

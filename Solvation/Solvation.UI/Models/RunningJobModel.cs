@@ -2,10 +2,10 @@
 
 namespace Solvation.UI.Models
 {
-	public class RunningJobModel:Observable
+	public class RunningJobModel : Observable
 	{
-		private string name;
 		private RunningJob job;
+		private string name;
 		private int number;
 
 		public int Number
@@ -32,5 +32,11 @@ namespace Solvation.UI.Models
 
 		public double StartTime { get; set; }
 		public double Duration { get; set; }
+		public double EndTime { get { return StartTime + Duration; } }
+
+		public string Type
+		{
+			get { return "job"; }
+		}
 	}
 }

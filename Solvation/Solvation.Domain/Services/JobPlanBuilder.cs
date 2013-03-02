@@ -77,6 +77,7 @@ namespace Solvation.Domain.Services
 					{
 						var completed = runningJob.Intencity*stepTime;
 						runningJob.JobReference.RemainingVolume -= completed;
+						runningJob.RunTime = step.TimeDelta;
 					}
 				}
 

@@ -59,14 +59,18 @@
 				</Rectangle>
 			</Border>
 			<DataTemplate.Triggers>
-				<DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" Value="True">
+				<MultiDataTrigger>
+					<MultiDataTrigger.Conditions>
+						<Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" Value="True"/>
+						<!--<Condition Binding="{Binding Path=Type, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" Value="job"/>-->
+					</MultiDataTrigger.Conditions>
 					<Setter TargetName="UsageRectangle" Property="LayoutTransform">
 						<Setter.Value>
 							<ScaleTransform CenterY="0.5" ScaleY="-1" />
 						</Setter.Value>
 					</Setter>
 					<Setter TargetName="UsageRectangle" Property="StrokeThickness" Value="2" />
-				</DataTrigger>
+				</MultiDataTrigger>
 			</DataTemplate.Triggers>
 		</DataTemplate>
 
@@ -93,11 +97,13 @@
 		<Border DockPanel.Dock="Bottom" Background="LightYellow" Padding="6">
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="Job: " />
-				<TextBlock Text="" />
+				<TextBlock Text="{Binding SelectedItem.Name, ElementName=GanttChart}" />
 				<TextBlock Text=" | Started at: " />
-				<TextBlock Text="" />
-				<TextBlock Text=" | Ended at: " />
-				<TextBlock Text="" />
+				<TextBlock Text="{Binding SelectedItem.StartTime, ElementName=GanttChart}" />
+				<TextBlock Text=" | Duration: " />
+				<TextBlock Text="{Binding SelectedItem.Duration, ElementName=GanttChart}" />
+				<TextBlock Text=" | Intensity: " />
+				<TextBlock Text="{Binding SelectedItem.Job.Intencity, ElementName=GanttChart}" />
 			</StackPanel>
 		</Border>
 		<ItemsControl Width="200" DockPanel.Dock="Left" ItemsSource="{Binding Path=DistinctJobs}" BorderThickness="1" BorderBrush="Navy">

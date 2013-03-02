@@ -1,4 +1,6 @@
-﻿namespace Solvation.Domain.DomainObjects
+﻿using System.Globalization;
+
+namespace Solvation.Domain.DomainObjects
 {
 	public class RunningJob
 	{
@@ -8,6 +10,8 @@
 		public double StartTime { get; set; }
 
 		public double EndTime { get { return StartTime + RunTime; } }
+
+		public string JobNumber { get { return JobReference.Number.ToString(CultureInfo.InvariantCulture); } }
 
 		public RunningJob(Job jobReference, double intencity, double runTime, double startTime)
 		{
