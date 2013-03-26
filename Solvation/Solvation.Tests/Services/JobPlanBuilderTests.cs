@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Solvation.Domain.DomainObjects;
 using Solvation.Domain.Services;
 
-namespace Solvation.Tests.Domain.DomainObjects
+namespace Solvation.Tests.Services
 {
 	[TestFixture]
 	public class JobPlanBuilderTests:Assert
