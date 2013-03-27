@@ -25,8 +25,8 @@ namespace Solvation.Tests.Services
 			//Act
 			var result = (new SimplexSolver()).Solve(A, b, c, B);
 			//Assert
-			AreEqual(2, result.Count);
-			AreEqual(new double[]{0,0}, result.ToArray());
+			AreEqual(4, result.Count);
+			AreEqual(new double[]{0, 0, 0, 0}, result.ToArray());
 		}
 	}
 }
