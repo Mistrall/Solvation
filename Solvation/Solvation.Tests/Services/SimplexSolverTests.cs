@@ -6,7 +6,7 @@ using Solvation.Domain.Services;
 namespace Solvation.Tests.Services
 {
 	[TestFixture]
-	public class SimplexSolverTests:Assert
+	public class SimplexSolverTests : Assert
 	{
 		[Test]
 		public void ShouldSolveSimpleCase1()
@@ -15,8 +15,13 @@ namespace Solvation.Tests.Services
 			var A = new DenseMatrix(new double[,]
 				{
 					{1, 0, 0, 0},
-					{20, 1, 0, 0}, {200, 20, 1, 0}, {2000, 200, 20, 1}, {-1, 0, 0, 0}, {0, -1, 0, 0},
-					{0, 0, -1, 0}, {0, 0, 0, -1}
+					{20, 1, 0, 0}, 
+					{200, 20, 1, 0}, 
+					{2000, 200, 20, 1}, 
+					{-1, 0, 0, 0}, 
+					{0, -1, 0, 0},
+					{0, 0, -1, 0}, 
+					{0, 0, 0, -1}
 				});
 			var b = new DenseVector(new double[] {1, 100, 10000, 1000000, 0, 0, 0, 0});
 
@@ -26,7 +31,7 @@ namespace Solvation.Tests.Services
 			var result = (new SimplexSolver()).Solve(A, b, c, B);
 			//Assert
 			AreEqual(4, result.Count);
-			AreEqual(new double[]{0, 0, 0, 0}, result.ToArray());
+			AreEqual(new double[] {0, 0, 0, 1000000}, result.ToArray());
 		}
 	}
 }
