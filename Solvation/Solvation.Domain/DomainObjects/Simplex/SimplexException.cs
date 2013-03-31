@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Solvation.Domain.Services
+namespace Solvation.Domain.DomainObjects.Simplex
 {
 	public class SimplexException : ApplicationException
 	{
