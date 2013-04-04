@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Solvation.Domain.DomainObjects;
+using Solvation.Domain.Extensions;
 using Solvation.Domain.Services;
 
 namespace Solvation.Tests.Services
@@ -9,8 +10,6 @@ namespace Solvation.Tests.Services
 	[TestFixture]
 	public class JobPlanBuilderTests:Assert
 	{
-		private const double Epsilon = 0.00001;
-
 		[Test]
 		public void ShouldBuildPlanForSimpleCase1()
 		{
@@ -29,18 +28,18 @@ namespace Solvation.Tests.Services
 			AreEqual(plan.Count(), 3);
 			AreEqual(plan[0].ExecutingJobs.Count, 1);
 			AreEqual(plan[0].ExecutingJobs[0].JobReference.Number, 1);
-			True((plan[0].ExecutingJobs[0].Intencity-2)<Epsilon);
-			True((plan[0].TimeDelta - 5) < Epsilon);
+			True(plan[0].ExecutingJobs[0].Intencity.FloatEquals(2));
+			True(plan[0].TimeDelta.FloatEquals(5));
 
 			AreEqual(plan[1].ExecutingJobs.Count, 1);
 			AreEqual(plan[1].ExecutingJobs[0].JobReference.Number, 2);
-			True((plan[1].ExecutingJobs[0].Intencity-1.43)<Epsilon);
-			True((plan[0].TimeDelta - 7) < Epsilon);
+			True(plan[1].ExecutingJobs[0].Intencity.FloatEquals(1.42857142857));
+			True(plan[1].TimeDelta.FloatEquals(7));
 
 			AreEqual(plan[2].ExecutingJobs.Count, 1);
 			AreEqual(plan[2].ExecutingJobs[0].JobReference.Number, 3);
 			AreEqual(plan[2].ExecutingJobs[0].Intencity, 2);
-			True((plan[0].TimeDelta - 10) < Epsilon);
+			True(plan[2].TimeDelta.FloatEquals(10));
 		}
 
 		[Test]
@@ -63,25 +62,25 @@ namespace Solvation.Tests.Services
 			AreEqual(plan[0].ExecutingJobs.Count, 2);
 			AreEqual(plan[0].ExecutingJobs[0].JobReference.Number, 1);
 			AreEqual(plan[0].ExecutingJobs[1].JobReference.Number, 4);
-			True((plan[0].ExecutingJobs[0].Intencity - 2) < Epsilon);
-			True((plan[0].ExecutingJobs[1].Intencity - 1) < Epsilon);
-			True((plan[0].ExecutingJobs[1].JobReference.RemainingVolume-10)<Epsilon);
-			True((plan[0].TimeDelta - 5) < Epsilon);
+			True(plan[0].ExecutingJobs[0].Intencity.FloatEquals(2));
+			True(plan[0].ExecutingJobs[1].Intencity.FloatEquals(1));
+			True(plan[0].ExecutingJobs[1].JobReference.RemainingVolume.FloatEquals(0.0));
+			True(plan[0].TimeDelta.FloatEquals(5));
 
 			AreEqual(plan[1].ExecutingJobs.Count, 1);
 			AreEqual(plan[1].ExecutingJobs[0].JobReference.Number, 2);
-			True((plan[1].ExecutingJobs[0].Intencity - 1.43) < Epsilon);
-			True((plan[0].TimeDelta - 7) < Epsilon);
+			True(plan[1].ExecutingJobs[0].Intencity.FloatEquals(1.42857142857));
+			True(plan[1].TimeDelta.FloatEquals(7));
 
 			AreEqual(plan[2].ExecutingJobs.Count, 1);
 			AreEqual(plan[2].ExecutingJobs[0].JobReference.Number, 3);
 			AreEqual(plan[2].ExecutingJobs[0].Intencity, 2);
-			True((plan[0].TimeDelta - 10) < Epsilon);
+			True(plan[2].TimeDelta.FloatEquals(10));
 
 			AreEqual(plan[3].ExecutingJobs.Count, 1);
 			AreEqual(plan[3].ExecutingJobs[0].JobReference.Number, 4);
 			AreEqual(plan[3].ExecutingJobs[0].Intencity, 2);
-			True((plan[3].TimeDelta - 7.5) < Epsilon);
+			True(plan[3].TimeDelta.FloatEquals(7.5));
 		}
 
 
@@ -97,7 +96,7 @@ namespace Solvation.Tests.Services
 			//Act
 			var maxIntensity = planBuilder.CalcMaxPossibleIntensity(firstJob, new[] {resource1});
 			//Assert
-			True((maxIntensity-2)<Epsilon);
+			True(maxIntensity.FloatEquals(2));
 		}
 
 		[Test]
@@ -115,7 +114,7 @@ namespace Solvation.Tests.Services
 			//Act
 			var maxIntensity = planBuilder.CalcMaxPossibleIntensity(firstJob, new[] { resource1, resource2 });
 			//Assert
-			True((maxIntensity - 1.25) < Epsilon);
+			True(maxIntensity.FloatEquals(1.25));
 		}
 	}
 }

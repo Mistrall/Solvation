@@ -29,10 +29,11 @@ namespace Solvation.Tests.Services
 			var c = new DenseVector(new double[] {1000, 100, 10, 1});
 			var B = Enumerable.Range(4, 4).ToArray();
 			//Act
-			var result = (new SimplexSolver()).SolveInternal(A, b, c, B);
+			var result = (new SimplexSolver()).Solve(A, b, c, B);
 			//Assert
-			AreEqual(4, result.Count);
-			AreEqual(new double[] {0, 0, 0, 1000000}, result.ToArray());
+			AreEqual(4, result.OptimalVector.Count);
+			AreEqual(16, result.Iteration);
+			AreEqual(new double[] {0, 0, 0, 1000000}, result.OptimalVector.ToArray());
 		}
 
 		[Test]
@@ -171,9 +172,10 @@ namespace Solvation.Tests.Services
 			var c = new DenseVector(new double[] { 8, 6, -5, -2, -10, 0, -9, 10, 2, 3, -6, -3, -9, 2, -5, -9, 4, 1, 7, -2, -6, 10, 0, 4, 4 });
 			var B = Enumerable.Range(100, 25).ToArray();
 			//Act
-			var result = (new SimplexSolver()).Solve(A, b, c, B, true);
+			var result = (new SimplexSolver()).Solve(A, b, c, B);
 			//Assert
 			AreEqual(25, result.OptimalVector.Count);
+			AreEqual(62, result.Iteration);
 			True(Math.Abs(3.070819586-result.OptimalValue)<0.00000001);
 		}
 	}

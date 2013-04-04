@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using MathNet.Numerics.LinearAlgebra.Double;
 using Solvation.Domain.DomainObjects.Simplex;
@@ -9,13 +8,13 @@ namespace Solvation.Domain.Services
 {
 	public class SimplexSolver
 	{
-		internal Vector SolveInternal(DenseMatrix A, DenseVector b, DenseVector c, int[] B, bool printAll = false)
+		private int iteration;
+
+		internal Vector SolveInternal(DenseMatrix A, DenseVector b, DenseVector c, int[] B)
 		{
 			//Init simplex
 			var m = A.RowCount;
 			var n = A.ColumnCount;
-
-			int iteration = 0;
 
 			var AB = A.Extract(B, Enumerable.Range(0, n).ToArray());
 			var bB = b.Extract(B);
@@ -47,8 +46,8 @@ namespace Solvation.Domain.Services
 				for (int k = 0; k < m; k++)
 				{
 					var val = A.Row(k)*d;
-					//Need to set this constant to good value
-					if (val > 0 && val > 0.000000001)
+
+					if (val > 0 && !val.FloatEquals(0))
 						K.Add(k);
 				}
 
@@ -87,12 +86,13 @@ namespace Solvation.Domain.Services
 			}
 		}
 
-		public SimplexResult Solve(DenseMatrix A, DenseVector b, DenseVector c, int[] B, bool printAll = false)
+		public SimplexResult Solve(DenseMatrix A, DenseVector b, DenseVector c, int[] B)
 		{
-			var vector = SolveInternal(A, b, c, B, printAll);
+			iteration = 0;
+			var vector = SolveInternal(A, b, c, B);
 			var optimalValue = (c.ToRowMatrix()*vector)[0];
 
-			return new SimplexResult {OptimalValue = optimalValue, OptimalVector = vector};
+			return new SimplexResult {OptimalValue = optimalValue, OptimalVector = vector, Iteration = iteration};
 		}
 	}
 }

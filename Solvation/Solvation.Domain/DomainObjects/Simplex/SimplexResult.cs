@@ -6,5 +6,6 @@ namespace Solvation.Domain.DomainObjects.Simplex
 	{
 		public double OptimalValue { get; set; }
 		public Vector OptimalVector { get; set; }
+		public int Iteration { get; set; }
 	}
 }

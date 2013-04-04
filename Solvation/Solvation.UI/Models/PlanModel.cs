@@ -44,13 +44,16 @@ namespace Solvation.UI.Models
 			set { Set(ref scaleDimension, value, "ScaleDimension"); }
 		}
 
+		public IEnumerable<PlanStep> Plan { get; private set; }
+
 		public PlanModel(IEnumerable<PlanStep> baseStepList)
 		{
-			steps = new ObservableCollection<PlanStepModel>(baseStepList.Select(bs => new PlanStepModel(bs)).ToList());
+			Plan = baseStepList;
+			steps = new ObservableCollection<PlanStepModel>(Plan.Select(bs => new PlanStepModel(bs)).ToList());
 
 			var jobList = new List<RunningJobModel>();
 			var distinctJobList = new List<RunningJobModel>();
-			//var dependencyList = new List<JobDependencyModel>();
+			
 			var dependencyHashTable = new Dictionary<int, JobDependencyModel>();
 
 			jobList =

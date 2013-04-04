@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Solvation.Domain.AlgorithmHelpers;
 using Solvation.Domain.DomainObjects;
+using Solvation.Domain.Extensions;
 using Solvation.Domain.SpecialCollections;
 
 namespace Solvation.Domain.Services
 {
 	public class JobPlanBuilder
 	{
-		private const double Epsilon = 0.00001;
-
 		public List<PlanStep> GetBasePlan(IEnumerable<Resource> resources, IEnumerable<Job> jobs, IEnumerable<double[]> dependencyValues)
 		{
 			//Initialization
@@ -28,7 +27,7 @@ namespace Solvation.Domain.Services
 				for (int r = 0; r < resArr.Length; r++) resourcesForStep[r] = resArr[r].DeepCopy();
 				
 				//Select jobs we can plan
-				var jobsPossibleToExecute = dataContainer.Jobs.Where(j => j.CanStart() && j.State!=JobState.Finished).ToList();
+				var jobsPossibleToExecute = dataContainer.Jobs.Where(j => j.CanStart() && j.State != JobState.Finished).ToList();
 				//Put to heap with greed comparer
 				var jobHeap = new Heap<Job>(jobsPossibleToExecute, jobsPossibleToExecute.Count(), new JobGreedyComparer());
 				var jobsForStep = new List<RunningJob>();
@@ -68,7 +67,7 @@ namespace Solvation.Domain.Services
 				//Compute all jobs to finish
 				foreach (var runningJob in jobsForStep)
 				{
-					if (Math.Abs(runningJob.RunTime - stepTime) < Epsilon)
+					if (runningJob.RunTime.FloatEquals(stepTime))
 					{
 						runningJob.JobReference.State = JobState.Finished;
 						runningJob.JobReference.RemainingVolume = 0;
