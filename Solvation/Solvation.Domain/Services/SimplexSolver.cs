@@ -94,5 +94,14 @@ namespace Solvation.Domain.Services
 
 			return new SimplexResult {OptimalValue = optimalValue, OptimalVector = vector, Iteration = iteration};
 		}
+
+		public SimplexResult Solve(SimplexTuple tuple)
+		{
+			iteration = 0;
+//			var vector = SolveInternal(A, b, c, B);
+//			var optimalValue = (c.ToRowMatrix() * vector)[0];
+
+			return new SimplexResult(); // { OptimalValue = optimalValue, OptimalVector = vector, Iteration = iteration };
+		}
 	}
 }

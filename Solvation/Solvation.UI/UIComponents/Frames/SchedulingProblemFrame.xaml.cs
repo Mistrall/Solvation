@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
+using Solvation.Domain.AlgorithmHelpers;
 using Solvation.Domain.DomainObjects;
+using Solvation.Domain.DomainObjects.Simplex;
 using Solvation.Domain.Services;
 using Solvation.UI.Models;
 
@@ -10,13 +13,15 @@ namespace Solvation.UI.UIComponents.Frames
 	/// </summary>
 	public partial class SchedulingProblemFrame
 	{
+		private PlanModel model;
+
 		public SchedulingProblemFrame():this(null)
 		{}
 
 		public SchedulingProblemFrame(PlanModel planModel)
 		{
 			InitializeComponent();
-			LayoutRoot.DataContext = planModel ?? CreateFakePlanModel();
+			LayoutRoot.DataContext = model = planModel ?? CreateFakePlanModel();
 		}
 
 		private PlanModel CreateFakePlanModel()
@@ -36,6 +41,12 @@ namespace Solvation.UI.UIComponents.Frames
 			var planModel = new PlanModel(plan);
 
 			return planModel;
+		}
+
+		public void OptimizePlan()
+		{
+			var simplexTuple = (new SimplexInputBuilder()).BuildFromBasePlan(model.Plan.ToList());
+			var optimizedPlan = (new SimplexSolver()).Solve(simplexTuple);
 		}
 	}
 }
