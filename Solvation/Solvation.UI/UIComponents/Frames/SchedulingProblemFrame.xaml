@@ -198,7 +198,7 @@
 						<selectors:TypeStyleMapping Type="models:PlanStepModel">
 							<selectors:TypeStyleMapping.Style>
 								<Style TargetType="ListBoxItem">
-									<Setter Property="Canvas.Left" Value="{Binding TimeStart, Converter={StaticResource TimeAsXCoordinate}}" />
+									<Setter Property="Canvas.Left" Value="{Binding TimeEnd, Converter={StaticResource TimeAsXCoordinate}}" />
 									<Setter Property="Margin" Value="0" />
 									<Setter Property="Padding" Value="0" />
 								</Style>

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using NUnit.Framework;
 using Solvation.Domain.DomainObjects.Simplex;
 using Solvation.Domain.Extensions;
@@ -179,6 +178,5 @@ namespace Solvation.Tests.Services
 			AreEqual(62, result.Iteration);
 			True(result.OptimalValue.FloatEquals(3.070819586));
 		}
-
 	}
 }
