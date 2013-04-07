@@ -101,6 +101,7 @@ namespace Solvation.UI.Models
 			var obs = new List<object>();
 			obs.AddRange(jobs);
 			obs.AddRange(dependencies);
+			obs.AddRange(steps);
 
 			JobsWithDepedencies = new ReadOnlyObservableCollection<object>(new ObservableCollection<object>(obs));
 

@@ -45,8 +45,7 @@
                    Width="{Binding Duration, Converter={StaticResource DurationAsWidth}}"
                    RadiusX="2"
                    RadiusY="2"
-                   Name="UsageRectangle"
-                   >
+                   Name="UsageRectangle">
 					<Rectangle.Stroke>
 						<SolidColorBrush Color="{Binding Number, Converter={StaticResource JobChainColour}}" />
 					</Rectangle.Stroke>
@@ -62,7 +61,6 @@
 				<MultiDataTrigger>
 					<MultiDataTrigger.Conditions>
 						<Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" Value="True"/>
-						<!--<Condition Binding="{Binding Path=Type, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" Value="job"/>-->
 					</MultiDataTrigger.Conditions>
 					<Setter TargetName="UsageRectangle" Property="LayoutTransform">
 						<Setter.Value>
@@ -91,9 +89,37 @@
 				</Path.Data>
 			</Path>
 		</DataTemplate>
+		<DataTemplate x:Key="StepTemplate">
+			<Line Stroke="DimGray" StrokeThickness="1" StrokeDashArray="5,2"
+				  X1="0" Y1="0" X2="0" Y2="{Binding ElementName=JobGrid, Path=ActualHeight}"></Line>
+		</DataTemplate>
+		
 	</UserControl.Resources>
-	
 	<DockPanel x:Name="LayoutRoot">
+		<Border DockPanel.Dock="Top" Background="Azure" Padding="6">
+			<StackPanel Orientation="Horizontal" Height="25">
+				<StackPanel Orientation="Horizontal" Width="192"/>
+					<ItemsControl ItemsSource="{Binding Path=Steps}">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<StackPanel Margin="2">
+								<TextBlock Text="{Binding StepDescription}"/>
+							</StackPanel>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<Canvas />
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+					<ItemsControl.ItemContainerStyle>
+						<Style>
+							<Setter Property="Canvas.Left" Value="{Binding TimeStart, Converter={StaticResource TimeAsXCoordinate}}" />
+						</Style>
+					</ItemsControl.ItemContainerStyle>
+				</ItemsControl>
+			</StackPanel>
+		</Border>
 		<Border DockPanel.Dock="Bottom" Background="LightYellow" Padding="6">
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="Job: " />
@@ -126,7 +152,7 @@
 			</ItemsControl.ItemContainerStyle>
 		</ItemsControl>
 		
-		<Grid>
+		<Grid Name="JobGrid">
 			<helpers:BindingReflector Target="{Binding  Mode=OneWayToSource, Source = {StaticResource TimeAsXCoordinate}, Path=ScaleDimension}"
 										Source="{Binding Path=ScaleDimension, Mode=OneWay}" />
 			<helpers:BindingReflector Target="{Binding  Mode=OneWayToSource, Source = {StaticResource DurationAsWidth}, Path=ScaleDimension}"
@@ -139,6 +165,7 @@
 					<selectors:ByTypeDataTemplateSelector>
 						<selectors:TypeTemplateMapping Type="models:RunningJobModel" Template="{StaticResource UsageBlockTemplate}"/>
 						<selectors:TypeTemplateMapping Type="models:JobDependencyModel" Template="{StaticResource DependencyTemplate}" />
+						<selectors:TypeTemplateMapping Type="models:PlanStepModel" Template="{StaticResource StepTemplate}" />
 					</selectors:ByTypeDataTemplateSelector>
 				</ListBox.ItemTemplateSelector>
 				<ListBox.ItemsPanel>
@@ -163,6 +190,15 @@
 								<Style TargetType="ListBoxItem">
 									<Setter Property="Canvas.Left" Value="{Binding DependantOn.EndTime, Converter={StaticResource TimeAsXCoordinate}}" />
 									<Setter Property="Canvas.Top" Value="{Binding DependantOn.JobReference.Number, Converter={StaticResource EquipmentRowCentreAsYCoordinate}}" />
+									<Setter Property="Margin" Value="0" />
+									<Setter Property="Padding" Value="0" />
+								</Style>
+							</selectors:TypeStyleMapping.Style>
+						</selectors:TypeStyleMapping>
+						<selectors:TypeStyleMapping Type="models:PlanStepModel">
+							<selectors:TypeStyleMapping.Style>
+								<Style TargetType="ListBoxItem">
+									<Setter Property="Canvas.Left" Value="{Binding TimeStart, Converter={StaticResource TimeAsXCoordinate}}" />
 									<Setter Property="Margin" Value="0" />
 									<Setter Property="Padding" Value="0" />
 								</Style>

@@ -19,7 +19,7 @@ namespace Solvation.Domain.Services
 			var resArr = resources.ToArray();
 
 			var resourcesForStep = new Resource[resArr.Length];
-
+			int stepNumber = 1;
 			//Repeat while we have unfinished jobs
 			while (unfinishedJobs.Count> 0)
 			{
@@ -62,7 +62,7 @@ namespace Solvation.Domain.Services
 				var stepTime = jobsForStep.Min(j => j.RunTime);
 				var startTime = (plan.Count > 0) ? plan.Last().TimeEnd : 0;
 				//Create PlanStep at this moment
-				var step = new PlanStep(jobsForStep, startTime, stepTime + startTime);
+				var step = new PlanStep(jobsForStep, startTime, stepTime + startTime, stepNumber++);
 				//Compute all jobs to finish
 				foreach (var runningJob in jobsForStep)
 				{
