@@ -9,9 +9,13 @@ namespace Solvation.Domain.DomainObjects
 		public double RunTime { get; set; }
 		public double StartTime { get; set; }
 
-		public double EndTime { get { return StartTime + RunTime; } }
+		public double EndTime { get; private set; }
+		public double WorkAmount { get; private set; }
 
-		public string JobNumber { get { return JobReference.Number.ToString(CultureInfo.InvariantCulture); } }
+		public string JobNumber
+		{
+			get { return JobReference.Number.ToString(CultureInfo.InvariantCulture); }
+		}
 
 		public RunningJob(Job jobReference, double intencity, double runTime, double startTime)
 		{
@@ -19,6 +23,8 @@ namespace Solvation.Domain.DomainObjects
 			Intencity = intencity;
 			RunTime = runTime;
 			StartTime = startTime;
+			EndTime = StartTime + RunTime;
+			WorkAmount = RunTime*Intencity;
 		}
 	}
 }

@@ -98,10 +98,16 @@ namespace Solvation.Domain.Services
 		public SimplexResult Solve(SimplexTuple tuple)
 		{
 			iteration = 0;
-//			var vector = SolveInternal(A, b, c, B);
-//			var optimalValue = (c.ToRowMatrix() * vector)[0];
+			var startingVertex = InitializeSimplex();
+			var vector = SolveInternal(tuple.EqualityCoeffs, tuple.FreeTerms, tuple.ObjFuncCoeffs, startingVertex);
+			var optimalValue = (tuple.ObjFuncCoeffs.ToRowMatrix() * vector)[0];
 
-			return new SimplexResult(); // { OptimalValue = optimalValue, OptimalVector = vector, Iteration = iteration };
+			return new SimplexResult { OptimalValue = optimalValue, OptimalVector = vector, Iteration = iteration };
+		}
+
+		private int[] InitializeSimplex()
+		{
+			throw new System.NotImplementedException();
 		}
 	}
 }

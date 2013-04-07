@@ -15,25 +15,24 @@ namespace Solvation.Domain.Services
 			//Initialization
 			var dataContainer = new SchedulingDataContainer(resources, jobs, dependencyValues);
 			var plan = new List<PlanStep>();
-			var unfinishedJobCount = dataContainer.Jobs.Count;
+			var unfinishedJobs = new LinkedList<Job>(dataContainer.Jobs);
 			var resArr = resources.ToArray();
 
 			var resourcesForStep = new Resource[resArr.Length];
 
 			//Repeat while we have unfinished jobs
-			while (unfinishedJobCount>0)
+			while (unfinishedJobs.Count> 0)
 			{
 				//Set up resources per step
 				for (int r = 0; r < resArr.Length; r++) resourcesForStep[r] = resArr[r].DeepCopy();
 				
 				//Select jobs we can plan
-				var jobsPossibleToExecute = dataContainer.Jobs.Where(j => j.CanStart() && j.State != JobState.Finished).ToList();
+				var jobsPossibleToExecute = unfinishedJobs.Where(j => j.CanStart()).ToList();
 				//Put to heap with greed comparer
 				var jobHeap = new Heap<Job>(jobsPossibleToExecute, jobsPossibleToExecute.Count(), new JobGreedyComparer());
 				var jobsForStep = new List<RunningJob>();
 				do
 				{
-					
 					//Take first 
 					var jobToExecute = jobHeap.PopRoot();
 					//Check we can plan it
@@ -71,6 +70,7 @@ namespace Solvation.Domain.Services
 					{
 						runningJob.JobReference.State = JobState.Finished;
 						runningJob.JobReference.RemainingVolume = 0;
+						unfinishedJobs.Remove(runningJob.JobReference);
 					}
 					else
 					{
@@ -82,7 +82,6 @@ namespace Solvation.Domain.Services
 
 				//Memorize job progress
 				plan.Add(step);
-				unfinishedJobCount--;
 			}
 			
 			return plan;

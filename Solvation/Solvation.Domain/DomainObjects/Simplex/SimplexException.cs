@@ -2,9 +2,10 @@
 
 namespace Solvation.Domain.DomainObjects.Simplex
 {
+	//Represents exception that thrown by Simplex algorithm
 	public class SimplexException : ApplicationException
 	{
-		public SimplexException(string problemIsUnbounded) : base(problemIsUnbounded)
+		public SimplexException(string message) : base(message)
 		{
 		}
 
