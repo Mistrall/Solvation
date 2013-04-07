@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
-using MathNet.Numerics.LinearAlgebra.Double;
 using NUnit.Framework;
+using Solvation.Domain.DomainObjects.Simplex;
+using Solvation.Domain.Extensions;
 using Solvation.Domain.Services;
 
 namespace Solvation.Tests.Services
@@ -13,7 +14,7 @@ namespace Solvation.Tests.Services
 		public void ShouldSolveSimpleCase1()
 		{
 			//Arrange
-			var A = new DenseMatrix(new double[,]
+			var A = new double[,]
 				{
 					{1, 0, 0, 0},
 					{20, 1, 0, 0}, 
@@ -23,13 +24,13 @@ namespace Solvation.Tests.Services
 					{0, -1, 0, 0},
 					{0, 0, -1, 0}, 
 					{0, 0, 0, -1}
-				});
-			var b = new DenseVector(new double[] {1, 100, 10000, 1000000, 0, 0, 0, 0});
+				};
+			var b = new double[] {1, 100, 10000, 1000000, 0, 0, 0, 0};
 
-			var c = new DenseVector(new double[] {1000, 100, 10, 1});
+			var c = new double[] {1000, 100, 10, 1};
 			var B = Enumerable.Range(4, 4).ToArray();
 			//Act
-			var result = (new SimplexSolver()).Solve(A, b, c, B);
+			var result = (new SimplexSolver()).Solve(new SimplexTuple(A, b, c, 0), B);
 			//Assert
 			AreEqual(4, result.OptimalVector.Count);
 			AreEqual(16, result.Iteration);
@@ -40,7 +41,7 @@ namespace Solvation.Tests.Services
 		public void ShouldSolveSimpleCase2()
 		{
 			//Arrange
-			var A = new DenseMatrix(new double[,]
+			var A = new double[,]
 					{{  3,   0,  10,  10,  -5, -10,   6,  -6,   8,   9,   9,  10,   1,   0, -3,   8,   2,  -4,  -6,  -5,  10,  -4,  -6,  -3,  -7},
                     {  7,   0,   1,   2,  -6,   2,   0,  -3,   2,  -7,  -4,  -3, -10,  -6, -2,  -3,  -8,   8,   7,  -7,   5,   6,   2,   9, -10},
                     { 10,  10,   8,  -9,  -1,   7,   6,  -2,   1,   7,   0,   3,  -8,   5, -1,  -5,  10,  -6,  -8,   0,   3,  -1,  -3,  -2,   3},
@@ -166,17 +167,18 @@ namespace Solvation.Tests.Services
                     {  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  0,   0,   0,   0,   0,   0,   0,   0,  -1,   0,   0},
                     {  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  0,   0,   0,   0,   0,   0,   0,   0,   0,  -1,   0},
                     {  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  -1}
-					});
-			var b = new DenseVector(new double[] { 5, 6, 4, 5, 9, 2, 7, 2, 7, 7, 0, 9, 5, 0, 6, 1, 8, 4, 2, 1, 3, 1, 3, 10, 2, 8, 8, 4, 0, 9, 8, 2, 0, 6, 7, 1, 2, 1, 5, 6, 4, 2, 6, 4, 6, 4, 2, 1, 10, 7, 9, 3, 10, 2, 3, 3, 4, 3, 3, 8, 4, 5, 4, 1, 7, 6, 7, 6, 5, 4, 8, 4, 6, 6, 7, 1, 2, 3, 2, 1, 2, 2, 8, 7, 5, 8, 1, 6, 0, 1, 10, 6, 2, 7, 8, 3, 5, 9, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
+					};
+			var b = new double[] { 5, 6, 4, 5, 9, 2, 7, 2, 7, 7, 0, 9, 5, 0, 6, 1, 8, 4, 2, 1, 3, 1, 3, 10, 2, 8, 8, 4, 0, 9, 8, 2, 0, 6, 7, 1, 2, 1, 5, 6, 4, 2, 6, 4, 6, 4, 2, 1, 10, 7, 9, 3, 10, 2, 3, 3, 4, 3, 3, 8, 4, 5, 4, 1, 7, 6, 7, 6, 5, 4, 8, 4, 6, 6, 7, 1, 2, 3, 2, 1, 2, 2, 8, 7, 5, 8, 1, 6, 0, 1, 10, 6, 2, 7, 8, 3, 5, 9, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-			var c = new DenseVector(new double[] { 8, 6, -5, -2, -10, 0, -9, 10, 2, 3, -6, -3, -9, 2, -5, -9, 4, 1, 7, -2, -6, 10, 0, 4, 4 });
+			var c = new double[] { 8, 6, -5, -2, -10, 0, -9, 10, 2, 3, -6, -3, -9, 2, -5, -9, 4, 1, 7, -2, -6, 10, 0, 4, 4 };
 			var B = Enumerable.Range(100, 25).ToArray();
 			//Act
-			var result = (new SimplexSolver()).Solve(A, b, c, B);
+			var result = (new SimplexSolver()).Solve(new SimplexTuple(A, b, c, 0), B);
 			//Assert
 			AreEqual(25, result.OptimalVector.Count);
 			AreEqual(62, result.Iteration);
-			True(Math.Abs(3.070819586-result.OptimalValue)<0.00000001);
+			True(result.OptimalValue.FloatEquals(3.070819586));
 		}
+
 	}
 }

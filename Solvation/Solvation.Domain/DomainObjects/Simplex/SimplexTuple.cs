@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace Solvation.Domain.DomainObjects.Simplex
@@ -6,13 +7,13 @@ namespace Solvation.Domain.DomainObjects.Simplex
 	{
 		public ObjectiveFunctionType Type { get; set; }
 
-		public DenseMatrix EqualityCoeffs { get; private set; }
-		public EquationType[] EquationTypes { get; private set; }
-		public DenseVector FreeTerms { get; private set; }
-		public DenseVector ObjFuncCoeffs { get; private set; }
-		public double ObjFuncFreeTerm { get; private set; }
+		public DenseMatrix EqualityCoeffs { get; set; }
+		public List<EquationType> EquationTypes { get; set; }
+		public DenseVector FreeTerms { get; set; }
+		public DenseVector ObjFuncCoeffs { get; set; }
+		public double ObjFuncFreeTerm { get; set; }
 
-		public SimplexTuple(ObjectiveFunctionType type, double[,] eqCoeffs, EquationType[] equationTypes, double[] freeTerms, double[] objFuncCoeffs, double objFuncFreeTerm)
+		public SimplexTuple(ObjectiveFunctionType type, double[,] eqCoeffs, List<EquationType> equationTypes, double[] freeTerms, double[] objFuncCoeffs, double objFuncFreeTerm)
 		{
 			Type = type;
 			EqualityCoeffs = new DenseMatrix(eqCoeffs);
@@ -22,9 +23,14 @@ namespace Solvation.Domain.DomainObjects.Simplex
 			ObjFuncFreeTerm = objFuncFreeTerm;
 		}
 
+		//Use this only for proper standart form
 		public SimplexTuple(double[,] eqCoeffs, double[] freeTerms, double[] objFuncCoeffs, double objFuncFreeTerm)
-			: this(ObjectiveFunctionType.Max, eqCoeffs, new EquationType[freeTerms.Length], freeTerms, objFuncCoeffs, objFuncFreeTerm)
+			: this(ObjectiveFunctionType.Max, eqCoeffs, new List<EquationType>(), freeTerms, objFuncCoeffs, objFuncFreeTerm)
 		{
+			for (int i = 0; i < freeTerms.Length; i++)
+			{
+				EquationTypes.Add(EquationType.LessOrEqual);
+			}
 		}
 	}
 }

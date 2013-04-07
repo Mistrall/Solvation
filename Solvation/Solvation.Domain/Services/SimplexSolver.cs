@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using MathNet.Numerics.LinearAlgebra.Double;
+using Solvation.Domain.AlgorithmHelpers;
 using Solvation.Domain.DomainObjects.Simplex;
 using Solvation.Domain.Extensions;
 
@@ -10,16 +11,12 @@ namespace Solvation.Domain.Services
 	{
 		private int iteration;
 
-		internal Vector SolveInternal(DenseMatrix A, DenseVector b, DenseVector c, int[] B)
+		internal Vector SolveInternal(Matrix A, Vector b, Vector c, int[] B, Matrix AB, Vector bB)
 		{
 			//Init simplex
 			var m = A.RowCount;
-			var n = A.ColumnCount;
 
-			var AB = A.Extract(B, Enumerable.Range(0, n).ToArray());
-			var bB = b.Extract(B);
-
-			var ABi = (DenseMatrix) AB.Inverse();
+			var ABi = AB.Inverse();
 			//X is a starting vector
 			var x = AB.LU().Solve(bB);
 
@@ -80,34 +77,23 @@ namespace Solvation.Domain.Services
 
 				g[r] -= 1;
 
-				ABi = (DenseMatrix) ABi.Add(ABi.Column(r).ToColumnMatrix() * g.ToRowMatrix());
+				ABi = ABi.Add(ABi.Column(r).ToColumnMatrix() * g.ToRowMatrix());
 				//Compute new x
 				x = x + v*d;
 			}
 		}
 
-		public SimplexResult Solve(DenseMatrix A, DenseVector b, DenseVector c, int[] B)
+		public SimplexResult Solve(SimplexTuple tuple, int[] B)
 		{
+			var standartTuple = (new SimplexInputBuilder()).ConvertToStandartForm(tuple);
 			iteration = 0;
-			var vector = SolveInternal(A, b, c, B);
-			var optimalValue = (c.ToRowMatrix()*vector)[0];
+			var AB = standartTuple.EqualityCoeffs.Extract(B, Enumerable.Range(0, standartTuple.EqualityCoeffs.ColumnCount).ToArray());
+			var bB = standartTuple.FreeTerms.Extract(B);
+
+			var vector = SolveInternal(standartTuple.EqualityCoeffs, standartTuple.FreeTerms, standartTuple.ObjFuncCoeffs, B, AB, bB);
+			var optimalValue = (standartTuple.ObjFuncCoeffs.ToRowMatrix() * vector)[0];
 
 			return new SimplexResult {OptimalValue = optimalValue, OptimalVector = vector, Iteration = iteration};
-		}
-
-		public SimplexResult Solve(SimplexTuple tuple)
-		{
-			iteration = 0;
-			var startingVertex = InitializeSimplex();
-			var vector = SolveInternal(tuple.EqualityCoeffs, tuple.FreeTerms, tuple.ObjFuncCoeffs, startingVertex);
-			var optimalValue = (tuple.ObjFuncCoeffs.ToRowMatrix() * vector)[0];
-
-			return new SimplexResult { OptimalValue = optimalValue, OptimalVector = vector, Iteration = iteration };
-		}
-
-		private int[] InitializeSimplex()
-		{
-			throw new System.NotImplementedException();
 		}
 	}
 }

@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlgorithmHelpers\SimplexInputBuilderTests.cs" />
     <Compile Include="Domain\DomainObjects\JobGreedyComparerTests.cs" />
     <Compile Include="Domain\DomainObjects\JobTests.cs" />
     <Compile Include="Domain\DomainObjects\SchedulingDataContainerTests.cs" />

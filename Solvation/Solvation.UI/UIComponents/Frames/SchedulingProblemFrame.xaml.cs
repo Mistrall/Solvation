@@ -46,7 +46,7 @@ namespace Solvation.UI.UIComponents.Frames
 		public void OptimizePlan()
 		{
 			var simplexTuple = (new SimplexInputBuilder()).BuildFromBasePlan(model.Plan.ToList());
-			var optimizedPlan = (new SimplexSolver()).Solve(simplexTuple);
+			//var optimizedPlan = (new SimplexSolver()).Solve(simplexTuple);
 		}
 	}
 }

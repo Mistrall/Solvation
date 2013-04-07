@@ -63,6 +63,8 @@
     <Compile Include="Extensions\DenseMatrixExtensions.cs" />
     <Compile Include="Extensions\DenseVectorExtenstions.cs" />
     <Compile Include="Extensions\DoubleExtensions.cs" />
+    <Compile Include="Extensions\SparseMatrixExtensions.cs" />
+    <Compile Include="Extensions\SparseVectorExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\JobPlanBuilder.cs" />
     <Compile Include="Services\SimplexSolver.cs" />
