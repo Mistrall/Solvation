@@ -18,6 +18,8 @@ namespace Solvation.UI.UIComponents.UserControls
         private static readonly Style SDataGridCellStyle;
         private static readonly Style SDataGridRowHeaderStyle;
         private static readonly Style SDataGridRowStyle;
+	    private static readonly Func<DataGridRowEventArgs, String> RowHeaderTextComposer;
+		private static readonly Func<DataGridAutoGeneratingColumnEventArgs, String> ColumnHeaderTextComposer;
 
         static DataGrid2D()
         {
@@ -27,6 +29,12 @@ namespace Solvation.UI.UIComponents.UserControls
             SDataGridCellStyle = resourceDictionary["DataGridCellStyle"] as Style;
             SDataGridRowHeaderStyle = resourceDictionary["DataGridRowHeaderStyle"] as Style;
             SDataGridRowStyle = resourceDictionary["DataGridRowStyle"] as Style;
+
+	        RowHeaderTextComposer =
+		        (e) => string.Format("J{0}  ", (e.Row.GetIndex() + 1).ToString(CultureInfo.InvariantCulture));
+
+	        ColumnHeaderTextComposer =
+		        (e) => string.Format("R{0}  ", e.Column.Header);
         }
 
         public static readonly DependencyProperty ItemsSource2DProperty =
@@ -119,18 +127,19 @@ namespace Solvation.UI.UIComponents.UserControls
 
         void DataGrid2D_LoadingRow(object sender, DataGridRowEventArgs e)
         {
-            e.Row.Header = (e.Row.GetIndex()).ToString(CultureInfo.InvariantCulture); 
+			e.Row.Header = RowHeaderTextComposer(e); 
         }
 
-        void DataGrid2D_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+	    void DataGrid2D_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             var column = e.Column as DataGridTextColumn;
 	        if (column == null) return;
 	        var binding = column.Binding as Binding;
 	        if (binding != null) binding.Path = new PropertyPath(binding.Path.Path + ".Value");
+		    column.Header = ColumnHeaderTextComposer(e);
         }
 
-        #endregion //EventHandlers
+	    #endregion //EventHandlers
 
         #region Properties
 
