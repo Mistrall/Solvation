@@ -5,6 +5,7 @@ using System.Windows;
 using Solvation.Domain.DomainObjects;
 using Solvation.Domain.Services;
 using Solvation.UI.Models;
+using Solvation.UI.Utils;
 using Solvation.WPF.MDI;
 
 namespace Solvation.UI.UIComponents.Frames
@@ -12,7 +13,7 @@ namespace Solvation.UI.UIComponents.Frames
 	/// <summary>
 	/// Interaction logic for CreateNewProblem.xaml
 	/// </summary>
-	public partial class CreateNewProblem
+	public partial class CreateNewProblem: ICanSaveContent<NewProblemModel>
 	{
 		private readonly MdiContainer parent;
 		private NewProblemModel model;
@@ -127,6 +128,11 @@ namespace Solvation.UI.UIComponents.Frames
 			};
 
 			parent.Children.Add(problemFrame);
+		}
+
+		public void SaveContent(NewProblemModel content, string filePath)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

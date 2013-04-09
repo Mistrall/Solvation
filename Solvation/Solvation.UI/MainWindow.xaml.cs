@@ -1,6 +1,9 @@
 ﻿using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Solvation.UI.Models;
+using Solvation.UI.Utils;
 using Solvation.WPF.MDI;
 using Solvation.WPF.MDI.Enums;
 using CreateNewProblem = Solvation.UI.UIComponents.Frames.CreateNewProblem;
@@ -57,7 +60,9 @@ namespace Solvation.UI
 
 		private void SaveProblem_Click(object sender, RoutedEventArgs e)
 		{
+			var activeFrame = Container.ActiveMdiChild.Content as ICanSaveContent<NewProblemModel>;
 
+			
 		}
 
 		private void SaveAsProblem_Click(object sender, RoutedEventArgs e)

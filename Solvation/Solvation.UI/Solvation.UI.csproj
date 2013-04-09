@@ -141,6 +141,7 @@
     <Compile Include="UIComponents\UserControls\TextBoxWithLabel.xaml.cs">
       <DependentUpon>TextBoxWithLabel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\ICanSaveContent.cs" />
     <Page Include="UIComponents\Frames\CreateNewProblem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
