@@ -60,9 +60,7 @@ namespace Solvation.UI
 
 		private void SaveProblem_Click(object sender, RoutedEventArgs e)
 		{
-			var activeFrame = Container.ActiveMdiChild.Content as ICanSaveContent<NewProblemModel>;
-
-			
+			var activeFrame = Container.ActiveMdiChild.Content as ICanSaveContent;
 		}
 
 		private void SaveAsProblem_Click(object sender, RoutedEventArgs e)

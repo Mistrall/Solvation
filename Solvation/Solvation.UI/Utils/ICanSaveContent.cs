@@ -1,7 +1,7 @@
 ﻿namespace Solvation.UI.Utils
 {
-	public interface ICanSaveContent<in T> where T:class
+	public interface ICanSaveContent
 	{
-		void SaveContent(T content, string filePath);
+		void SaveContent<T>(T content, string filePath) where T : class;
 	}
 }

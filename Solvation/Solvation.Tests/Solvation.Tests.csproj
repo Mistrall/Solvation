@@ -136,6 +136,10 @@
       <Project>{4743a165-b92f-45e8-b44e-44d052ecd8fa}</Project>
       <Name>Solvation.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Solvation.UI\Solvation.UI.csproj">
+      <Project>{B7A49831-D384-4C32-8B45-FCCB4A436EAB}</Project>
+      <Name>Solvation.UI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

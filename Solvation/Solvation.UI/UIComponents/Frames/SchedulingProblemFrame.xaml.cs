@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using Solvation.Domain.AlgorithmHelpers;
 using Solvation.Domain.DomainObjects;
-using Solvation.Domain.DomainObjects.Simplex;
 using Solvation.Domain.Services;
 using Solvation.UI.Models;
 
@@ -14,14 +14,16 @@ namespace Solvation.UI.UIComponents.Frames
 	public partial class SchedulingProblemFrame
 	{
 		private PlanModel model;
+		private readonly NewProblemModel initialData;
 
-		public SchedulingProblemFrame():this(null)
+		public SchedulingProblemFrame():this(null, null)
 		{}
 
-		public SchedulingProblemFrame(PlanModel planModel)
+		public SchedulingProblemFrame(PlanModel planModel, NewProblemModel initialData)
 		{
 			InitializeComponent();
 			LayoutRoot.DataContext = model = planModel ?? CreateFakePlanModel();
+			this.initialData = initialData;
 		}
 
 		private PlanModel CreateFakePlanModel()
@@ -45,8 +47,17 @@ namespace Solvation.UI.UIComponents.Frames
 
 		public void OptimizePlan()
 		{
-			var simplexTuple = (new SimplexInputBuilder()).BuildFromBasePlan(model.Plan.ToList());
+			var resources = (initialData.Resources.Select(rm => new Resource(rm.Number, rm.Value))).ToList();
+			var jobs =
+				(initialData.Jobs.Select(
+					jm => new Job(jm.Number, jm.FullWorkVolume, jm.PrecedingJobs, jm.MinimumIntensity, jm.MaximumIntensity))).ToList();
+			var simplexTuple = (new SimplexInputBuilder()).BuildFromBasePlan(model.Plan.ToList(), jobs, resources, initialData.DependencyValues.ToList());
 			//var optimizedPlan = (new SimplexSolver()).Solve(simplexTuple);
+		}
+
+		private void OptimizePlanClick(object sender, RoutedEventArgs e)
+		{
+			OptimizePlan();
 		}
 	}
 }

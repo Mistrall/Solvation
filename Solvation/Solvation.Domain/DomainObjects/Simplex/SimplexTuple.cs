@@ -12,6 +12,9 @@ namespace Solvation.Domain.DomainObjects.Simplex
 		public DenseVector FreeTerms { get; set; }
 		public DenseVector ObjFuncCoeffs { get; set; }
 		public double ObjFuncFreeTerm { get; set; }
+		//Amount of real equations
+		public int InitialProblemSize { get; set; }
+
 
 		public SimplexTuple(ObjectiveFunctionType type, double[,] eqCoeffs, List<EquationType> equationTypes, double[] freeTerms, double[] objFuncCoeffs, double objFuncFreeTerm)
 		{
@@ -21,6 +24,7 @@ namespace Solvation.Domain.DomainObjects.Simplex
 			FreeTerms = new DenseVector(freeTerms);
 			ObjFuncCoeffs = new DenseVector(objFuncCoeffs);
 			ObjFuncFreeTerm = objFuncFreeTerm;
+			InitialProblemSize = freeTerms.Length;
 		}
 
 		//Use this only for proper standart form

@@ -13,7 +13,7 @@ namespace Solvation.UI.UIComponents.Frames
 	/// <summary>
 	/// Interaction logic for CreateNewProblem.xaml
 	/// </summary>
-	public partial class CreateNewProblem: ICanSaveContent<NewProblemModel>
+	public partial class CreateNewProblem: ICanSaveContent
 	{
 		private readonly MdiContainer parent;
 		private NewProblemModel model;
@@ -121,7 +121,7 @@ namespace Solvation.UI.UIComponents.Frames
 			var problemFrame = new MdiChild
 			{
 				Title = "Scheduling problem",
-				Content = new SchedulingProblemFrame(new PlanModel(baseStepList)),
+				Content = new SchedulingProblemFrame(new PlanModel(baseStepList), model),
 				Width = 800,
 				Height = 600,
 				Position = new Point(300, 300)
@@ -130,7 +130,7 @@ namespace Solvation.UI.UIComponents.Frames
 			parent.Children.Add(problemFrame);
 		}
 
-		public void SaveContent(NewProblemModel content, string filePath)
+		public void SaveContent<T>(T content, string filePath) where T : class
 		{
 			throw new NotImplementedException();
 		}
