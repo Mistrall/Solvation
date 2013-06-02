@@ -68,7 +68,8 @@ namespace Solvation.Tests.AlgorithmHelpers
 			var result = (new SimplexInputBuilder()).BuildFromBasePlan(baseStepList, jobArr, resourceArray, dependencies);
 			//Assert
 			NotNull(result);
-			AreEqual(new double[] {-1, -1, -1, 0, 0, 0, 0}, result.ObjFuncCoeffs.ToArray());
+			AreEqual(new double[] {1, 1, 1, 0, 0, 0, 0}, result.ObjFuncCoeffs.ToArray());
+			AreEqual(ObjectiveFunctionType.Min, result.Type);
 			AreEqual(27, result.EqualityCoeffs.RowCount);
 			//Step1
 			//intencity

@@ -52,7 +52,9 @@ namespace Solvation.UI.UIComponents.Frames
 				(initialData.Jobs.Select(
 					jm => new Job(jm.Number, jm.FullWorkVolume, jm.PrecedingJobs, jm.MinimumIntensity, jm.MaximumIntensity))).ToList();
 			var simplexTuple = (new SimplexInputBuilder()).BuildFromBasePlan(model.Plan.ToList(), jobs, resources, initialData.DependencyValues.ToList());
-			//var optimizedPlan = (new SimplexSolver()).Solve(simplexTuple);
+			var variableCount = simplexTuple.ObjFuncCoeffs.Count;
+
+			var optimizedPlan = (new SimplexSolver()).Solve(simplexTuple, Enumerable.Range(0, variableCount).ToArray());
 		}
 
 		private void OptimizePlanClick(object sender, RoutedEventArgs e)

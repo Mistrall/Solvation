@@ -55,6 +55,7 @@
     <Compile Include="Domain\DomainObjects\SchedulingDataContainerTests.cs" />
     <Compile Include="Domain\Extensions\DenseMatrixExtensionTests.cs" />
     <Compile Include="Domain\Extensions\DenseVectorExtensionTests.cs" />
+    <Compile Include="Extensions\AssertExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Samples\MathNet.Numerics\ConsoleHelper.cs" />
     <Compile Include="Samples\MathNet.Numerics\ContinuousDistributions\BetaDistribution.cs" />

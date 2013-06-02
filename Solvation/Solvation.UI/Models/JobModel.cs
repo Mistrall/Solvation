@@ -23,10 +23,11 @@ namespace Solvation.UI.Models
 			}
 			set
 			{
-				if (!String.IsNullOrEmpty(value))
+				if (value!=null && !String.IsNullOrEmpty(value.Trim()))
 				{
 					PrecedingJobs = value.Split(',').Select(Int32.Parse).ToList();	
 				}
+				else precedingJobs = new List<int>();
 			} 
 		}
 		public double FullWorkVolume { get; set; }

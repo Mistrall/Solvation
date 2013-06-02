@@ -104,7 +104,7 @@ namespace Solvation.Domain.AlgorithmHelpers
 			for (int tnum = 0; tnum < tVarCounter; tnum++)
 			{
 				//Put non-negative coeffs to objective function
-				objFunctionCoeffs[tnum] = -1;
+				objFunctionCoeffs[tnum] = 1;
 				//Build eqCoeff matrix (A)
 				//Add non-negativity to delta t
 				eqCoeffs[tnum, tnum] = -1;

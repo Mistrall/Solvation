@@ -45,7 +45,7 @@ namespace Solvation.Domain.Services
 						//calc spended resources, remaining resources and time
 						foreach (var resource in resourcesForStep)
 						{
-							var jobResourceDependency = jobToExecute.ResourceDependencies.FirstOrDefault(d => d.Resource == resource);
+							var jobResourceDependency = jobToExecute.ResourceDependencies.FirstOrDefault(d => d.Resource.Number == resource.Number);
 							if (jobResourceDependency != null)
 								resource.Value -= jobResourceDependency.Value*maxIntensity;
 						}
