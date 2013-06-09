@@ -178,7 +178,8 @@ namespace Solvation.Domain.Services
 					throw new SimplexException("Problem is unsolvable");
 
 			var basis = vector.Take(tuple.ObjFuncCoeffs.Count).ToArray();
-			var indexes = auxBasis.InequalityIndexes.Where(x => x < tuple.EqualityCoeffs.RowCount).ToArray();
+			var indexes =
+				auxBasis.InequalityIndexes.Where(x => x < tuple.EqualityCoeffs.RowCount).Take(tuple.ObjFuncCoeffs.Count).ToArray();
 
 			return new StartingBasis
 				{
