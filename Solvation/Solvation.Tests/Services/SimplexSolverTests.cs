@@ -210,7 +210,7 @@ namespace Solvation.Tests.Services
 			AreEqual(2, result.Iteration);
 			this.AreFloatEqual(115, result.OptimalValue);
 
-			var expected = new double[] { 10, 10, 0, 20 };
+			var expected = new double[] {10, 10, 0, 20};
 			this.AreFloatEqual(expected, result.OptimalVector.ToArray());
 		}
 
@@ -235,7 +235,61 @@ namespace Solvation.Tests.Services
 			//AreEqual(5, result.Iteration);
 			this.AreFloatEqual(20, result.OptimalValue);
 
-			var expected = new double[] {1.12, 8.8};
+			var expected = new[] {1.12, 8.8};
+			this.AreFloatEqual(expected, result.OptimalVector.ToArray());
+		}
+
+		[Test]
+		public void ShouldSolveSimpleCase5()
+		{
+			//Arrange
+			var A = new double[,]
+				{
+					{2, 3, 6},
+					{4, 2, 4},
+					{4, 6, 8},
+					{-1, 0, 0},
+					{0, -1, 0},
+					{0, 0, -1}
+				};
+			var b = new double[] {240, 200, 160, 0, 0, 0};
+
+			var c = new double[] {4, 5, 4};
+			//Act
+			var result = (simplexSolver).Solve(new SimplexTuple(A, b, c, 0));
+			//Assert
+			AreEqual(3, result.OptimalVector.Count);
+			//AreEqual(5, result.Iteration);
+			this.AreFloatEqual(160, result.OptimalValue);
+
+			var expected = new[] {40.0, 0, 0};
+			this.AreFloatEqual(expected, result.OptimalVector.ToArray());
+		}
+
+		[Test]
+		public void ShouldSolveSimpleCase6()
+		{
+			//Arrange
+			var A = new double[,]
+				{
+					{1, 1, 1},
+					{-2, -1, 1},
+					{0, 1, -1},
+					{-1, 0, 0},
+					{0, -1, 0},
+					{0, 0, -1},
+				};
+			var b = new double[] {40, -10, -10, 0, 0, 0};
+
+			var c = new double[] {2, 3, 1};
+			//Act
+			var result = (simplexSolver).Solve(new SimplexTuple(A, b, c, 0));
+			//Assert
+			AreEqual(3, result.OptimalVector.Count);
+			AreEqual(2, result.Iteration);
+			this.AreFloatEqual(70, result.OptimalValue);
+
+			var expected = new[] {10.0, 10.0, 20.0};
 			this.AreFloatEqual(expected, result.OptimalVector.ToArray());
 		}
 
