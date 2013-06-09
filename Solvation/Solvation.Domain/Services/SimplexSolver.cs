@@ -86,6 +86,8 @@ namespace Solvation.Domain.Services
 		public SimplexResult Solve(SimplexTuple tuple)
 		{
 			var standartTuple = (new SimplexInputBuilder()).ConvertToStandartForm(tuple);
+			var multiplier = 1;
+			if (tuple.Type == ObjectiveFunctionType.Min) multiplier *= -1;
 			var bInternal = InitializeSimplex(tuple);
 
 			iteration = 0;
@@ -95,7 +97,8 @@ namespace Solvation.Domain.Services
 
 			var vector = SolveInternal(standartTuple.EqualityCoeffs, standartTuple.FreeTerms, standartTuple.ObjFuncCoeffs,
 			                           bInternal, AB, bB);
-			var optimalValue = (standartTuple.ObjFuncCoeffs.ToRowMatrix()*vector)[0];
+			//Multiply result to -1 if we have min function at start
+			var optimalValue = multiplier*(standartTuple.ObjFuncCoeffs.ToRowMatrix()*vector)[0];
 
 			return new SimplexResult {OptimalValue = optimalValue, OptimalVector = vector, Iteration = iteration};
 		}
@@ -133,6 +136,7 @@ namespace Solvation.Domain.Services
 			var auxb = tuple.FreeTerms.Clone();
 			int rowCount = tuple.EqualityCoeffs.RowCount;
 			//for each negative index we should go with added slack variable
+			//TODO: work with Dense/Sparse vectors
 			for (int i = 0; i < tuple.EqualityCoeffs.RowCount; i++)
 			{
 				if (tuple.FreeTerms[i] >= 0) continue;
@@ -167,6 +171,7 @@ namespace Solvation.Domain.Services
 
 			iteration = 0;
 			var columns = Enumerable.Range(0, varCount).ToArray();
+			//TODO: work with Dense/Sparse vectors
 			var auxAb = ((DenseMatrix) auxA).Extract(startingEq.ToArray(), columns);
 			var auxbB = ((DenseVector) auxb).Extract(startingEq.ToArray());
 

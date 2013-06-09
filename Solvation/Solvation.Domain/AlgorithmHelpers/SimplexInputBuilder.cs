@@ -16,9 +16,9 @@ namespace Solvation.Domain.AlgorithmHelpers
 			//count final variable number
 			int totalVariables = tVarCounter + xVarCounter;
 			//count final inequality number (for each variable 1 non-negative condition and 2*intencity restrictions)
-			//also adding 2 eq per each stage -> total volumes for all stages should match initial total job volumes
+			//also adding 2 eq per each job -> total volumes for all stages should match initial total job volumes
 			//also adding resource limitations per each stage
-			int totalInequalities = totalVariables + 2*xVarCounter + (2 + resources.Count)*basePlan.Count;
+			int totalInequalities = totalVariables + 2*xVarCounter + resources.Count*basePlan.Count+2*jobs.Count;
 
 			//initialize
 			const ObjectiveFunctionType type = ObjectiveFunctionType.Min;
