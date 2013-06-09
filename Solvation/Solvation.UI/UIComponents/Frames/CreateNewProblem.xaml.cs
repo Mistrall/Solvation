@@ -121,7 +121,7 @@ namespace Solvation.UI.UIComponents.Frames
 			var problemFrame = new MdiChild
 			{
 				Title = "Scheduling problem",
-				Content = new SchedulingProblemFrame(new PlanModel(baseStepList), model),
+				Content = new SchedulingProblemFrame(parent, new PlanModel(baseStepList), model),
 				Width = 800,
 				Height = 600,
 				Position = new Point(300, 300)

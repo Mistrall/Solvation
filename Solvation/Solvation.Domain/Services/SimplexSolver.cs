@@ -85,9 +85,9 @@ namespace Solvation.Domain.Services
 
 		public SimplexResult Solve(SimplexTuple tuple)
 		{
-			var standartTuple = (new SimplexInputBuilder()).ConvertToStandartForm(tuple);
 			var multiplier = 1;
 			if (tuple.Type == ObjectiveFunctionType.Min) multiplier *= -1;
+			var standartTuple = (new SimplexInputBuilder()).ConvertToStandartForm(tuple);
 			var bInternal = InitializeSimplex(tuple);
 
 			iteration = 0;

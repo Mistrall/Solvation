@@ -44,6 +44,14 @@ namespace Solvation.UI.Models
 			set { Set(ref scaleDimension, value, "ScaleDimension"); }
 		}
 
+		private double totalTime;
+
+		public double TotalTime
+		{
+			get { return totalTime; }
+			set { Set(ref totalTime, value, "TotalTime"); }
+		}
+
 		public IEnumerable<PlanStep> Plan { get; private set; }
 
 		public PlanModel(IEnumerable<PlanStep> baseStepList)
@@ -53,7 +61,7 @@ namespace Solvation.UI.Models
 
 			var jobList = new List<RunningJobModel>();
 			var distinctJobList = new List<RunningJobModel>();
-			
+
 			var dependencyHashTable = new Dictionary<int, JobDependencyModel>();
 
 			jobList =
@@ -106,7 +114,11 @@ namespace Solvation.UI.Models
 			JobsWithDepedencies = new ReadOnlyObservableCollection<object>(new ObservableCollection<object>(obs));
 
 			var lastOrDefault = Steps.LastOrDefault();
-			if (lastOrDefault != null) scaleDimension = 700/lastOrDefault.TimeEnd;
+			if (lastOrDefault != null)
+			{
+				scaleDimension = 700/lastOrDefault.TimeEnd;
+				totalTime = lastOrDefault.TimeEnd;
+			}
 		}
 
 		private class JobModelByNumberComparer : IEqualityComparer<RunningJobModel>
@@ -123,19 +135,19 @@ namespace Solvation.UI.Models
 			}
 		}
 
-		private class JobDependencyComparer : IEqualityComparer<JobDependencyModel>
-		{
-			public bool Equals(JobDependencyModel x, JobDependencyModel y)
-			{
-				if (x == null || y == null) return false;
-				return (x.Dependant.JobReference.Number == y.Dependant.JobReference.Number)
-				       && (x.DependantOn.JobReference.Number == y.DependantOn.JobReference.Number);
-			}
-
-			public int GetHashCode(JobDependencyModel obj)
-			{
-				return obj.Dependant.JobReference.Number ^ obj.DependantOn.JobReference.Number;
-			}
-		}
+//		private class JobDependencyComparer : IEqualityComparer<JobDependencyModel>
+//		{
+//			public bool Equals(JobDependencyModel x, JobDependencyModel y)
+//			{
+//				if (x == null || y == null) return false;
+//				return (x.Dependant.JobReference.Number == y.Dependant.JobReference.Number)
+//				       && (x.DependantOn.JobReference.Number == y.DependantOn.JobReference.Number);
+//			}
+//
+//			public int GetHashCode(JobDependencyModel obj)
+//			{
+//				return obj.Dependant.JobReference.Number ^ obj.DependantOn.JobReference.Number;
+//			}
+//		}
 	}
 }

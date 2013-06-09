@@ -123,7 +123,9 @@
 		<Border DockPanel.Dock="Bottom" Background="LightYellow" Padding="6">
 			<DockPanel>
 				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="Job: " />
+					<TextBlock Text="Total time: "/>
+					<TextBlock Text="{Binding Path=TotalTime}" />
+					<TextBlock Text=" | Job: " />
 					<TextBlock Text="{Binding SelectedItem.Name, ElementName=GanttChart}" />
 					<TextBlock Text=" | Started at: " />
 					<TextBlock Text="{Binding SelectedItem.StartTime, ElementName=GanttChart}" />
