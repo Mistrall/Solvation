@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Solvation.Domain.DomainObjects.Simplex;
 using Solvation.Domain.Extensions;
 using Solvation.Domain.Services;
@@ -10,6 +9,8 @@ namespace Solvation.Tests.Services
 	[TestFixture]
 	public class SimplexSolverTests : Assert
 	{
+		private readonly SimplexSolver simplexSolver = new SimplexSolver();
+
 		[Test]
 		public void ShouldSolveSimpleCase1()
 		{
@@ -28,9 +29,8 @@ namespace Solvation.Tests.Services
 			var b = new double[] {1, 100, 10000, 1000000, 0, 0, 0, 0};
 
 			var c = new double[] {1000, 100, 10, 1};
-			var B = Enumerable.Range(4, 4).ToArray();
 			//Act
-			var result = (new SimplexSolver()).Solve(new SimplexTuple(A, b, c, 0), B);
+			var result = (simplexSolver).Solve(new SimplexTuple(A, b, c, 0));
 			//Assert
 			AreEqual(4, result.OptimalVector.Count);
 			AreEqual(16, result.Iteration);
@@ -178,9 +178,8 @@ namespace Solvation.Tests.Services
 				};
 
 			var c = new double[] {8, 6, -5, -2, -10, 0, -9, 10, 2, 3, -6, -3, -9, 2, -5, -9, 4, 1, 7, -2, -6, 10, 0, 4, 4};
-			var B = Enumerable.Range(100, 25).ToArray();
 			//Act
-			var result = (new SimplexSolver()).Solve(new SimplexTuple(A, b, c, 0), B);
+			var result = (simplexSolver).Solve(new SimplexTuple(A, b, c, 0));
 			//Assert
 			AreEqual(25, result.OptimalVector.Count);
 			AreEqual(62, result.Iteration);
@@ -204,20 +203,40 @@ namespace Solvation.Tests.Services
 			var b = new double[] {40, -10, -10, 0, 0, 0, 0};
 
 			var c = new double[] {0.5, 3, 1, 4};
-			var B = Enumerable.Range(3, 4).ToArray();
 			//Act
-			var result = (new SimplexSolver()).Solve(new SimplexTuple(A, b, c, 0), B);
+			var result = (simplexSolver).Solve(new SimplexTuple(A, b, c, 0));
 			//Assert
 			AreEqual(4, result.OptimalVector.Count);
-			AreEqual(5, result.Iteration);
+			AreEqual(2, result.Iteration);
 			this.AreFloatEqual(115, result.OptimalValue);
 
-			var resultVector = new double[] {10, 10, 0, 20};
-			for (int index = 0; index < resultVector.Length; index++)
-			{
-				var var = resultVector[index];
-				True(result.OptimalVector[index].FloatEquals(var));
-			}
+			var expected = new double[] { 10, 10, 0, 20 };
+			this.AreFloatEqual(expected, result.OptimalVector.ToArray());
+		}
+
+		[Test]
+		public void ShouldSolveSimpleCase4()
+		{
+			//Arrange
+			var A = new double[,]
+				{
+					{10, 1},
+					{20, -3},
+					{-1, 0},
+					{0, -1}
+				};
+			var b = new double[] {20, -4, 0, 0};
+
+			var c = new double[] {10, 1};
+			//Act
+			var result = (simplexSolver).Solve(new SimplexTuple(A, b, c, 0));
+			//Assert
+			AreEqual(2, result.OptimalVector.Count);
+			//AreEqual(5, result.Iteration);
+			this.AreFloatEqual(20, result.OptimalValue);
+
+			var expected = new double[] {1.12, 8.8};
+			this.AreFloatEqual(expected, result.OptimalVector.ToArray());
 		}
 
 		[Test]
@@ -234,9 +253,26 @@ namespace Solvation.Tests.Services
 			var b = new double[] {-1, -2, 0, 0};
 
 			var c = new double[] {1, 1};
-			var B = Enumerable.Range(2, 2).ToArray();
 			//Act&Assert
-			Throws<SimplexException>(() => (new SimplexSolver()).Solve(new SimplexTuple(A, b, c, 0), B), "Problem is unbounded");
+			Throws<SimplexException>(() => (simplexSolver).Solve(new SimplexTuple(A, b, c, 0)), "Problem is unbounded");
+		}
+
+		[Test]
+		public void ShouldDetectIfProblemIsUnbounded2()
+		{
+			//Arrange
+			var A = new double[,]
+				{
+					{1, 1},
+					{-1, -1},
+					{-1, 0},
+					{0, -1}
+				};
+			var b = new double[] {1, -2, 0, 0};
+
+			var c = new double[] {1, 1};
+			//Act&Assert
+			Throws<SimplexException>(() => (simplexSolver).Solve(new SimplexTuple(A, b, c, 0)), "Problem is unsolvable");
 		}
 	}
 }

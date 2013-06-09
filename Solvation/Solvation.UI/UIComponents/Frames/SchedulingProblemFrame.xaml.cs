@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using Solvation.Domain.AlgorithmHelpers;
 using Solvation.Domain.DomainObjects;
+using Solvation.Domain.DomainObjects.Simplex;
 using Solvation.Domain.Services;
 using Solvation.UI.Models;
 
@@ -52,9 +53,8 @@ namespace Solvation.UI.UIComponents.Frames
 				(initialData.Jobs.Select(
 					jm => new Job(jm.Number, jm.FullWorkVolume, jm.PrecedingJobs, jm.MinimumIntensity, jm.MaximumIntensity))).ToList();
 			var simplexTuple = (new SimplexInputBuilder()).BuildFromBasePlan(model.Plan.ToList(), jobs, resources, initialData.DependencyValues.ToList());
-			var variableCount = simplexTuple.ObjFuncCoeffs.Count;
 
-			var optimizedPlan = (new SimplexSolver()).Solve(simplexTuple, Enumerable.Range(0, variableCount).ToArray());
+			SimplexResult simplexResult = (new SimplexSolver()).Solve(simplexTuple);
 		}
 
 		private void OptimizePlanClick(object sender, RoutedEventArgs e)

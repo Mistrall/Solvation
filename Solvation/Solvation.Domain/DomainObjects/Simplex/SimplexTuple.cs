@@ -14,9 +14,13 @@ namespace Solvation.Domain.DomainObjects.Simplex
 		public double ObjFuncFreeTerm { get; set; }
 		//Amount of real equations
 		public int InitialProblemSize { get; set; }
+		//For slack form
+		public int[] BasisVariables { get; set; }
+		public int[] SlackVariables { get; set; }
 
 
-		public SimplexTuple(ObjectiveFunctionType type, double[,] eqCoeffs, List<EquationType> equationTypes, double[] freeTerms, double[] objFuncCoeffs, double objFuncFreeTerm)
+		public SimplexTuple(ObjectiveFunctionType type, double[,] eqCoeffs, List<EquationType> equationTypes,
+		                    double[] freeTerms, double[] objFuncCoeffs, double objFuncFreeTerm = 0)
 		{
 			Type = type;
 			EqualityCoeffs = new DenseMatrix(eqCoeffs);
@@ -36,5 +40,11 @@ namespace Solvation.Domain.DomainObjects.Simplex
 				EquationTypes.Add(EquationType.LessOrEqual);
 			}
 		}
+	}
+
+	public class StartingBasis
+	{
+		public int[] InequalityIndexes { get; set; }
+		public double[] FeasibleBasis { get; set; }
 	}
 }

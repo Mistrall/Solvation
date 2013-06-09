@@ -78,37 +78,37 @@ namespace Solvation.Tests.AlgorithmHelpers
 			AreEqual(new double[] {1, 0, 0, 0, -1, 0, 0}, result.EqualityCoeffs.Row(9).ToArray());
 			AreEqual(new double[] {-10, 0, 0, 0, 1, 0, 0}, result.EqualityCoeffs.Row(10).ToArray());
 			//resources
-			AreEqual(new double[] { -20, 0, 0, 1, 0.7, 0, 0 }, result.EqualityCoeffs.Row(11).ToArray());
-			AreEqual(new double[] { -50, 0, 0, 2, 3.5, 0, 0 }, result.EqualityCoeffs.Row(12).ToArray());
+			AreEqual(new double[] {-20, 0, 0, 1, 0.7, 0, 0}, result.EqualityCoeffs.Row(11).ToArray());
+			AreEqual(new double[] {-50, 0, 0, 2, 3.5, 0, 0}, result.EqualityCoeffs.Row(12).ToArray());
 			//Step2
 			//intencity
 			AreEqual(new double[] {0, 1, 0, 0, 0, -1, 0}, result.EqualityCoeffs.Row(13).ToArray());
 			AreEqual(new double[] {0, -10, 0, 0, 0, 1, 0}, result.EqualityCoeffs.Row(14).ToArray());
 			//resources
-			AreEqual(new double[] { 0, -20, 0, 0, 0, 1, 0 }, result.EqualityCoeffs.Row(15).ToArray());
-			AreEqual(new double[] { 0, -50, 0, 0, 0, 2, 0 }, result.EqualityCoeffs.Row(16).ToArray());
+			AreEqual(new double[] {0, -20, 0, 0, 0, 1, 0}, result.EqualityCoeffs.Row(15).ToArray());
+			AreEqual(new double[] {0, -50, 0, 0, 0, 2, 0}, result.EqualityCoeffs.Row(16).ToArray());
 			//Step3
 			//intencity
 			AreEqual(new double[] {0, 0, 1, 0, 0, 0, -1}, result.EqualityCoeffs.Row(17).ToArray());
 			AreEqual(new double[] {0, 0, -10, 0, 0, 0, 1}, result.EqualityCoeffs.Row(18).ToArray());
 			//resources
-			AreEqual(new double[] { 0, 0, -20, 0, 0, 0, 2 }, result.EqualityCoeffs.Row(19).ToArray());
-			AreEqual(new double[] { 0, 0, -50, 0, 0, 0, 2 }, result.EqualityCoeffs.Row(20).ToArray());
+			AreEqual(new double[] {0, 0, -20, 0, 0, 0, 2}, result.EqualityCoeffs.Row(19).ToArray());
+			AreEqual(new double[] {0, 0, -50, 0, 0, 0, 2}, result.EqualityCoeffs.Row(20).ToArray());
 
 			//Full work volumes
-			AreEqual(new double[] { 0, 0, 0, 1, 0, 1, 0 }, result.EqualityCoeffs.Row(21).ToArray());
+			AreEqual(new double[] {0, 0, 0, 1, 0, 1, 0}, result.EqualityCoeffs.Row(21).ToArray());
 			AreEqual(100, result.FreeTerms.ToArray()[21]);
-			AreEqual(new double[] { 0, 0, 0, -1, 0, -1, 0 }, result.EqualityCoeffs.Row(22).ToArray());
+			AreEqual(new double[] {0, 0, 0, -1, 0, -1, 0}, result.EqualityCoeffs.Row(22).ToArray());
 			AreEqual(-100, result.FreeTerms.ToArray()[22]);
 
-			AreEqual(new double[] { 0, 0, 0, 0, 0, 0, 1 }, result.EqualityCoeffs.Row(23).ToArray());
+			AreEqual(new double[] {0, 0, 0, 0, 0, 0, 1}, result.EqualityCoeffs.Row(23).ToArray());
 			AreEqual(50, result.FreeTerms.ToArray()[23]);
-			AreEqual(new double[] { 0, 0, 0, 0, 0, 0, -1 }, result.EqualityCoeffs.Row(24).ToArray());
+			AreEqual(new double[] {0, 0, 0, 0, 0, 0, -1}, result.EqualityCoeffs.Row(24).ToArray());
 			AreEqual(-50, result.FreeTerms.ToArray()[24]);
 
-			AreEqual(new double[] { 0, 0, 0, 0, 1, 0, 0 }, result.EqualityCoeffs.Row(25).ToArray());
+			AreEqual(new double[] {0, 0, 0, 0, 1, 0, 0}, result.EqualityCoeffs.Row(25).ToArray());
 			AreEqual(50, result.FreeTerms.ToArray()[25]);
-			AreEqual(new double[] { 0, 0, 0, 0, -1, 0, 0 }, result.EqualityCoeffs.Row(26).ToArray());
+			AreEqual(new double[] {0, 0, 0, 0, -1, 0, 0}, result.EqualityCoeffs.Row(26).ToArray());
 			AreEqual(-50, result.FreeTerms.ToArray()[26]);
 		}
 	}
